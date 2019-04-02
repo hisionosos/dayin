@@ -167,7 +167,7 @@ public class WebViewActivity extends BaseActivity {
             case R.id.print_all:
                 //截取组件视图
 
-                getCutImage1();
+                getViewBitmap(webView);
                 break;
         }
     }
@@ -199,25 +199,42 @@ public class WebViewActivity extends BaseActivity {
         return filePath;
     }
 
-    private String getCutImage1(){
-        webView.setDrawingCacheEnabled(true);
-        webView.buildDrawingCache();
-        Bitmap bitmap = webView.getDrawingCache();
-        try {
-            String fileName = Environment.getExternalStorageDirectory().getPath() + "/webview_jietu.jpg";
-            FileOutputStream fos = new FileOutputStream(fileName);
-            //压缩bitmap到输出流中
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, fos);
-            fos.close();
-            Toast.makeText(WebViewActivity.this, "截屏成功", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        } finally {
-//            bitmap.recycle();
+
+
+        private void getViewBitmap(final WebView webView){
+            webView.setDrawingCacheEnabled(true);
+            webView.buildDrawingCache();
+            int height = (int) (webView.getContentHeight() * webView.getScale());
+            int width = webView.getWidth();
+            int pH = webView.getHeight();
+            final Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            Canvas canvas = new Canvas(bm);
+            int top = height;
+            while (top > 0) {
+                if (top < pH) {
+                    top = 0;
+                } else {
+                    top -= pH;
+                }
+                canvas.save();
+                canvas.clipRect(0, top, width, top + pH);
+                webView.scrollTo(0, top);
+                webView.draw(canvas);
+                canvas.restore();
+            }
+
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    webView.destroyDrawingCache(); // 保存过后释放资源
+                    bm.recycle();
+                }
+            });
+
         }
 
-        return "";
-    }
+
 
 
     private void getAllImage(){
