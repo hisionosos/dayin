@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.test.iview.dayin.view.VpSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_vsrl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_title"></include>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/record_all"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@color/main_tab_color"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#dcdcdc"></View>
+
+                <TextView
+                    android:id="@+id/record_success"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="捡漏成功"
+                    android:textColor="@color/t66"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#dcdcdc"></View>
+
+                <TextView
+                    android:id="@+id/record_fail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="捡漏失败"
+                    android:textColor="@color/t66"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#dcdcdc"></View>
+
+            <com.test.iview.dayin.view.XRecyclerView
+                android:id="@+id/record_xrv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/eee"></com.test.iview.dayin.view.XRecyclerView>
+
+            <LinearLayout
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="131dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="你还没有捡漏记录哦~"
+                    android:textColor="#aaa"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</com.test.iview.dayin.view.VpSwipeRefreshLayout>

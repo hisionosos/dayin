@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#fff">
+
+        <ImageView
+            android:id="@+id/address_fanhui"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="20dp"
+            android:src="@drawable/login_fanhui" />
+
+        <TextView
+            android:text="收货地址"
+            android:id="@+id/address_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#333"
+            android:textSize="17dp" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/address_add"
+            android:layout_width="80dp"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button_hongseding2"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="16dp"
+                android:src="@drawable/jia"
+                android:layout_height="11dp" />
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="新增"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dcdcdc" />
+    </RelativeLayout>
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:background="@color/eee"
+        android:divider="@color/eee"
+        android:dividerHeight="1px"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:id="@+id/address_xrv"
+        android:layout_height="match_parent"></com.baoyz.swipemenulistview.SwipeMenuListView>
+
+    <!--<com.hankkin.library.RefreshSwipeMenuListView-->
+        <!--android:id="@+id/address_xrv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_marginTop="48dp"-->
+        <!--android:layout_height="match_parent"></com.hankkin.library.RefreshSwipeMenuListView>-->
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/no"
+        android:layout_width="match_parent"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="131dp"
+            android:layout_height="64dp"
+            android:background="@drawable/no"
+            />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:text="你还没有添加收货地址哦~"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#aaa"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

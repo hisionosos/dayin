@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/dialog_shibai_cha"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_above="@+id/dialog_shibai_ll"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/xiangqing_cha" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/dialog_shibai_ll"
+        android:layout_width="match_parent"
+        android:layout_height="341dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_biankuang_baise"
+        android:orientation="vertical"
+        android:padding="30dp">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/chongzhishibai"
+            />
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="捡漏失败！"
+            android:textSize="20dp"
+            android:textColor="@color/t66"
+            android:layout_marginTop="14dp"
+            />
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="对不起！ 卖家拒绝了您的出价！"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/t99"
+                android:textSize="@dimen/sp_14"
+                />
+        <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="支付金额已退至您的账户余额。"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/t99"
+                android:textSize="@dimen/sp_14"
+                />
+
+        <Button
+            android:id="@+id/dialog_shibai_chujia"
+            android:layout_marginTop="20dp"
+            android:layout_width="90dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_hongseding2"
+            android:textColor="@color/white"
+            android:text="重新出价"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</RelativeLayout>

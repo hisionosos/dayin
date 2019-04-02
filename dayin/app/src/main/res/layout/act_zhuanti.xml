@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.test.iview.dayin.view.VpSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/zhuanti_vsrl"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/fanhui"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="20dp"
+                android:src="@drawable/login_fanhui" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:id="@+id/title11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/xiangqing_share" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="#dcdcdc" />
+        </RelativeLayout>
+
+        <com.test.iview.dayin.view.XRecyclerView
+            android:id="@+id/zhuanti_xrv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="48dp"></com.test.iview.dayin.view.XRecyclerView>
+
+
+    </RelativeLayout>
+</com.test.iview.dayin.view.VpSwipeRefreshLayout>

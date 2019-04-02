@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:orientation="vertical">
+
+        <include layout="@layout/common_title"/>
+
+
+
+        <RelativeLayout
+            android:id="@+id/item1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="中文"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+            <ImageView
+                android:id="@+id/man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/choose_in"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/item2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="英文"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="西班牙"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="葡萄牙"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="日语"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="法语"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/item7"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_130"
+            android:background="#fff"
+            android:paddingLeft="@dimen/dp_50"
+            android:paddingRight="@dimen/dp_50">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="韩语"
+                android:layout_centerVertical="true"
+                android:textColor="#f333"
+                android:textSize="@dimen/sp_40" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_2"
+                android:background="#EDEDED"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_115"/>
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/rgSex"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_910"
+        android:gravity="right"
+        android:layout_marginTop="@dimen/dp_200"
+        android:layout_marginRight="@dimen/dp_50"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/choose0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@drawable/radio_button_style" />
+
+        <RadioButton
+            android:id="@+id/choose6"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_button_style" />
+    </RadioGroup>
+
+
+</FrameLayout>

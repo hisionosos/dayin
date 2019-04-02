@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="@dimen/dp_16"
+        android:layout_height="@dimen/dp_14"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+    <TextView
+
+        android:drawablePadding="@dimen/dp_10"
+        android:drawableLeft="@drawable/news_laba"
+        android:id="@+id/item_news_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/main_tab_color"
+        android:text="斯蒂芬斯蒂芬斯蒂芬似懂非懂斯蒂芬的的的的的的的的的的速度发呆的斯蒂芬多少"
+        android:layout_marginTop="@dimen/dp_9"
+        />
+    <TextView
+        android:layout_marginTop="@dimen/dp_7"
+        android:id="@+id/item_news_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018"
+        android:layout_below="@+id/item_news_title"
+        android:layout_marginLeft="34dp"
+        android:textColor="@color/t99"
+        android:textSize="@dimen/sp_12"
+        />
+    <ImageView
+        android:background="@color/eee"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_below="@+id/item_news_time"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+</RelativeLayout>

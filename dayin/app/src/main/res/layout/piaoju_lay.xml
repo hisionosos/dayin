@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include layout="@layout/common_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEFEF">
+
+        <LinearLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_80"
+                android:background="@drawable/v_lines"/>
+            <TextView
+                android:id="@+id/add_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="图片"
+                android:paddingLeft="@dimen/dp_50"
+                android:paddingRight="@dimen/dp_50"
+                android:textSize="@dimen/dp_50"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_80"
+                android:background="@drawable/v_lines"/>
+            <TextView
+                android:id="@+id/add_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="二维码"
+                android:paddingLeft="@dimen/dp_50"
+                android:paddingRight="@dimen/dp_50"
+                android:textSize="@dimen/dp_50"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_80"
+                android:background="@drawable/v_lines"/>
+            <TextView
+                android:id="@+id/add_biaoqing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="表情包"
+                android:paddingLeft="@dimen/dp_50"
+                android:paddingRight="@dimen/dp_50"
+                android:textSize="@dimen/dp_50"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_80"
+                android:background="@drawable/v_lines"/>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/canv"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title_bar"
+            android:background="@drawable/shape_pop_dialog"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_above="@+id/main_tab">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:visibility="invisible"
+            android:background="@null"/>
+
+            <com.test.iview.dayin.view.SingleTouchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_tab"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            app:tabIndicatorHeight="@dimen/dp_0"
+            app:tabMode="fixed"
+            app:tabBackground="@null"
+            android:layout_height="@dimen/dp_144">
+
+
+        </android.support.design.widget.TabLayout>
+    </RelativeLayout>
+
+</LinearLayout>

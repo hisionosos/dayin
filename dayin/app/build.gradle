@@ -1,0 +1,114 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.jakewharton.butterknife'
+
+
+android {
+    signingConfigs {
+        release {
+            keyAlias 'iviewlogo'
+            keyPassword 'iviewlogo'
+            storePassword 'iviewlogo'
+            storeFile file('E:/logowork/logo/iviewlogo.jks')
+        }
+    }
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        manifestPlaceholders = [activityLabel: "defaultName"]
+        applicationId "com.test.iview.dayin"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 100
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        signingConfigs {
+//            release {
+//
+//                v2SigningEnabled false
+//            }
+//        }
+
+        ndk {
+            abiFilters "armeabi", "x86", "armeabi-v7a", "x86_64"
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "cf9e5f7c452a71d0c69f2ddc", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    allprojects {
+        repositories {
+            jcenter()
+            mavenCentral()
+            maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+            maven { url "https://jitpack.io" }
+            maven { url "http://lib.gcssloop.com:8081/repository/gcssloop-central/" }
+        }
+    }
+    implementation 'com.android.support:appcompat-v7:26.0.0'
+    implementation 'com.android.support:recyclerview-v7:26.0.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    //OkGo
+    implementation 'com.lzy.net:okgo:2.1.4'
+    //BeasAdapter  https://github.com/CymChad/BaseRecyclerViewAdapterHelper/wiki/%E9%A6%96%E9%A1%B5
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
+    implementation 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation files('libs/glide-3.6.0.jar')
+    implementation 'com.google.code.gson:gson:2.6.2'
+    //圆形头像  https://github.com/GcsSloop/rclayout
+    implementation 'com.gcssloop.widget:rclayout:1.6.0'
+    implementation files('libs/open_sdk_r5990_lite.jar')
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    implementation 'com.sina.weibo.sdk:core:4.2.7:openDefaultRelease@aar'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.1'
+    //https://github.com/Gavin-ZYX/StickyDecoration
+    implementation 'com.gavin.com.library:stickyDecoration:1.4.2'
+    implementation files('libs/alipaySdk-20170922.jar')
+    //https://github.com/crazyandcoder/citypicker
+    implementation 'liji.library.dev:citypickerview:3.1.6'
+    implementation 'com.contrarywind:Android-PickerView:4.1.3'
+    implementation 'com.android.support:support-v4:26.0.0'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.hankkin:swiperefresh:1.0.1'
+    implementation files('libs/TencentLocationSdk_v6.2.5.3_r15b3b3cc_20171103_115903.jar')
+    implementation files('libs/TencentMapSDK_Raster_v_1.2.8.1.c02ec64.jar')
+    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    // bug收集https://bugly.qq.com/v2/index  其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    implementation files('libs/jpush-android-3.1.3.jar')
+    implementation files('libs/jcore-android-1.2.1.jar')
+    implementation files('libs/janalytics-android-1.2.1.jar')
+    implementation 'com.linchaolong.android:imagepicker:1.5'
+    implementation 'com.facebook.fresco:fresco:1.1.0'
+    implementation 'com.xiaosu:VerticalRollingTextView:2.0.9'
+    implementation 'pub.devrel:easypermissions:1.0.1'
+    implementation 'com.android.support:design:26.0.0'
+
+}

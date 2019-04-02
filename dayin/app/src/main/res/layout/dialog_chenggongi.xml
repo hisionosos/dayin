@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/dialog_chenggong_cha"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_above="@+id/dialog_chenggong_ll"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/xiangqing_cha" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/dialog_chenggong_ll"
+        android:layout_width="match_parent"
+        android:layout_height="341dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_biankuang_baise"
+        android:orientation="vertical"
+        android:padding="30dp">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/chongzhichenggong"
+            />
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="捡漏成功！"
+            android:textSize="20dp"
+            android:textColor="@color/main_tab_color"
+            android:layout_marginTop="14dp"
+            />
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="恭喜您捡漏成功, 为你节省"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/t99"
+                android:textSize="@dimen/sp_14"
+                />
+            <TextView
+                android:id="@+id/dialog_chenggong_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0元"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/main_tab_color"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="。"
+                android:textColor="@color/t99"
+                android:textSize="@dimen/sp_14"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/dialog_chenggong_see"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:background="@drawable/button_hongseding2"
+            android:textColor="@color/white"
+            android:text="查看订单"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/eee"
+    android:orientation="vertical">
+
+    <include layout="@layout/item_title"></include>
+
+    <ScrollView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10">
+
+                <ImageView
+                    android:id="@+id/aftersalerecord_pic"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/aftersalerecord_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="13dp"
+                    android:layout_toRightOf="@+id/aftersalerecord_pic"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+
+                <TextView
+                    android:id="@+id/aftersalerecord_money1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/aftersalerecord_pic"
+                    android:text="成交价:  "
+                    android:textColor="@color/main_tab_color"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/aftersalerecord_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/aftersalerecord_money1"
+                    android:textColor="@color/main_tab_color"
+                    android:textSize="@dimen/sp_14" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_8"
+                android:background="@color/eee" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申请时间："
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aftersalerecord_shijian"
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eee"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="售后编号："
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/aftersalerecord_bianhao"
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eee"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="售后类型："
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+
+                <TextView
+                    android:id="@+id/aftersalerecord_leixing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/t33"
+                    android:textSize="@dimen/dp_14" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eee"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="售后原因："
+                    android:textColor="@color/t66"
+                    android:textSize="@dimen/dp_14" />
+
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/aftersalerecord_yuanyin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/t33"
+                    android:textSize="@dimen/dp_14" />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_8"
+                android:background="@color/eee" />
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/aftersalerecord_no"
+                android:gravity="center"
+                android:textSize="@dimen/dp_14"
+                android:textColor="@color/t99"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="客服将在24小时之内联系您，请耐心等待！"
+                />
+            <com.test.iview.dayin.view.XRecyclerView
+                android:id="@+id/aftersalerecord_xrv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"></com.test.iview.dayin.view.XRecyclerView>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

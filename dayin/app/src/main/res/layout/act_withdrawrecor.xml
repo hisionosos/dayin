@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/item_title"></include>
+    <com.test.iview.dayin.view.XRecyclerView
+        android:id="@+id/withdrawrecor_xrv"
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.test.iview.dayin.view.XRecyclerView>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/no"
+        android:layout_width="match_parent"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="131dp"
+            android:layout_height="64dp"
+            android:background="@drawable/no"
+            />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:text="你还没有提现记录哦~"
+            android:textSize="@dimen/sp_14"
+            android:textColor="#aaa"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</RelativeLayout>

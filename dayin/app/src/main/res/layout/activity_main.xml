@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context="com.test.iview.dayin.activity.MainActivity">
+
+
+    <FrameLayout
+        android:id="@+id/main_lay"
+        android:layout_above="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_above="@+id/main_tab"
+        android:background="#c8c8c8" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/main_tab"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        app:tabIndicatorHeight="@dimen/dp_0"
+        app:tabMode="fixed"
+        app:tabBackground="@null"
+        android:layout_height="@dimen/dp_144">
+
+
+    </android.support.design.widget.TabLayout>
+
+</RelativeLayout>

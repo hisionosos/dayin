@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.test.iview.dayin.view.VpSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_vsrl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/search_fanhui"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="20dp"
+                    android:src="@drawable/login_fanhui" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="搜索"
+                    android:textColor="#333"
+                    android:textSize="17dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="#dcdcdc" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/f0"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/button_huisebiankuang"
+                    android:drawableLeft="@drawable/search"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:hint="请输入搜索关键词"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:id="@+id/search_search"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/button_srarch"
+                    android:gravity="center"
+                    android:text="搜索"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14">
+
+                </TextView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="131dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/no" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="对不起...啥都没找到~"
+                        android:textColor="#aaa"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+                <com.test.iview.dayin.view.XRecyclerView
+                    android:id="@+id/search_xrv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"></com.test.iview.dayin.view.XRecyclerView>
+
+                <com.test.iview.dayin.view.XRecyclerView
+                    android:id="@+id/search_xrv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.test.iview.dayin.view.XRecyclerView>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</com.test.iview.dayin.view.VpSwipeRefreshLayout>

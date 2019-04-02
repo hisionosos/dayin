@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.test.iview.dayin.view.VpSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_vsrl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/item_title"></include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="48dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/collect_baobei"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="宝贝"
+                android:textColor="@color/main_tab_color"
+                android:textSize="@dimen/dp_15" />
+
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/eee" />
+
+            <TextView
+                android:id="@+id/collect_dianpu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="店铺"
+                android:textColor="@color/t66"
+                android:textSize="@dimen/dp_15" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="88dp"
+            android:background="@color/dc" />
+
+        <com.test.iview.dayin.view.XRecyclerView
+            android:id="@+id/collect_xrv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="88.5dp"
+            android:background="@color/eee"></com.test.iview.dayin.view.XRecyclerView>
+
+
+
+        <LinearLayout
+            android:id="@+id/no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="88dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="131dp"
+                android:layout_height="64dp"
+                android:background="@drawable/no" />
+
+            <TextView
+                android:id="@+id/no_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="您没有收藏任何宝贝哦~"
+                android:textColor="#aaa"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.test.iview.dayin.view.VpSwipeRefreshLayout>

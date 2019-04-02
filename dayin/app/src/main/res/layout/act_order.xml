@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.test.iview.dayin.view.VpSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/home_vsrl"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_title"></include>
+
+            <com.test.iview.dayin.view.XRecyclerView
+                android:id="@+id/order_xrv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/eee"></com.test.iview.dayin.view.XRecyclerView>
+
+            <LinearLayout
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="131dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="购物车快要饿扁了哦~"
+                    android:textColor="#aaa"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</com.test.iview.dayin.view.VpSwipeRefreshLayout>

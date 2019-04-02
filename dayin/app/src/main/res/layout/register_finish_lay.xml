@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/title_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_133"
+        android:text="注册完成！"
+        android:layout_marginTop="@dimen/dp_539"
+        android:textColor="#ff4a4a4a"
+        android:textSize="@dimen/sp_90" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_133"
+        android:text="欢迎使用iView"
+        android:textColor="#ff4a4a4a"
+        android:textSize="@dimen/sp_90"
+        />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="@dimen/dp_888"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_373"
+        android:background="@drawable/shape_button_selector"
+        android:text="现在登录"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/sp_60"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
