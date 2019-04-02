@@ -110,5 +110,5 @@ dependencies {
     implementation 'com.xiaosu:VerticalRollingTextView:2.0.9'
     implementation 'pub.devrel:easypermissions:1.0.1'
     implementation 'com.android.support:design:26.0.0'
-
+    implementation 'com.just.agentweb:agentweb:4.0.2'
 }

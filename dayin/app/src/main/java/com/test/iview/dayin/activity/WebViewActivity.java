@@ -4,10 +4,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -19,10 +27,12 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.global.MyApplication;
@@ -31,9 +41,16 @@ import com.test.iview.dayin.util.QqShare;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.wbapi.WBShareActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.chad.library.adapter.base.listener.SimpleClickListener.TAG;
 
 
 /**
@@ -41,13 +58,36 @@ import java.util.Map;
  */
 
 public class WebViewActivity extends BaseActivity {
+    @BindView(R.id.back)
+    ImageView back;
+    @BindView(R.id.search_et)
+    EditText searchEt;
+    @BindView(R.id.search_search)
+    TextView searchSearch;
+    @BindView(R.id.web_title)
+    RelativeLayout webTitle;
+    @BindView(R.id.webview_web)
     WebView webView;
-    final public static int READ_EXTERNAL_STORAGE = 555;
-    private RelativeLayout webview_rl;
-    private ImageView webview_fanhui;
-    private boolean isLogin = false;
-    Map<String,String> header = new HashMap<>();
+    @BindView(R.id.web_lay)
+    LinearLayout webLay;
+    @BindView(R.id.webview_fanhui)
+    ImageView webviewFanhui;
+    @BindView(R.id.webview_forward)
+    ImageView webviewForward;
+    @BindView(R.id.big_txt)
+    TextView bigTxt;
+    @BindView(R.id.small_txt)
+    TextView smallTxt;
+    @BindView(R.id.print_cur)
+    TextView printCur;
+    @BindView(R.id.print_all)
+    TextView printAll;
+    @BindView(R.id.webview_rl)
+    RelativeLayout webviewRl;
 
+    private String url = "http://www.baidu.com";
+    WebSettings settings;
+    private int textSize = 100;
     @Override
     protected void onResume() {
         super.onResume();
@@ -61,24 +101,8 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-        webView = (WebView) findViewById(R.id.webview_web);
-        webview_rl = (RelativeLayout) findViewById(R.id.webview_rl);
-        webview_fanhui = (ImageView) findViewById(R.id.webview_fanhui);
-        webview_fanhui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        if (getIntent().getIntExtra("WebView_Type",0)==0){
-            webview_rl.setVisibility(View.GONE);
-        }else{
-            webview_rl.setVisibility(View.VISIBLE);
-        }
-        header.put("android","android");
-
-        webView.addJavascriptInterface(new JavaScriptinterface(this), "app");
         initTestWebView();
+        webView.loadUrl(url);
     }
 
     @Override
@@ -90,6 +114,349 @@ public class WebViewActivity extends BaseActivity {
     public int initLayout() {
         return R.layout.act_webview;
     }
+
+
+    @OnClick({R.id.back, R.id.search_search, R.id.webview_fanhui, R.id.webview_forward, R.id.big_txt, R.id.small_txt, R.id.print_cur, R.id.print_all})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                break;
+            case R.id.search_search:
+                url = searchEt.getText().toString();
+                if (!url.startsWith("http://")) {
+                    url = url + "http://";
+                }
+                webView.loadUrl(url);
+                break;
+            case R.id.webview_fanhui:
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                }
+                break;
+            case R.id.webview_forward:
+                if (webView.canGoForward()){
+                    webView.goForward();
+                }
+                break;
+            case R.id.big_txt:
+                if (textSize < 200){
+                    textSize += 10;
+                    settings.setTextZoom(textSize);
+                }
+
+                break;
+            case R.id.small_txt:
+                if (textSize > 20){
+                    textSize -= 10;
+                    settings.setTextZoom(textSize);
+                }
+                break;
+            case R.id.print_cur:
+                webTitle.setVisibility(View.GONE);
+                webviewRl.setVisibility(View.GONE);
+                getCutImage();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                webTitle.setVisibility(View.VISIBLE);
+                webviewRl.setVisibility(View.VISIBLE);
+                //截屏
+                break;
+            case R.id.print_all:
+                //截取组件视图
+
+                getCutImage1();
+                break;
+        }
+    }
+
+
+    private String getCutImage(){
+        final View dView = getWindow().getDecorView();
+        dView.setDrawingCacheEnabled(true);
+        dView.buildDrawingCache();
+        String filePath = "";
+
+        try {
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    // 要在运行在子线程中
+                    final Bitmap bmp = dView.getDrawingCache(); // 获取图片
+                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    dView.destroyDrawingCache(); // 保存过后释放资源
+                    bmp.recycle();
+
+                }
+            },500);
+
+        } catch (Exception e) {
+        }
+
+        return filePath;
+    }
+
+    private String getCutImage1(){
+        webView.setDrawingCacheEnabled(true);
+        webView.buildDrawingCache();
+        Bitmap bitmap = webView.getDrawingCache();
+        try {
+            String fileName = Environment.getExternalStorageDirectory().getPath() + "/webview_jietu.jpg";
+            FileOutputStream fos = new FileOutputStream(fileName);
+            //压缩bitmap到输出流中
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, fos);
+            fos.close();
+            Toast.makeText(WebViewActivity.this, "截屏成功", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        } finally {
+//            bitmap.recycle();
+        }
+
+        return "";
+    }
+
+
+    private void getAllImage(){
+
+        webView.setDrawingCacheEnabled(true);
+        webView.buildDrawingCache();
+        String filePath = "";
+        // WebView 生成长图，也就是超过一屏的图片，代码中的 longImage 就是最后生成的长图
+        webView.measure(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
+        webView.setDrawingCacheEnabled(true);
+        webView.buildDrawingCache();
+        final Bitmap longImage = Bitmap.createBitmap(webView.getMeasuredWidth(),
+                webView.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(longImage);  // 画布的宽高和 WebView 的网页保持一致
+        Paint paint = new Paint();
+        canvas.drawBitmap(longImage, 0, webView.getMeasuredHeight(), paint);
+        webView.draw(canvas);
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                // 要在运行在子线程中
+                savePicture(longImage, System.currentTimeMillis() + "_screen.png");// 保存图片
+                webView.destroyDrawingCache();
+
+            }
+        },500);
+
+        savePicture(longImage, System.currentTimeMillis() + "_screen.png");// 保存图片
+
+    }
+
+//    private String getAllImageX5(){
+//        // 这里的 mWebView 就是 X5 内核的 WebView ，代码中的 longImage 就是最后生成的长图
+//        webView.measure(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED),
+//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
+//        webView.setDrawingCacheEnabled(true);
+//        webView.buildDrawingCache();
+//        Bitmap longImage = Bitmap.createBitmap(webView.getMeasuredWidth(),
+//                webView.getMeasuredHeight() , Bitmap.Config.ARGB_8888);
+//        Canvas canvas = new Canvas(longImage);  // 画布的宽高和 WebView 的网页保持一致
+//        Paint paint = new Paint();
+//        canvas.drawBitmap(longImage, 0, webView.getMeasuredHeight(), paint);
+//
+//        float scale = getResources().getDisplayMetrics().density;
+//        Bitmap x5Bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+//        Canvas x5Canvas = new Canvas(x5Bitmap);
+//        x5Canvas.drawColor(ContextCompat.getColor(this, R.color.d73921));
+//        webView.getX5WebViewExtension().snapshotWholePage(x5Canvas, false, false);  // 少了这行代码就无法正常生成长图
+//        Matrix matrix = new Matrix();
+//        matrix.setScale(scale, scale);
+//        longCanvas.drawBitmap(x5Bitmap, matrix, paint);
+//    }
+
+
+    public void savePicture(Bitmap bm, String fileName) {
+        if (null == bm) {
+            Log.i("savePicture", "---图片为空------");
+            return;
+        }
+        Log.e("path",Environment.getExternalStorageDirectory().getAbsolutePath() );
+        File foder = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+        if (!foder.exists()) {
+            foder.mkdirs();
+        }
+        File myCaptureFile = new File(foder, fileName);
+        try {
+            if (!myCaptureFile.exists()) {
+                myCaptureFile.createNewFile();
+            }
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+            //压缩保存到本地
+            bm.compress(Bitmap.CompressFormat.PNG, 90, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+    public final static int FILECHOOSER_RESULTCODE = 1;
+    public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;
+
+    private void initTestWebView() {
+
+        settings = webView.getSettings();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        settings.setJavaScriptEnabled(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setAllowFileAccess(true);
+        settings.setSupportZoom(true);
+        settings.setDisplayZoomControls(false);
+        webView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //表示按返回键
+//                        时的操作
+                        webView.goBack();   //后退
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        webView.addJavascriptInterface(new JavaScriptinterface(WebViewActivity.this), "app");
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("xxx提示").setMessage(message).setPositiveButton("确定", null);
+                builder.setCancelable(false);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                result.confirm();
+                return true;
+            }
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) {
+
+                }
+            }
+
+            //扩展浏览器上传文件
+            //3.0++版本
+            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+                openFileChooserImpl(uploadMsg);
+            }
+
+            //3.0--版本
+            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+                openFileChooserImpl(uploadMsg);
+            }
+
+            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+                openFileChooserImpl(uploadMsg);
+            }
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                onenFileChooseImpleForAndroid(filePathCallback);
+                return true;
+            }
+        });
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                webView.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {   //加载完成
+                super.onPageFinished(view, url);
+
+                if (url.equals("about:blank")) {
+                    ToastUtils.showToast("加载失败...");
+
+                }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                ToastUtils.showToast("加载失败...");
+
+            }
+        });
+
+
+    }
+
+
+    public ValueCallback<Uri> mUploadMessage;
+
+    public void openFileChooserImpl(ValueCallback<Uri> uploadMsg) {
+        mUploadMessage = uploadMsg;
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.addCategory(Intent.CATEGORY_OPENABLE);
+        i.setType("image/*");
+        startActivityForResult(Intent.createChooser(i, "File Chooser"), FILECHOOSER_RESULTCODE);
+    }
+
+    public ValueCallback<Uri[]> mUploadMessageForAndroid5;
+
+    public void onenFileChooseImpleForAndroid(ValueCallback<Uri[]> filePathCallback) {
+        mUploadMessageForAndroid5 = filePathCallback;
+        Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        contentSelectionIntent.setType("image/*");
+
+        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+        chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+        chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
+
+        startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE_FOR_ANDROID_5);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == FILECHOOSER_RESULTCODE) {
+            if (null == mUploadMessage)
+                return;
+            Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
+            mUploadMessage.onReceiveValue(result);
+            mUploadMessage = null;
+
+        } else if (requestCode == FILECHOOSER_RESULTCODE_FOR_ANDROID_5) {
+            if (null == mUploadMessageForAndroid5)
+                return;
+            Uri result = (intent == null || resultCode != RESULT_OK) ? null : intent.getData();
+            if (result != null) {
+                mUploadMessageForAndroid5.onReceiveValue(new Uri[]{result});
+            } else {
+                mUploadMessageForAndroid5.onReceiveValue(new Uri[]{});
+            }
+            mUploadMessageForAndroid5 = null;
+        }
+    }
+
+
 
     public class JavaScriptinterface {
         private Activity mactivity;
@@ -124,7 +491,7 @@ public class WebViewActivity extends BaseActivity {
          */
         @JavascriptInterface
         public void login() {
-            isLogin = true;
+//            isLogin = true;
             startActivity(new Intent(WebViewActivity.this, LoginActivity.class));
         }
 
@@ -210,154 +577,5 @@ public class WebViewActivity extends BaseActivity {
         }
     }
 
-    private ArrayList<String> list = new ArrayList<>();
-
-
-    public final static int FILECHOOSER_RESULTCODE = 1;
-    public final static int FILECHOOSER_RESULTCODE_FOR_ANDROID_5 = 2;
-
-    private void initTestWebView() {
-        String url = getIntent().getStringExtra("WebView_URL");
-//        String url = "https://www.baidu.com/?tn=95531022_s_hao_pg";
-        WebSettings settings = webView.getSettings();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        settings.setJavaScriptEnabled(true);
-        settings.setBuiltInZoomControls(true);
-        settings.setAllowFileAccess(true);
-        webView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {  //表示按返回键
-//                        时的操作
-                        webView.goBack();   //后退
-//                        webview.goForward();//前进
-                        return true;    //已处理
-                    }
-                }
-                return false;
-            }
-        });
-        webView.addJavascriptInterface(new JavaScriptinterface(WebViewActivity.this), "app");
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle("xxx提示").setMessage(message).setPositiveButton("确定", null);
-                builder.setCancelable(false);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                result.confirm();
-                return true;
-            }
-
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
-
-                }
-            }
-
-            //扩展浏览器上传文件
-            //3.0++版本
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-                openFileChooserImpl(uploadMsg);
-            }
-
-            //3.0--版本
-            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-                openFileChooserImpl(uploadMsg);
-            }
-
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-                openFileChooserImpl(uploadMsg);
-            }
-
-            @Override
-            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-                onenFileChooseImpleForAndroid(filePathCallback);
-                return true;
-            }
-        });
-
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadUrl(url);
-                return true;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {   //加载完成
-                super.onPageFinished(view, url);
-
-                if (url.equals("about:blank")) {
-                    ToastUtils.showToast("加载失败...");
-                    finish();
-                }
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                ToastUtils.showToast("加载失败...");
-                finish();
-            }
-        });
-
-        webView.loadUrl(url);
-    }
-
-
-    public ValueCallback<Uri> mUploadMessage;
-
-    public void openFileChooserImpl(ValueCallback<Uri> uploadMsg) {
-        mUploadMessage = uploadMsg;
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("image/*");
-        startActivityForResult(Intent.createChooser(i, "File Chooser"), FILECHOOSER_RESULTCODE);
-    }
-
-    public ValueCallback<Uri[]> mUploadMessageForAndroid5;
-
-    public void onenFileChooseImpleForAndroid(ValueCallback<Uri[]> filePathCallback) {
-        mUploadMessageForAndroid5 = filePathCallback;
-        Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        contentSelectionIntent.setType("image/*");
-
-        Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-        chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
-        chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
-
-        startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE_FOR_ANDROID_5);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == FILECHOOSER_RESULTCODE) {
-            if (null == mUploadMessage)
-                return;
-            Uri result = intent == null || resultCode != RESULT_OK ? null : intent.getData();
-            mUploadMessage.onReceiveValue(result);
-            mUploadMessage = null;
-
-        } else if (requestCode == FILECHOOSER_RESULTCODE_FOR_ANDROID_5) {
-            if (null == mUploadMessageForAndroid5)
-                return;
-            Uri result = (intent == null || resultCode != RESULT_OK) ? null : intent.getData();
-            if (result != null) {
-                mUploadMessageForAndroid5.onReceiveValue(new Uri[]{result});
-            } else {
-                mUploadMessageForAndroid5.onReceiveValue(new Uri[]{});
-            }
-            mUploadMessageForAndroid5 = null;
-        }
-    }
 
 }
