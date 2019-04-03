@@ -271,29 +271,6 @@ public class WebViewActivity extends BaseActivity {
 
     }
 
-//    private String getAllImageX5(){
-//        // 这里的 mWebView 就是 X5 内核的 WebView ，代码中的 longImage 就是最后生成的长图
-//        webView.measure(View.MeasureSpec.makeMeasureSpec(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED),
-//                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-//        webView.layout(0, 0, webView.getMeasuredWidth(), webView.getMeasuredHeight());
-//        webView.setDrawingCacheEnabled(true);
-//        webView.buildDrawingCache();
-//        Bitmap longImage = Bitmap.createBitmap(webView.getMeasuredWidth(),
-//                webView.getMeasuredHeight() , Bitmap.Config.ARGB_8888);
-//        Canvas canvas = new Canvas(longImage);  // 画布的宽高和 WebView 的网页保持一致
-//        Paint paint = new Paint();
-//        canvas.drawBitmap(longImage, 0, webView.getMeasuredHeight(), paint);
-//
-//        float scale = getResources().getDisplayMetrics().density;
-//        Bitmap x5Bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
-//        Canvas x5Canvas = new Canvas(x5Bitmap);
-//        x5Canvas.drawColor(ContextCompat.getColor(this, R.color.d73921));
-//        webView.getX5WebViewExtension().snapshotWholePage(x5Canvas, false, false);  // 少了这行代码就无法正常生成长图
-//        Matrix matrix = new Matrix();
-//        matrix.setScale(scale, scale);
-//        longCanvas.drawBitmap(x5Bitmap, matrix, paint);
-//    }
-
 
     public void savePicture(Bitmap bm, String fileName) {
         if (null == bm) {

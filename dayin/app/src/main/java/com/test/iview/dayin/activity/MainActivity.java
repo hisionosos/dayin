@@ -32,13 +32,14 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @BindView(R.id.main_tab)
     TabLayout mainTab;
 
+
     private HomeFragment homeFragment;
 //    private AdContentFragment adContentFragment;
 //    private PlayFragment playFragment;
     private MyFragment myFragment;
     private String[] tab_title = {"首页", "个人中心"};
     private int[] tab_imgs = {R.drawable.tab_home,R.drawable.tab_my};
-    private String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
+    private String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.WRITE_EXTERNAL_STORAGE,};
     private ArrayList fgs = new ArrayList<>();
 
     @Override
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        ToastUtils.showShort("部分权限未打开，可能影响使用");
+//        ToastUtils.showShort("部分权限未打开，可能影响使用");
     }
 
     @Override
