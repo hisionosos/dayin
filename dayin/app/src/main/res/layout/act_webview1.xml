@@ -35,10 +35,10 @@
             android:layout_alignParentBottom="true"
             android:background="#dcdcdc" />
     </RelativeLayout>
-<WebView
-    android:layout_marginTop="48dp"
-    android:layout_width="match_parent"
-    android:id="@+id/webview1"
-    android:layout_height="match_parent"></WebView>
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/webview1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

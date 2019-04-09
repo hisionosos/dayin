@@ -120,6 +120,7 @@ public class WebViewActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
+                finish();
                 break;
             case R.id.search_search:
                 url = searchEt.getText().toString();
@@ -187,6 +188,7 @@ public class WebViewActivity extends BaseActivity {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
                     savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    ToastUtils.showShort("保存成功");
                     dView.destroyDrawingCache(); // 保存过后释放资源
                     bmp.recycle();
 
@@ -227,6 +229,7 @@ public class WebViewActivity extends BaseActivity {
                 @Override
                 public void run() {
                     savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    ToastUtils.showShort("保存成功");
                     webView.destroyDrawingCache(); // 保存过后释放资源
                     bm.recycle();
                 }

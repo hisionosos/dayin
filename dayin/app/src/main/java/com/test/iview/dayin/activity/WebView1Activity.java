@@ -2,6 +2,7 @@ package com.test.iview.dayin.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.tencent.smtt.sdk.TbsReaderView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.util.DiaLog;
 import com.test.iview.dayin.util.QqShare;
@@ -36,17 +38,22 @@ public class WebView1Activity extends BaseActivity {
 
     private Dialog dialog;
 
+    private TbsReaderView mTbsReaderView;
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
         webview1Title.setText(getIntent().getStringExtra("WebView_Title_t"));
-
+        webview1.setDrawingCacheEnabled(true);
 //        WebUtile.init(this, webview1, getIntent().getStringExtra("WebView_URL"), null, null, gif);
 //        webview1.addJavascriptInterface(new JavaScriptinterface(), "app");
     }
 
     @Override
     public void initData() {
+//        mTbsReaderView = new TbsReaderView(this, this);
+//        mRelativeLayout = findViewById(R.id.tbsView);
+//        mRelativeLayout.addView(mTbsReaderView,new RelativeLayout.LayoutParams(-1,-1));
 
     }
 
@@ -142,4 +149,11 @@ public class WebView1Activity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTbsReaderView.onStop();
+    }
+
 }

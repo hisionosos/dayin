@@ -81,10 +81,6 @@
             android:visibility="invisible"
             android:background="@null"/>
 
-            <com.test.iview.dayin.view.SingleTouchView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"/>
 
         </RelativeLayout>
 

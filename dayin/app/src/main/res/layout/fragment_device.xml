@@ -58,7 +58,7 @@
                 <ImageView
                     android:id="@+id/dayinji"
                     android:layout_width="@dimen/dp_160"
-                    android:layout_height="@dimen/sp_110"
+                    android:layout_height="@dimen/dp_110"
                     android:background="@drawable/dayinji"/>
 
                 <TextView

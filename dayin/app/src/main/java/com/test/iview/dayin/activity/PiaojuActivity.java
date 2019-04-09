@@ -100,13 +100,7 @@ public class PiaojuActivity extends BaseActivity {
 //        singleTouchView.setEditable(false);
 //        singleTouchView.setImageBitamp(Text2BitmapUtils.getBitmap(this,"共四个字",500,5,3,0xff999585,0x00121234));
 
-        SingleTouchEditText singleTouchView = new SingleTouchEditText(PiaojuActivity.this);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        singleTouchView.setLayoutParams(layoutParams);
-        singleTouchView.setBackground(getResources().getDrawable(R.drawable.main_backimg));
-        singleTouchView.setHint("请输入文字");
-        canv.addView(singleTouchView);
+
 
     }
 
@@ -171,7 +165,7 @@ public class PiaojuActivity extends BaseActivity {
                 CameraUtils.albumChoose(this);
                 break;
             case R.id.add_code:
-
+                startActivity(new Intent(this,CaptureActivity.class));
                 break;
             case R.id.add_biaoqing:
 
