@@ -183,6 +183,9 @@
             android:name="com.test.iview.dayin.activity.common.YuLeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.test.iview.dayin.activity.common.BiaoqingBaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.test.iview.dayin.wbapi.WBShareActivity"
             android:screenOrientation="portrait"></activity>
         <activity

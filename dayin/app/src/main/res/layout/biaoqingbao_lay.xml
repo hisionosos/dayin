@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include layout="@layout/common_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EFEFEF">
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/canv"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title_bar"
+            android:background="@drawable/shape_pop_dialog"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_above="@+id/main_tab">
+            <EditText
+                android:id="@+id/edit_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:cursorVisible="false"
+                android:padding="@dimen/dp_30"
+                android:visibility="visible"
+                android:background="@null"/>
+
+
+        </RelativeLayout>
+
+        <RadioGroup
+            android:id="@+id/main_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/main_tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="素材库"
+                android:gravity="center"
+                android:textSize="@dimen/sp_30"
+                android:textColor="@color/text_color_selecter"
+                android:drawableTop="@drawable/tab_biaoqing"
+                android:background="@color/transparent"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/main_tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="文字"
+                android:textColor="@color/text_color_selecter"
+                android:textSize="@dimen/sp_30"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/tab_ziti"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+    </RelativeLayout>
+
+</LinearLayout>

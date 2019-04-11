@@ -38,7 +38,7 @@ public class YuLeActivity extends BaseActivity {
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("轻松工作");
+        commonTitle.setText("娱乐打印");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class YuLeActivity extends BaseActivity {
                 startActivity(new Intent(this,TuWenActivity.class));
                 break;
             case R.id.work2:
-                startActivity(new Intent(this,TuWenActivity.class));
+                startActivity(new Intent(this,BiaoqingBaoActivity.class));
                 break;
             case R.id.work3:
                 startActivity(new Intent(this,TuWenActivity.class));

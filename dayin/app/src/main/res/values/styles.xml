@@ -36,4 +36,9 @@
         <item name="android:background">@drawable/splash_img</item>
     </style>
 
+    <style name="setting_popu_anim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_pupowindow_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_pupowindow_exit</item>
+    </style>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.test.iview.dayin.activity.common;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -147,7 +148,10 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
     @Override
     public void onOssSelect(View view, int position) {
         Log.e("position",position + "");
-
+        Intent intent = new Intent();
+        intent.putExtra("img", position);
+        setResult(1000, intent);
+        finish();
     }
 
 

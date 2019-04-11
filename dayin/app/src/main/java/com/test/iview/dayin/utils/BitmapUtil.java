@@ -7,9 +7,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,6 +22,11 @@ import java.io.IOException;
 
 public class BitmapUtil {
 
+    private final static BitmapUtil bitmapUtil = new BitmapUtil();
+
+    public static BitmapUtil getInstance(){
+        return bitmapUtil;
+    }
     /**
      * 返回图片宽高数组，第0个是宽，第1个是高
      */
@@ -239,6 +249,61 @@ public class BitmapUtil {
         return inSampleSize;
 
     }
+
+    public String getCutImage(final View dView){
+
+        dView.setDrawingCacheEnabled(true);
+        dView.buildDrawingCache();
+        String filePath = "";
+
+        try {
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    // 要在运行在子线程中
+                    final Bitmap bmp = dView.getDrawingCache(); // 获取图片
+                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    ToastUtils.showShort("保存成功");
+                    dView.destroyDrawingCache(); // 保存过后释放资源
+                    bmp.recycle();
+
+                }
+            },500);
+
+        } catch (Exception e) {
+        }
+
+        return filePath;
+    }
+
+
+    public void savePicture(Bitmap bm, String fileName) {
+        if (null == bm) {
+            Log.i("savePicture", "---图片为空------");
+            return;
+        }
+        Log.e("path", Environment.getExternalStorageDirectory().getAbsolutePath() );
+        File foder = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+        if (!foder.exists()) {
+            foder.mkdirs();
+        }
+        File myCaptureFile = new File(foder, fileName);
+        try {
+            if (!myCaptureFile.exists()) {
+                myCaptureFile.createNewFile();
+            }
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+            //压缩保存到本地
+            bm.compress(Bitmap.CompressFormat.PNG, 90, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public interface MyCallback {
         void onPrepare();
