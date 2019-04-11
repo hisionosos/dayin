@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/work_back">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_200"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/work1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/work_1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="文字"/>
+
+            <ImageView
+                android:id="@+id/work2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/work_2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="纸条"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_120"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/work3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/work_3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_244"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="横幅"/>
+
+            <ImageView
+                android:id="@+id/work4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/work_4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_220"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="待办事项"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_120"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/work5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/work_5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_216"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="word文档"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/piaoju_2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:layout_marginRight="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="标签"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

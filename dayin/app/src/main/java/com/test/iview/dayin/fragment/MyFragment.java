@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.InstallActivity;
+import com.test.iview.dayin.activity.LanguageActivity;
 import com.test.iview.dayin.activity.MyInfosActivity;
 import com.test.iview.dayin.entity.MyBean;
 import com.test.iview.dayin.global.MyApplication;
@@ -66,8 +67,10 @@ public class MyFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(), MyInfosActivity.class));
                 break;
             case R.id.item1:
+
                 break;
             case R.id.item2:
+                startActivity(new Intent(getActivity(), LanguageActivity.class));
                 break;
             case R.id.item3:
                 break;

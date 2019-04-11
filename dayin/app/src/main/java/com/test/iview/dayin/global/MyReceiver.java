@@ -59,32 +59,6 @@ public class MyReceiver extends BroadcastReceiver {
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         context.startActivity(i);
                         break;
-                    case "news":
-                        i = new Intent(MyApplication.getContext(), WebView1Activity.class);
-                        i.putExtra("WebView_URL", object.getString("shareurl"));
-                        i.putExtra("WebViewShare_URL", object.getString("shareurl"));
-                        i.putExtra("WebView_title", object.getString("sharetitle"));
-                        i.putExtra("WebView_Des", object.getString("sharedes"));
-                        i.putExtra("WebView_img", object.getString("shareimg"));
-                        i.putExtra("WebView_Title_t", object.getString("sharetit"));
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(i);
-                        break;
-                    case "newslist":
-                        break;
-                    case "goodlist":
-                        i = new Intent(MyApplication.getContext(), HomeClassificationActivity.class);
-                        i.putExtra("Home_Classification_id", object.getString("itemid"));
-                        i.putExtra("Home_Classification_title", object.getString("title"));
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(i);
-                        break;
-                    case "specials" :
-                        i = new Intent(MyApplication.getContext(), ZhuanTiActivity.class);
-                        i.putExtra("ZhuanTiActivity_ID", object.getString("itemid"));
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(i);
-                        break;
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -1,29 +1,21 @@
-package com.test.iview.dayin.activity;
+package com.test.iview.dayin.activity.common;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.oned.Code128Writer;
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.activity.BaseActivity;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.view.SingleTouchView;
-
-import java.util.Hashtable;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
@@ -46,16 +38,29 @@ public class CaptureActivity extends BaseActivity {
     @BindView(R.id.txt_url)
     EditText txtUrl;
 
+    String flag = "";
+
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+        flag = getIntent().getStringExtra("flag");
+        if (flag.equals("1")){
+            getRcode.setText("生成二维码");
+            commonTitle.setText("二维码打印");
+        }else{
+            getRcode.setText("生成条形码");
+            commonTitle.setText("条形码打印");
+            txtUrl.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+        }
+
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("二维码打印");
+
     }
 
     @Override
     public void initData() {
+
 
     }
 
@@ -77,19 +82,26 @@ public class CaptureActivity extends BaseActivity {
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
+                Bitmap bitmap = null;
                 if (str.length() > 0){
+                    if (flag.equals("1")){
+                        bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    }else if (flag.equals("2")){
+                        bitmap = QRCodeEncoder.syncEncodeBarcode(str,350,200,20);//条形码
+                    }
 
-//                    Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
-                        Bitmap bitmap = QRCodeEncoder.syncEncodeBarcode(str,350,200,20);//条形码
-                    SingleTouchView singleTouchView = new SingleTouchView(CaptureActivity.this);
-                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    singleTouchView.setLayoutParams(layoutParams);
-                    singleTouchView.setImageBitamp(bitmap);
-                    canv.addView(singleTouchView);
+                    if (bitmap != null){
+                        SingleTouchView singleTouchView = new SingleTouchView(CaptureActivity.this);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        singleTouchView.setLayoutParams(layoutParams);
+                        singleTouchView.setImageBitamp(bitmap);
+                        canv.addView(singleTouchView);
+                    }else{
+                        ToastUtils.showShort("error");
+                    }
 
 
-                    QRCodeEncoder.syncEncodeBarcode(str,350,200,20);
                 }else{
                     ToastUtils.showShort("请输入文字");
                 }

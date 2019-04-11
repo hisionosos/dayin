@@ -2,10 +2,8 @@ package com.test.iview.dayin.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
@@ -17,14 +15,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.activity.common.CaptureActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.utils.CameraUtils;
 import com.test.iview.dayin.utils.ResourceUtils;
-import com.test.iview.dayin.view.SingleTouchEditText;
 import com.test.iview.dayin.view.SingleTouchView;
-import com.test.iview.dayin.view.Text2BitmapUtils;
 
-import java.io.IOException;
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -90,7 +86,7 @@ public class PiaojuActivity extends BaseActivity {
             imageView.setBackgroundResource(tab_imgs[i]);
             textView.setText(tab_title[i]);
             tab.setCustomView(view);
-            mainTab.addTab(tab);
+            mainTab.addTab(tab,false);
         }
 
     }
@@ -165,7 +161,7 @@ public class PiaojuActivity extends BaseActivity {
                 CameraUtils.albumChoose(this);
                 break;
             case R.id.add_code:
-                startActivity(new Intent(this,CaptureActivity.class));
+                startActivity(new Intent(this, CaptureActivity.class));
                 break;
             case R.id.add_biaoqing:
 

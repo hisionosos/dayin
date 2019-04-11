@@ -102,7 +102,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.test.iview.dayin.activity.CaptureActivity"
+            android:name="com.test.iview.dayin.activity.common.CaptureActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -146,6 +146,41 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.QiangActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.PiaojuDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.XiaoPiaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.WorkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.XiaoZiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.ZhiTiaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.SuCaiKuActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.test.iview.dayin.activity.common.HengFuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.DaiBanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.WenDangActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.TuWenActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.test.iview.dayin.activity.common.YuLeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.wbapi.WBShareActivity"

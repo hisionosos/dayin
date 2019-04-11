@@ -1,5 +1,6 @@
 package com.test.iview.dayin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -52,8 +53,10 @@ public class MyInfosActivity extends BaseActivity {
             case R.id.item1:
                 break;
             case R.id.item2:
+                startActivity(new Intent(this,NickActivity.class));
                 break;
             case R.id.item3:
+                startActivity(new Intent(this,SexActivity.class));
                 break;
         }
     }

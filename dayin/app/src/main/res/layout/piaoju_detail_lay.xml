@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EFEFEF"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_400"
+        android:layout_marginTop="@dimen/dp_40"
+        android:orientation="vertical"
+        android:background="@drawable/piaoju_detail_back">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_200"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/piaoju1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/piaoju_1"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="小票"/>
+
+            <ImageView
+                android:id="@+id/piaoju2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/piaoju_2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="标签"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_120"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/piaoju3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/piaoju_3"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_236"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="不干胶"/>
+
+            <ImageView
+                android:id="@+id/piaoju4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/piaoju_4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp_236"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="二维码"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_120"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/piaoju5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_200"
+                android:background="@drawable/piaoju_5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_236"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="条形码"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:layout_marginRight="@dimen/dp_200"
+                android:background="@drawable/piaoju_2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:layout_marginRight="@dimen/dp_250"
+                android:layout_marginTop="@dimen/dp_120"
+                android:text="标签"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

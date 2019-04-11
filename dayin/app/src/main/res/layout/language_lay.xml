@@ -39,14 +39,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="@dimen/dp_115"/>
 
-            <ImageView
-                android:id="@+id/man"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/choose_in"/>
-
         </RelativeLayout>
 
 
@@ -234,6 +226,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_910"
         android:gravity="right"
+        android:visibility="visible"
         android:layout_marginTop="@dimen/dp_200"
         android:layout_marginRight="@dimen/dp_50"
         android:orientation="vertical" >
@@ -242,8 +235,8 @@
             android:id="@+id/choose0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:layout_weight="1"
+            android:checked="true"
             android:button="@drawable/radio_button_style" />
 
         <RadioButton

@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.PiaojuActivity;
 import com.test.iview.dayin.activity.WebViewActivity;
+import com.test.iview.dayin.activity.common.PiaojuDetailActivity;
+import com.test.iview.dayin.activity.common.WorkActivity;
+import com.test.iview.dayin.activity.common.YuLeActivity;
 import com.test.iview.dayin.utils.DimensUtils;
 import com.test.iview.dayin.view.CustomPopWindow;
 
@@ -86,13 +89,13 @@ public class HomeFragment extends BaseFragment {
                 showPopBottom();
                 break;
             case R.id.item1:
-                startActivity(new Intent(getActivity(), WebViewActivity.class));
+                startActivity(new Intent(getActivity(), WorkActivity.class));
                 break;
             case R.id.item2:
-                startActivity(new Intent(getActivity(), PiaojuActivity.class));
+                startActivity(new Intent(getActivity(), PiaojuDetailActivity.class));
                 break;
             case R.id.item3:
-                startActivity(new Intent(getActivity(), WebViewActivity.class));
+                startActivity(new Intent(getActivity(), YuLeActivity.class));
                 break;
             case R.id.item4:
                 startActivity(new Intent(getActivity(), WebViewActivity.class));

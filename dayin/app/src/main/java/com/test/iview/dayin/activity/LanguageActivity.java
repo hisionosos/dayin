@@ -2,6 +2,7 @@ package com.test.iview.dayin.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -22,8 +23,7 @@ public class LanguageActivity extends BaseActivity {
     TextView commonTxt;
     @BindView(R.id.common_title)
     TextView commonTitle;
-    @BindView(R.id.man)
-    ImageView man;
+
     @BindView(R.id.item1)
     RelativeLayout item1;
     @BindView(R.id.item2)
@@ -65,6 +65,34 @@ public class LanguageActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        rgSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.choose0:
+                        Log.e("check","choose0");
+                        break;
+                    case R.id.choose1:
+                        Log.e("check","choose1");
+                        break;
+                    case R.id.choose2:
+                        Log.e("check","choose2");
+                        break;
+                    case R.id.choose3:
+                        Log.e("check","choose3");
+                        break;
+                    case R.id.choose4:
+                        Log.e("check","choose4");
+                        break;
+                    case R.id.choose5:
+                        Log.e("check","choose5");
+                        break;
+                    case R.id.choose6:
+                        Log.e("check","choose6");
+                        break;
+                }
+            }
+        });
 
     }
 
