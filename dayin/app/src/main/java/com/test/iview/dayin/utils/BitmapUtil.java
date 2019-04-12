@@ -254,8 +254,8 @@ public class BitmapUtil {
 
         dView.setDrawingCacheEnabled(true);
         dView.buildDrawingCache();
-        String filePath = "";
-
+        final String fileName = System.currentTimeMillis() + "_screen.png";
+        String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + fileName;
         try {
             new Handler().postDelayed(new Runnable() {
 
@@ -263,7 +263,8 @@ public class BitmapUtil {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
+                    BlueSAPI.getInstance().printContent(dView.getContext(),bmp,5);
+//                    savePicture(bmp, fileName);// 保存图片
                     ToastUtils.showShort("保存成功");
                     dView.destroyDrawingCache(); // 保存过后释放资源
                     bmp.recycle();
@@ -272,6 +273,7 @@ public class BitmapUtil {
             },500);
 
         } catch (Exception e) {
+            filePath = "";
         }
 
         return filePath;
@@ -283,6 +285,7 @@ public class BitmapUtil {
             Log.i("savePicture", "---图片为空------");
             return;
         }
+
         Log.e("path", Environment.getExternalStorageDirectory().getAbsolutePath() );
         File foder = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
         if (!foder.exists()) {
@@ -300,7 +303,9 @@ public class BitmapUtil {
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
+
 
     }
 

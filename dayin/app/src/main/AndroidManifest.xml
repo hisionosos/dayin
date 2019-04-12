@@ -148,6 +148,15 @@
             android:name="com.test.iview.dayin.activity.QiangActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.test.iview.dayin.view.imagecut.IMGEditActivity"
+            android:theme="@style/ImageEditTheme" />
+
+        <activity
+            android:name="com.test.iview.dayin.view.imagecut.IMGGalleryActivity"
+            android:theme="@style/ImageGalleryTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
             android:name="com.test.iview.dayin.activity.common.PiaojuDetailActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -164,6 +173,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.common.SuCaiKuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.TuPianActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -184,6 +196,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.common.BiaoqingBaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.common.TuKuangActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.wbapi.WBShareActivity"

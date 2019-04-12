@@ -19,6 +19,7 @@ import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
 import com.test.iview.dayin.activity.PiaojuActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.view.SingleTouchView;
 import com.test.iview.dayin.view.common.SettingPopuWindow;
 
@@ -76,20 +77,6 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
     @Override
     public void initData() {
 
-        mainTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.main_tab1:
-
-                        break;
-                    case R.id.main_tab2:
-
-                        break;
-                }
-
-            }
-        });
 
     }
 
@@ -117,12 +104,6 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
         editTxt.setTextSize(font);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.back,R.id.main_tab1, R.id.main_tab2,R.id.home_add})
     public void onViewClicked(View view) {
@@ -146,6 +127,7 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
                 }
                 editTxt.setCursorVisible(false);
                 BitmapUtil.getInstance().getCutImage(canv);
+
                 break;
         }
     }

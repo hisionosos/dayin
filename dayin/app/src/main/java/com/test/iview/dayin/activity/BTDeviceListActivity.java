@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.utils.BlueSAPI;
+import com.test.iview.dayin.utils.ToastUtils;
 
 import java.util.Set;
 
@@ -44,6 +46,8 @@ public class BTDeviceListActivity extends TabActivity {
 	public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
 	/** Called when the activity is first created. */
+
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -218,16 +222,26 @@ public class BTDeviceListActivity extends TabActivity {
 			// View
 			String info = ((TextView) v).getText().toString();//20:13:08:12:32:16
 			String address = info.substring(info.length() - 17);
+			connectDevice(address);
 
-			// Create the result Intent and include the MAC address
-			Intent intent = new Intent();
-			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-
-			// Set result and finish this Activity
-			setResult(Activity.RESULT_OK, intent);
-			finish();
+//			Intent intent = new Intent();
+//			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
+//			setResult(Activity.RESULT_OK, intent);
+//			finish();
 		}
 	};
+
+	private void connectDevice(String deviceid){
+		String pwd = "0000";
+
+		int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd);
+		if (res != 0) {
+			ToastUtils.showShort("打印机连接失败");
+		}else {
+			ToastUtils.showShort("打印机连接成功");
+			finish();
+		}
+	}
 
 	// The BroadcastReceiver that listens for discovered devices and
 	// changes the title when discovery is finished
@@ -286,8 +300,9 @@ public class BTDeviceListActivity extends TabActivity {
 	
 	@Override
 	 public void onDestroy() {
-		   //删除广播注册
-		   unregisterReceiver(mReceiver);
-		  super.onDestroy();
-		 }
+		BlueSAPI.getInstance().closePrinter();
+		unregisterReceiver(mReceiver);
+		super.onDestroy();
+	}
+
 }

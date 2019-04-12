@@ -64,10 +64,10 @@ public class YuLeActivity extends BaseActivity {
                 startActivity(new Intent(this,BiaoqingBaoActivity.class));
                 break;
             case R.id.work3:
-                startActivity(new Intent(this,TuWenActivity.class));
+                startActivity(new Intent(this,TuPianActivity.class));
                 break;
             case R.id.work4:
-                startActivity(new Intent(this,TuWenActivity.class));
+                startActivity(new Intent(this,TuPianActivity.class));
                 break;
             case R.id.work5:
                 startActivity(new Intent(this,TuWenActivity.class));
