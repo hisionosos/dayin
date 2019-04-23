@@ -30,9 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:cursorVisible="false"
-                android:padding="@dimen/dp_30"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:background="@null"/>
 
 
@@ -51,28 +49,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:text="图片"
+                android:text="素材库"
                 android:gravity="center"
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
-                android:drawableTop="@drawable/tab_tupian"
+                android:drawableTop="@drawable/tab_sucai"
                 android:background="@color/transparent"
                 android:layout_weight="1"/>
             <RadioButton
                 android:id="@+id/main_tab2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:button="@null"
-                android:text="涂鸦"
-                android:visibility="gone"
-                android:textColor="@color/text_color_selecter"
-                android:textSize="@dimen/sp_30"
-                android:gravity="center"
-                android:background="@color/transparent"
-                android:drawableTop="@drawable/tab_tuya"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:id="@+id/main_tab3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
@@ -82,18 +67,6 @@
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_ziti"
-                android:layout_weight="1"/>
-            <RadioButton
-                android:id="@+id/main_tab4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:button="@null"
-                android:text="表情包"
-                android:textColor="@color/text_color_selecter"
-                android:textSize="@dimen/sp_30"
-                android:gravity="center"
-                android:background="@color/transparent"
-                android:drawableTop="@drawable/tab_biaoqing"
                 android:layout_weight="1"/>
 
         </RadioGroup>

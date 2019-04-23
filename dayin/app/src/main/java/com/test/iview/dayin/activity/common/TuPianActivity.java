@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.view.SingleTouchView;
 import com.test.iview.dayin.view.common.SettingPopuWindow;
@@ -99,6 +100,7 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
 
                 break;
             case R.id.main_tab2:
+                //涂鸦
 
                 break;
             case R.id.main_tab3:
@@ -130,9 +132,20 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
         }
         if (requestCode == 4000) {
             onChooseImages(IMGGalleryActivity.getImageInfos(data));
-
         }
 
+        if (resultCode == RESULT_OK && requestCode == 3000){
+            Bitmap bitmap = MyApplication.mCache.getAsBitmap("cut_img");
+            if (null != bitmap){
+                SingleTouchView singleTouchView = new SingleTouchView(this);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+                singleTouchView.setLayoutParams(layoutParams);
+                singleTouchView.setImageBitamp(bitmap);
+                canv.addView(singleTouchView);
+                arrs.add(singleTouchView);
+            }
+        }
     }
 
     private void onChooseImages(List<IMGImageInfo> images) {

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.view.imagecut.core.IMGMode;
 import com.test.iview.dayin.view.imagecut.core.IMGText;
@@ -133,7 +134,8 @@ public class IMGEditActivity extends IMGEditBaseActivity {
         if (!TextUtils.isEmpty(path)) {
             Bitmap bitmap = mImgView.saveBitmap();
             if (bitmap != null) {
-                BlueSAPI.getInstance().printContent(getApplicationContext(),bitmap,5);
+                MyApplication.mCache.put("cut_img",bitmap);
+//                BlueSAPI.getInstance().printContent(getApplicationContext(),bitmap,5);
 //                FileOutputStream fout = null;
 //                try {
 //                    fout = new FileOutputStream(path);

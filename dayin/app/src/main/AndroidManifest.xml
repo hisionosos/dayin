@@ -171,6 +171,10 @@
         <activity
             android:name="com.test.iview.dayin.activity.common.ZhiTiaoActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.test.iview.dayin.activity.common.TuYaActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.common.SuCaiKuActivity"
             android:screenOrientation="portrait" />

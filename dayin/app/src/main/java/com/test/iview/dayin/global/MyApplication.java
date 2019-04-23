@@ -17,6 +17,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.smtt.sdk.QbSdk;
 import com.test.iview.dayin.utils.SharedPreferencesUtils;
+import com.test.iview.dayin.utils.cache.AppACache;
 import com.test.iview.dayin.wbapi.Constants1;
 
 import java.util.logging.Level;
@@ -41,7 +42,7 @@ public class MyApplication extends Application {
     public static Context getContext() {
         return mContext;
     }
-
+    public static AppACache mCache;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,7 +55,7 @@ public class MyApplication extends Application {
     private void init(){
         Fresco.initialize(this);
         CrashReport.initCrashReport(getApplicationContext(), "aef05c4e0a", false);
-
+        mCache = AppACache.get(this);
         BroadcastReceiver receiver = new NetWorkChangeBroadcastReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
