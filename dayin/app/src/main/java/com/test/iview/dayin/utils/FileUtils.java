@@ -1202,4 +1202,40 @@ public class FileUtils {
             Log.i("", "This directory is file, not execute delete");
         }
     }
+
+
+
+    /**
+     *  从assets目录中复制整个文件夹内容
+     *  @param  context  Context 使用CopyFiles类的Activity
+     *  @param  oldPath  String  原文件路径  如：/aa
+     *  @param  dirName  String  复制后路径  如：xx:/bb/cc
+     */
+    public static File copyFilesFassets(Context context,String oldPath,String dirName) {
+        File file = null;
+        try {
+            InputStream is = context.getAssets().open(oldPath);
+            file = new File(createFileDir(context,dirName), oldPath);
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int byteCount=0;
+            while((byteCount=is.read(buffer))!=-1) {//循环从输入流读取 buffer字节
+                fos.write(buffer, 0, byteCount);//将读取的输入流写入到输出流
+            }
+            fos.flush();//刷新缓冲区
+            is.close();
+            fos.close();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+
+        }
+
+        return file;
+
+    }
+
+
+
 }
