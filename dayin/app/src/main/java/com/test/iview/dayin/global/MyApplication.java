@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -29,7 +30,7 @@ import cn.jpush.android.api.JPushInterface;
  * Created by Administrator on 2018\4\25 0025.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     private static Context mContext;
     private static MyApplication application = null;

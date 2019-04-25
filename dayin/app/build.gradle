@@ -5,10 +5,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            keyAlias 'iviewlogo'
-            keyPassword 'iviewlogo'
-            storePassword 'iviewlogo'
-            storeFile file('E:/logowork/logo/iviewlogo.jks')
+            keyAlias 'duduji'
+            keyPassword 'duduji'
+            storePassword 'duduji'
+            storeFile file('E:/dayin_project/dayin/duduji.jks')
         }
     }
     compileSdkVersion 26
@@ -20,6 +20,7 @@ android {
         targetSdkVersion 26
         versionCode 100
         versionName "1.0.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //        signingConfigs {
 //            release {

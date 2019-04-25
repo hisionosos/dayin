@@ -59,46 +59,21 @@
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_above="@+id/main_tab">
 
-            <LinearLayout
-                android:id="@+id/biaoqian1_lay"
+            <ScrollView
+                android:id="@+id/canv_soll"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/biaoqian1_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    layout="@layout/biaoqianone"
-                    android:visibility="gone"/>
-            </LinearLayout>
+                    <include layout="@layout/xiaopiaoone" />
+                </LinearLayout>
+            </ScrollView>
 
-            <LinearLayout
-                android:id="@+id/biaoqian2_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
-                    layout="@layout/biaoqiantwo"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/biaoqian3_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
-                    layout="@layout/biaoqianthree"
-                    android:visibility="gone"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/biaoqian4_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include
-                    layout="@layout/biaoqianfour"
-                    android:visibility="gone"/>
-            </LinearLayout>
 
         </RelativeLayout>
 
