@@ -1,16 +1,23 @@
 package com.test.iview.dayin.activity.common;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.utils.ResourceUtils;
 
 import butterknife.BindView;
@@ -27,8 +34,14 @@ public class ZhiTiaoActivity extends BaseActivity {
     RadioGroup mainTab;
     @BindView(R.id.back)
     ImageView back;
-
-
+    @BindView(R.id.wangge_lay)
+    LinearLayout wanggeLay;
+    @BindView(R.id.size_seek)
+    SeekBar sizeSeek;
+    @BindView(R.id.edit_txt)
+    EditText editTxt;
+    @BindView(R.id.canv)
+    RelativeLayout canv;
     String flag = "";
     private String[] tab_title = {"大小", "调整",  "粗细",};
     private int[] tab_imgs = { R.drawable.tab_daxiao, R.drawable.tab_tiaozheng, R.drawable.tab_cuxi};
@@ -36,7 +49,7 @@ public class ZhiTiaoActivity extends BaseActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         flag = getIntent().getStringExtra("flag");
-        commonTitle.setText("纸条打印");
+        commonTitle.setText(R.string.dy_zhitiao);
 
     }
 
@@ -46,21 +59,19 @@ public class ZhiTiaoActivity extends BaseActivity {
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
 
-        mainTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.main_tab1:
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                editTxt.setTextSize(progress/5 + 15);
+            }
 
-                        break;
-                    case R.id.main_tab2:
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
-                        break;
-                    case R.id.main_tab3:
+            }
 
-                        break;
-
-                }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
@@ -72,13 +83,56 @@ public class ZhiTiaoActivity extends BaseActivity {
         return R.layout.zhitiao_lay;
     }
 
-    @OnClick({R.id.back})
+    
+    private boolean isBlod = false;
+    private int editGrave = 0;
+
+
+    @OnClick({R.id.back,R.id.home_add,R.id.main_tab1,R.id.main_tab2,R.id.main_tab3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
                 break;
+            case R.id.home_add:
+                editTxt.setCursorVisible(false);
+                BitmapUtil.getInstance().getCutImage(canv);
 
+                break;
+            case R.id.main_tab1:
+                setting();
+                break;
+            case R.id.main_tab2:
+                if (editGrave == 0){
+                    editTxt.setGravity(Gravity.CENTER);
+                    editGrave ++;
+                }else if (editGrave == 1){
+                    editTxt.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+                    editGrave ++;
+                }else if (editGrave == 2){
+                    editTxt.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                    editGrave --;
+                    editGrave --;
+                }
+                break;
+            case R.id.main_tab3:
+                if (isBlod){
+                    editTxt.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                    isBlod = false;
+                }else{
+                    editTxt.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                    isBlod = true;
+                }
+                break;
         }
     }
+
+    private void setting() {
+        if (wanggeLay.getVisibility() == View.VISIBLE){
+            wanggeLay.setVisibility(View.INVISIBLE);
+        }else{
+            wanggeLay.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

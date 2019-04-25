@@ -12,10 +12,47 @@
         android:background="#EFEFEF">
 
         <RelativeLayout
+            android:id="@+id/code_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="#fff"
+            android:layout_marginTop="@dimen/dp_20"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/get_rcode"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_100"
+                android:layout_alignParentRight="true"
+                android:background="#0E6EB8"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/to_qcode"/>
+
+            <EditText
+                android:id="@+id/txt_url"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120"
+                android:hint="@string/input_text"
+
+                android:gravity="center_vertical"
+                android:layout_toLeftOf="@+id/get_rcode"
+                android:layout_marginLeft="@dimen/dp_60"
+                android:background="@null"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/canv"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/code_bar"
             android:background="@drawable/shape_pop_dialog"
             android:layout_marginLeft="@dimen/dp_50"
             android:layout_marginRight="@dimen/dp_50"
@@ -46,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:text="表格"
+                android:text="@string/wangge"
                 android:gravity="center"
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
@@ -58,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:text="图片"
+                android:text="@string/dy_photo"
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
@@ -72,7 +109,7 @@
                 android:button="@null"
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
-                android:text="调整"
+                android:text="@string/dy_ajust"
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_tiaozheng"
@@ -83,7 +120,7 @@
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:textColor="@color/text_color_selecter"
-                android:text="表情包"
+                android:text="@string/dy_biaoqing"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
                 android:background="@color/transparent"
@@ -96,47 +133,13 @@
                 android:button="@null"
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
-                android:text="二维码"
+                android:text="@string/dy_erweima"
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_ercode"
                 android:layout_weight="1"/>
         </RadioGroup>
 
-
-        <RelativeLayout
-            android:id="@+id/code_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#fff"
-            android:visibility="invisible"
-            android:layout_marginRight="@dimen/dp_60"
-            android:layout_marginLeft="@dimen/dp_60"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:layout_above="@+id/main_tab"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/get_rcode"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_100"
-                android:layout_alignParentRight="true"
-                android:background="#0E6EB8"
-                android:gravity="center"
-                android:text="生成二维码"/>
-
-            <EditText
-                android:id="@+id/txt_url"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_120"
-                android:hint="输入文字..."
-                android:gravity="center_vertical"
-                android:layout_toLeftOf="@+id/get_rcode"
-                android:layout_marginLeft="@dimen/dp_60"
-                android:background="@null"/>
-
-        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/wangge_lay"
@@ -165,7 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="行数"/>
+                    android:text="@string/dy_row"/>
 
                 <ImageView
                     android:id="@+id/hang_mis"
@@ -201,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="列数"/>
+                        android:text="@string/dy_coum"/>
 
                     <ImageView
                         android:id="@+id/lie_mis"
@@ -251,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="@dimen/sp_30"
-                        android:text="固定"/>
+                        android:text="@string/dy_true"/>
                 </LinearLayout>
 
 

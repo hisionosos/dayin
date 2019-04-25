@@ -41,7 +41,7 @@ public class WorkActivity extends BaseActivity {
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("轻松工作");
+        commonTitle.setText(R.string.dy_work);
 
     }
 

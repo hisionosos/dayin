@@ -31,7 +31,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="13dp"
                 android:gravity="center"
-                android:text="更新中..."
+                android:text="@string/dy_update"
                 android:textColor="@color/t32"
                 android:textSize="22dp" />
 

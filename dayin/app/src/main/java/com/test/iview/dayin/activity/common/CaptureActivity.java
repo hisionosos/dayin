@@ -13,8 +13,12 @@ import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.view.SingleTouchView;
+
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
@@ -44,11 +48,11 @@ public class CaptureActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         flag = getIntent().getStringExtra("flag");
         if (flag.equals("1")){
-            getRcode.setText("生成二维码");
-            commonTitle.setText("二维码打印");
+            getRcode.setText(getString(R.string.to_qcode));
+            commonTitle.setText(getString(R.string.dy_toqcode));
         }else{
-            getRcode.setText("生成条形码");
-            commonTitle.setText("条形码打印");
+            getRcode.setText(R.string.to_tiaoxingma);
+            commonTitle.setText(R.string.dy_tiaoxingmadayin);
             txtUrl.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
         }
 
@@ -69,7 +73,7 @@ public class CaptureActivity extends BaseActivity {
         return R.layout.capture_lay;
     }
 
-
+    private ArrayList<SingleTouchView> arrs = new ArrayList<>();
 
     @OnClick({R.id.back, R.id.home_add, R.id.get_rcode})
     public void onViewClicked(View view) {
@@ -78,7 +82,12 @@ public class CaptureActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.home_add:
-
+//                for (int i = 0; i < arrs.size(); i++) {
+//                    arrs.get(i).setEditable(false);
+//
+//                }
+//                editTxt.setCursorVisible(false);
+//                BitmapUtil.getInstance().getCutImage(canv);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -97,6 +106,7 @@ public class CaptureActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
+                        arrs.add(singleTouchView);
                     }else{
                         ToastUtils.showShort("error");
                     }

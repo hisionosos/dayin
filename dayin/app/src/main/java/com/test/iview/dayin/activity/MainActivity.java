@@ -2,11 +2,14 @@ package com.test.iview.dayin.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,11 +20,14 @@ import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.fragment.HomeFragment;
 import com.test.iview.dayin.fragment.MyFragment;
+import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 //    private AdContentFragment adContentFragment;
 //    private PlayFragment playFragment;
     private MyFragment myFragment;
-    private String[] tab_title = {"首页", "个人中心"};
+    private int[] tab_title = {R.string.common_title, R.string.dy_myinfo};
     private int[] tab_imgs = {R.drawable.tab_home,R.drawable.tab_my};
     private String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,Manifest.permission.WRITE_EXTERNAL_STORAGE,};
     private ArrayList fgs = new ArrayList<>();
@@ -60,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 //            Utils.gotoNotificationSetting(this);
 //        }
 
+        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
+        updateActivity(local);
+
         //检查权限
         if (!EasyPermissions.hasPermissions(this,perms)){
             EasyPermissions.requestPermissions(this,"是否打开需要的权限？",1000,perms);
@@ -68,6 +77,16 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         }
 
         init();
+
+    }
+    public void updateActivity(String sta) {
+        // 本地语言设置
+        Locale myLocale = new Locale(sta);
+        Resources res = getResources();// 获得res资源对象
+        DisplayMetrics dm = res.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
+        Configuration conf = res.getConfiguration();// 获得设置对象
+        conf.locale = myLocale;// 简体中文
+        res.updateConfiguration(conf, dm);
 
     }
 
@@ -114,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             ImageView imageView = view.findViewById(R.id.tab_img);
             TextView textView = view.findViewById(R.id.tab_txt);
             imageView.setBackgroundResource(tab_imgs[i]);
-            textView.setText(tab_title[i]);
+            textView.setText(getString(tab_title[i]));
             tab.setCustomView(view);
             mainTab.addTab(tab);
         }

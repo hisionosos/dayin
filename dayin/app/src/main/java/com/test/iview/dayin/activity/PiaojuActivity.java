@@ -21,6 +21,8 @@ import com.test.iview.dayin.utils.CameraUtils;
 import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.view.SingleTouchView;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -55,7 +57,7 @@ public class PiaojuActivity extends BaseActivity {
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("票据打印");
+        commonTitle.setText(getString(R.string.dy_piaojudayin));
 
 //        sing.setImageBitamp(BitmapFactory.decodeResource(getResources(), R.drawable.qwer));
         //初始化tab
@@ -116,7 +118,7 @@ public class PiaojuActivity extends BaseActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
+    private ArrayList<SingleTouchView> arrs = new ArrayList<>();
 
     private void addImage(Uri uri){
         showLoadingDialog();
@@ -138,6 +140,7 @@ public class PiaojuActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp((Bitmap) object);
                         canv.addView(singleTouchView);
+                        arrs.add(singleTouchView);
                     }
                 });
 
@@ -150,7 +153,7 @@ public class PiaojuActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.back, R.id.add_image, R.id.add_code, R.id.add_biaoqing})
+    @OnClick({R.id.back, R.id.add_image, R.id.add_code, R.id.add_biaoqing,R.id.home_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -158,13 +161,22 @@ public class PiaojuActivity extends BaseActivity {
                 break;
             case R.id.add_image:
                 Log.e("add_image","add_image");
-                CameraUtils.albumChoose(this);
+                CameraUtils.albumChoose(this,null);
                 break;
             case R.id.add_code:
                 startActivity(new Intent(this, CaptureActivity.class));
                 break;
             case R.id.add_biaoqing:
 
+                break;
+            case R.id.home_add:
+                for (int i = 0; i < arrs.size(); i++) {
+                    SingleTouchView singleTouchView = arrs.get(i);
+                    if (null != singleTouchView){
+                        arrs.get(i).setEditable(false);
+                    }
+                }
+                BitmapUtil.getInstance().getCutImage(canv);
                 break;
         }
     }

@@ -30,13 +30,13 @@ public class WenDangActivity extends BaseActivity {
 
 
     String flag = "";
-    private String[] tab_title = {"导入", "字体",  "纯文本",};
+//    private String[] tab_title = {getString(R.string.dy_daoru), getString(R.string.dy_ziti),  getString(R.string.dy_chunwenben),};
     private int[] tab_imgs = { R.drawable.tab_daoru, R.drawable.tab_ziti, R.drawable.tab_chunwenben};
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         flag = getIntent().getStringExtra("flag");
-        commonTitle.setText("文档打印");
+        commonTitle.setText(R.string.dy_wendang);
 
     }
 

@@ -27,13 +27,13 @@
                 android:layout_alignParentRight="true"
                 android:background="#0E6EB8"
                 android:layout_marginRight="@dimen/dp_60"
-                android:text="生成二维码"/>
+                android:text="@string/to_qcode"/>
 
             <EditText
                 android:id="@+id/txt_url"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_120"
-                android:hint="请输入文字..."
+                android:hint="@string/input_text"
                 android:layout_toLeftOf="@+id/get_rcode"
                 android:layout_marginLeft="@dimen/dp_60"
                 android:background="@null"/>

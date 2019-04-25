@@ -1,35 +1,31 @@
 package com.test.iview.dayin.activity.common;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
-import com.test.iview.dayin.activity.PiaojuActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
-import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.view.SingleTouchView;
-import com.test.iview.dayin.view.common.SettingPopuWindow;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWindow.callBack {
+public class BiaoqingBaoActivity extends BaseActivity{
     @BindView(R.id.home_add)
     ImageView homeAdd;
     @BindView(R.id.common_txt)
@@ -48,6 +44,13 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
     RelativeLayout canv;
     @BindView(R.id.main_tab1)
     RadioButton mainTab1;
+    @BindView(R.id.wangge_lay)
+    LinearLayout wanggeLay;
+    @BindView(R.id.size_seek)
+    SeekBar sizeSeek;
+
+
+
     private int mScreenHeight;
     private int mScreenWidth;
 
@@ -61,7 +64,7 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
         mScreenHeight = metrics.heightPixels;
         mScreenWidth = metrics.widthPixels;
 
-        commonTitle.setText("表情包打印");
+        commonTitle.setText(R.string.dy_baioqingdayin);
 
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
@@ -76,19 +79,31 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
 
     @Override
     public void initData() {
+        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                editTxt.setTextSize(progress/5 + 15);
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
     }
 
     private void setting() {
-
-        SettingPopuWindow popupWindow = new SettingPopuWindow(this,
-                mScreenWidth - 100,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
-        popupWindow.showAtLocation(mainTab2, Gravity.BOTTOM | Gravity.CENTER,
-                0, 80);
-        popupWindow.setCallback(this);
+        if (wanggeLay.getVisibility() == View.VISIBLE){
+            wanggeLay.setVisibility(View.INVISIBLE);
+        }else{
+            wanggeLay.setVisibility(View.VISIBLE);
+        }
 
 
     }
@@ -99,10 +114,7 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
     }
 
 
-    @Override
-    public void setFontSize(float font, int index) {
-        editTxt.setTextSize(font);
-    }
+
 
 
     @OnClick({R.id.back,R.id.main_tab1, R.id.main_tab2,R.id.home_add})
@@ -122,8 +134,10 @@ public class BiaoqingBaoActivity extends BaseActivity implements SettingPopuWind
                 break;
             case R.id.home_add:
                 for (int i = 0; i < arrs.size(); i++) {
-                    arrs.get(i).setEditable(false);
-
+                    SingleTouchView singleTouchView = arrs.get(i);
+                    if (null != singleTouchView){
+                        arrs.get(i).setEditable(false);
+                    }
                 }
                 editTxt.setCursorVisible(false);
                 BitmapUtil.getInstance().getCutImage(canv);

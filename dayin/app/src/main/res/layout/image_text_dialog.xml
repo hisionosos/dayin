@@ -46,7 +46,7 @@
         android:gravity="top"
         android:textColor="@color/image_color_primary"
         android:textSize="24sp"
-        tools:text="这里添加文字" />
+        tools:text="@string/dy_here_add_txt" />
 
     <include layout="@layout/image_color_layout" />
 

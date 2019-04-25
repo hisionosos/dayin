@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/work_back">
+        android:background="@drawable/yule_totle">
 
 
         <RelativeLayout
@@ -20,34 +20,51 @@
             android:layout_marginTop="@dimen/dp_200"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/work1"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_200"
-                android:background="@drawable/work_1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_250"
                 android:layout_marginTop="@dimen/dp_120"
-                android:text="图片"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/work2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_200"
-                android:background="@drawable/work_2"/>
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_photo"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_phototxt"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_250"
-                android:layout_marginTop="@dimen/dp_120"
-                android:text="图文"/>
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/work1"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/yule_1"/>
+
+
+                <ImageView
+                    android:id="@+id/work2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/yule_2"/>
+
+            </LinearLayout>
+
+
         </RelativeLayout>
 
 
@@ -57,34 +74,50 @@
             android:layout_marginTop="@dimen/dp_120"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/work3"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_200"
-                android:background="@drawable/work_3"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_244"
                 android:layout_marginTop="@dimen/dp_120"
-                android:text="表情包"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/work4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_200"
-                android:background="@drawable/work_4"/>
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_biaoqing"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_eraser"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp_250"
-                android:layout_marginTop="@dimen/dp_120"
-                android:text="涂鸦"/>
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/work3"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/yule_3"/>
+
+
+                <ImageView
+                    android:id="@+id/work4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/yule_4"/>
+
+            </LinearLayout>
+
         </RelativeLayout>
 
 
@@ -94,35 +127,50 @@
             android:layout_marginTop="@dimen/dp_120"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/work5"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_200"
-                android:background="@drawable/work_5"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_250"
                 android:layout_marginTop="@dimen/dp_120"
-                android:text="图框"/>
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:visibility="invisible"
-                android:layout_marginRight="@dimen/dp_200"
-                android:background="@drawable/piaoju_2"/>
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_tukuang"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/dy_xiaoji"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:visibility="invisible"
-                android:layout_marginRight="@dimen/dp_250"
-                android:layout_marginTop="@dimen/dp_120"
-                android:text="标签"/>
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/work5"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/yule_5"/>
+
+
+                <ImageView
+                    android:id="@+id/work6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/yule_6"/>
+
+            </LinearLayout>
+
         </RelativeLayout>
 
 

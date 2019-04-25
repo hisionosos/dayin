@@ -2,11 +2,14 @@ package com.test.iview.dayin.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +27,7 @@ import com.test.iview.dayin.view.common.HttpProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -51,7 +55,8 @@ public abstract class BaseActivity extends Activity {
         }
         setContentView(initLayout());
         ButterKnife.bind(this);
-
+        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
+        updateActivity(local);
 
 
         initView(savedInstanceState);
@@ -60,6 +65,17 @@ public abstract class BaseActivity extends Activity {
 
     }
 
+
+    public void updateActivity(String sta) {
+        // 本地语言设置
+        Locale myLocale = new Locale(sta);
+        Resources res = getResources();// 获得res资源对象
+        DisplayMetrics dm = res.getDisplayMetrics();// 获得屏幕参数：主要是分辨率，像素等。
+        Configuration conf = res.getConfiguration();// 获得设置对象
+        conf.locale = myLocale;// 简体中文
+        res.updateConfiguration(conf, dm);
+
+    }
 
     public void setTitleBar(boolean ishow) {
         isshowtitle = ishow;

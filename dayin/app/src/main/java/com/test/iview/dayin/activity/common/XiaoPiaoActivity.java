@@ -1,20 +1,34 @@
 package com.test.iview.dayin.activity.common;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
-import com.test.iview.dayin.utils.ResourceUtils;
+import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.ToastUtils;
+import com.test.iview.dayin.view.SingleTouchView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
 public class XiaoPiaoActivity extends BaseActivity {
     @BindView(R.id.home_add)
@@ -30,55 +44,75 @@ public class XiaoPiaoActivity extends BaseActivity {
 
 
     String flag = "";
+    @BindView(R.id.canv)
+    RelativeLayout canv;
+    @BindView(R.id.main_tab1)
+    RadioButton mainTab1;
+    @BindView(R.id.main_tab2)
+    RadioButton mainTab2;
+    @BindView(R.id.main_tab3)
+    RadioButton mainTab3;
+    @BindView(R.id.main_tab4)
+    RadioButton mainTab4;
+    @BindView(R.id.main_tab5)
+    RadioButton mainTab5;
 
+    @BindView(R.id.wangge_lay)
+    LinearLayout wanggeLay;
+    @BindView(R.id.size_seek)
+    SeekBar sizeSeek;
+    @BindView(R.id.code_bar)
+    RelativeLayout codeBar;
+    @BindView(R.id.get_rcode)
+    Button getRcode;
+    @BindView(R.id.txt_url)
+    EditText txtUrl;
+    @BindView(R.id.biaoqian_1)
+    EditText biaoqian1;
+    @BindView(R.id.biaoqian_2)
+    EditText biaoqian2;
+    @BindView(R.id.biaoqian_3)
+    EditText biaoqian3;
+    @BindView(R.id.biaoqian_4)
+    EditText biaoqian4;
+
+
+    private int moban = 0;
     private String[] tab_title = {"模板", "大小", "调整", "表情包", "粗细", "二维码"};
     private int[] tab_imgs = {R.drawable.tab_muban, R.drawable.tab_daxiao, R.drawable.tab_tiaozheng, R.drawable.tab_biaoqing,
-            R.drawable.tab_cuxi,R.drawable.tab_ercode};
-
+            R.drawable.tab_cuxi, R.drawable.tab_ercode};
 
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         flag = getIntent().getStringExtra("flag");
-        if (flag.equals("1")){
-
-            commonTitle.setText("小票打印");
-        }else if (flag.equals("2")){
-            commonTitle.setText("标签打印");
-        }else{
-            commonTitle.setText("不干胶打印");
-        }
-
+        commonTitle.setText(getString(R.string.dy_xiaopiaodayin));
 
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-
-        mainTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.main_tab1:
-
-                        break;
-                    case R.id.main_tab2:
-
-                        break;
-                    case R.id.main_tab3:
-
-                        break;
-
-                }
-
-            }
-        });
 
 
     }
 
     @Override
     public void initData() {
+        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -86,14 +120,158 @@ public class XiaoPiaoActivity extends BaseActivity {
         return R.layout.xiaopiao_lay;
     }
 
-    @OnClick({R.id.back})
+
+    private boolean isBlod = false;
+    private int editGrave = 0;
+
+    @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.home_add, R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
                 break;
+            case R.id.main_tab1://模板
+                Intent intent = new Intent(this, SuCaiKuActivity.class);
+                intent.putExtra("sucai", "xiaopiao");
+                startActivityForResult(intent, 1000);
+                break;
+            case R.id.main_tab2://大小
+                setting();
+                break;
+            case R.id.main_tab3://调整
+                if (editGrave == 0) {
+                    if (flag.equals("2")){
+                        biaoqian1.setGravity(Gravity.CENTER);
+                        biaoqian2.setGravity(Gravity.CENTER);
+                        biaoqian3.setGravity(Gravity.CENTER);
+                        biaoqian4.setGravity(Gravity.CENTER);
+                    }
+                    editGrave++;
+                } else if (editGrave == 1) {
+                    if (flag.equals("2")){
+                        biaoqian1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian4.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                    }
 
+                    editGrave++;
+                } else if (editGrave == 2) {
+                    if (flag.equals("2")){
+                        biaoqian1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian4.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    }
+                    editGrave--;
+                    editGrave--;
+                }
+                break;
+            case R.id.main_tab4://粗细
+                if (flag.equals("2")){
+                    if (isBlod) {
+
+                        biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        isBlod = false;
+                    } else {
+                        biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        isBlod = true;
+                    }
+                }
+                break;
+            case R.id.main_tab5://二维码
+                if (codeBar.getVisibility() == View.VISIBLE) {
+                    codeBar.setVisibility(View.GONE);
+                } else {
+                    codeBar.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.home_add:
+                for (int i = 0; i < arrs.size(); i++) {
+                    SingleTouchView singleTouchView = arrs.get(i);
+                    if (null != singleTouchView) {
+                        arrs.get(i).setEditable(false);
+                    }
+                }
+                BitmapUtil.getInstance().getCutImage(canv);
+                break;
+            case R.id.get_rcode:
+                String str = txtUrl.getText().toString();
+                Bitmap bitmap = null;
+                if (str.length() > 0) {
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str, 350, R.color.black);//二维码
+                    if (bitmap != null) {
+                        SingleTouchView singleTouchView = new SingleTouchView(XiaoPiaoActivity.this);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        singleTouchView.setLayoutParams(layoutParams);
+                        singleTouchView.setImageBitamp(bitmap);
+                        canv.addView(singleTouchView);
+                        arrs.add(singleTouchView);
+                        if (codeBar.getVisibility() == View.VISIBLE) {
+                            codeBar.setVisibility(View.INVISIBLE);
+                        } else {
+                            codeBar.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        ToastUtils.showShort("error");
+                    }
+
+
+                } else {
+                    ToastUtils.showShort(R.string.input_text);
+                }
+
+                break;
         }
+    }
+
+
+    private void setting() {
+        if (wanggeLay.getVisibility() == View.VISIBLE) {
+            wanggeLay.setVisibility(View.INVISIBLE);
+        } else {
+            wanggeLay.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1000 && null != data) {
+            int id = data.getIntExtra("img", 0);
+            if (id == R.mipmap.xiaopiao_1){
+                moban = 1;
+            }else if (id == R.mipmap.xiaopiao_1){
+                moban = 2;
+            }else{
+                addCusView(id);
+            }
+        }
+
+
+    }
+
+    private ArrayList<SingleTouchView> arrs = new ArrayList<>();
+    private ArrayList<String> arr = new ArrayList<>();
+
+    private void addCusView(int id) {
+        if (id != 0) {
+            SingleTouchView singleTouchView = new SingleTouchView(this);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            singleTouchView.setLayoutParams(layoutParams);
+            singleTouchView.setImageResource(id);
+            canv.addView(singleTouchView);
+            arrs.add(singleTouchView);
+        }
+
     }
 
 }

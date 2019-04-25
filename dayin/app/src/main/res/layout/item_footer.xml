@@ -9,6 +9,6 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="别拉了,我是有底线的"
+        android:text="@string/dy_list_footer_tip"
         />
 </LinearLayout>

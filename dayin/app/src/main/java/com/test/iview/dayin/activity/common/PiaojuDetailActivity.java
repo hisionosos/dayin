@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.activity.BiaoQianActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +40,7 @@ public class PiaojuDetailActivity extends BaseActivity {
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("票据打印");
+        commonTitle.setText(getString(R.string.dy_piaojudayin));
     }
 
     @Override
@@ -62,19 +63,18 @@ public class PiaojuDetailActivity extends BaseActivity {
                 break;
             case R.id.piaoju1:
                 Intent intent1 = new Intent(this,XiaoPiaoActivity.class);
-                intent1.putExtra("flag","1");
-                startActivity(intent1);//小票，标签打印
+                startActivity(intent1);//小票打印
 
                 break;
             case R.id.piaoju2:
-                Intent intent2 = new Intent(this,XiaoPiaoActivity.class);
+                Intent intent2 = new Intent(this, BiaoQianActivity.class);
                 intent2.putExtra("flag","2");
-                startActivity(intent2);//小票，标签打印
+                startActivity(intent2);//标签打印
                 break;
             case R.id.piaoju3:
-                Intent intent3 = new Intent(this,XiaoPiaoActivity.class);
+                Intent intent3 = new Intent(this,BiaoQianActivity.class);
                 intent3.putExtra("flag","3");
-                startActivity(intent3);//小票，标签打印
+                startActivity(intent3);//不干胶打印
                 break;
             case R.id.piaoju4:
                 Intent intent4 = new Intent(this, CaptureActivity.class);

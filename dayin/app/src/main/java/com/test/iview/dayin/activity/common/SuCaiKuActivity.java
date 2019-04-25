@@ -88,6 +88,7 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
             R.mipmap.wenzi_48,R.mipmap.wenzi_49};
 
     private int[] xiaopiao_data = {R.mipmap.xiaopiao_1,R.mipmap.xiaopiao_2};
+    private int[] xiaoji_data = {R.drawable.xiaoji_1,R.drawable.xiaoji_2,R.drawable.xiaoji_3};
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
 
     private String sucai_flag = "";
     private int[] datas = null;
-    private String[] strs = {"biaoqian","biaoqianzhi","biaoqing","kechengbiao","tukuang","tuya","wenzi","xiaopiao"};
+    private String[] strs = {"biaoqian","biaoqianzhi","biaoqing","kechengbiao","tukuang","tuya","wenzi","xiaopiao","xiaoji"};
     @Override
     public void initData() {
         sucai_flag = getIntent().getStringExtra("sucai");
@@ -129,6 +130,9 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
                     break;
                 case "xiaopiao":
                     datas = xiaopiao_data;
+                    break;
+                    case "xiaoji":
+                    datas = xiaoji_data;
                     break;
 
             }

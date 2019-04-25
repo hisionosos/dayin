@@ -20,7 +20,7 @@
         android:layout_marginLeft="@dimen/dp_10"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/main_tab_color"
-        android:text="斯蒂芬斯蒂芬斯蒂芬似懂非懂斯蒂芬的的的的的的的的的的速度发呆的斯蒂芬多少"
+        android:text=""
         android:layout_marginTop="@dimen/dp_9"
         />
     <TextView

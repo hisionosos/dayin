@@ -86,14 +86,14 @@ public class TuWenActivity extends BaseActivity {
     Button getRcode;
     @BindView(R.id.txt_url)
     EditText txtUrl;
-    private String[] tab_title = {"表格", "图片", "调整", "表情包", "二维码"};
+//    private String[] tab_title = {getString(R.string.wangge), getString(R.string.dy_photo), getString(R.string.dy_ajust), getString(R.string.dy_biaoqing), getString(R.string.dy_erweima)};
     private int[] tab_imgs = {R.drawable.tab_biaoge, R.drawable.tab_tupian, R.drawable.tab_tiaozheng, R.drawable.tab_biaoqing,
             R.drawable.tab_ercode};
 
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-        commonTitle.setText("图文打印");
+        commonTitle.setText(R.string.dy_tuwen);
 
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
@@ -142,7 +142,7 @@ public class TuWenActivity extends BaseActivity {
                 }
                 break;
             case R.id.main_tab2:
-                CameraUtils.albumChoose(this);
+                CameraUtils.albumChoose(this,null);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){
@@ -170,7 +170,7 @@ public class TuWenActivity extends BaseActivity {
                 break;
             case R.id.main_tab5:
                 if (codeBar.getVisibility() == View.VISIBLE){
-                    codeBar.setVisibility(View.INVISIBLE);
+                    codeBar.setVisibility(View.GONE);
                 }else{
                     codeBar.setVisibility(View.VISIBLE);
                 }
@@ -180,7 +180,7 @@ public class TuWenActivity extends BaseActivity {
                     hang_count --;
                     hangCount.setText(hang_count + "");
                 }else{
-                    ToastUtils.showShort("达到最大限制");
+                    ToastUtils.showShort(R.string.dy_to_max);
                 }
                 break;
             case R.id.hang_add:
@@ -188,7 +188,7 @@ public class TuWenActivity extends BaseActivity {
                     hang_count ++;
                     hangCount.setText(hang_count + "");
                 }else{
-                    ToastUtils.showShort("达到最大限制");
+                    ToastUtils.showShort(R.string.dy_to_max);
                 }
 
                 break;
@@ -197,7 +197,7 @@ public class TuWenActivity extends BaseActivity {
                     lie_count --;
                     lieCount.setText(lie_count + "");
                 }else{
-                    ToastUtils.showShort("达到最大限制");
+                    ToastUtils.showShort(R.string.dy_to_max);
                 }
 
                 break;
@@ -206,7 +206,7 @@ public class TuWenActivity extends BaseActivity {
                     lie_count ++;
                     lieCount.setText(lie_count + "");
                 }else{
-                    ToastUtils.showShort("达到最大限制");
+                    ToastUtils.showShort(R.string.dy_to_max);
                 }
 
                 break;
@@ -229,7 +229,7 @@ public class TuWenActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
-
+                        arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
                             codeBar.setVisibility(View.INVISIBLE);
                         }else{
@@ -241,7 +241,7 @@ public class TuWenActivity extends BaseActivity {
 
 
                 }else{
-                    ToastUtils.showShort("请输入文字");
+                    ToastUtils.showShort(R.string.input_text);
                 }
 
                 break;

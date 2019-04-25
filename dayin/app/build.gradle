@@ -113,8 +113,10 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.0.2'
     implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.5'
     implementation 'com.android.support:cardview-v7:26.0.0'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation files('libs/tbs_sdk_thirdapp_v4.3.0.1020_43633_sharewithdownload_withoutGame_obfs_20190111_105200.jar')
 
+    implementation project(path: ':sticker')
     implementation project(':doodle')
     implementation ('cn.hzw.imageselector:library:1.0'){
         transitive = false

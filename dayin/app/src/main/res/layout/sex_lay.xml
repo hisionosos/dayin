@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:text="男"
+            android:text="@string/dy_man"
             android:layout_centerVertical="true"
             android:textColor="#f333"
             android:textSize="@dimen/sp_40" />
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="center_vertical"
-            android:text="女"
+            android:text="@string/dy_woman"
             android:layout_centerVertical="true"
             android:textColor="#f333"
             android:textSize="@dimen/sp_40" />

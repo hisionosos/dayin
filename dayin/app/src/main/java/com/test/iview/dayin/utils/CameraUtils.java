@@ -6,9 +6,14 @@ import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
+
+import com.test.iview.dayin.global.MyApplication;
 
 import java.io.File;
 
@@ -35,16 +40,27 @@ public class CameraUtils {
      * 调用相机拍照
      * @param activity 调用的Activity
      */
-    public static void takePhoto(Activity activity) {
+    public static Uri takePhoto(Activity activity, Fragment fragment) {
 
         String photoName = System.currentTimeMillis() + ".jpg";
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = new File(Environment.getExternalStorageDirectory(), photoName);
-        Uri uri = Uri.fromFile(file);
+        Uri uri ;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(MyApplication.getContext(), "com.test.iview.dayin.provider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
         takePhotoUri = uri;
         intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        activity.startActivityForResult(intent, CODE_TAKE_PHOTO);
+        if (activity == null){
+            fragment.startActivityForResult(intent,CODE_TAKE_PHOTO);
+        }else{
+            activity.startActivityForResult(intent, CODE_TAKE_PHOTO);
+        }
+
+        return uri;
     }
 
     /**
@@ -72,10 +88,15 @@ public class CameraUtils {
      * 相册选择图片
      * @param activity
      */
-    public static void albumChoose(Activity activity) {
+    public static void albumChoose(Activity activity, Fragment fragment) {
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        activity.startActivityForResult(intent, CODE_ALBUM_CHOOSE);
+        if (activity == null){
+            fragment.startActivityForResult(intent, CODE_ALBUM_CHOOSE);
+        }else{
+            activity.startActivityForResult(intent, CODE_ALBUM_CHOOSE);
+        }
+
     }
 
     /**

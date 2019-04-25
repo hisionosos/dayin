@@ -27,7 +27,7 @@
                 android:id="@+id/add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="图片"
+                android:text="@string/dy_photo"
                 android:paddingLeft="@dimen/dp_50"
                 android:paddingRight="@dimen/dp_50"
                 android:textSize="@dimen/dp_50"/>
@@ -39,7 +39,7 @@
                 android:id="@+id/add_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="二维码"
+                android:text="@string/dy_erweima"
                 android:paddingLeft="@dimen/dp_50"
                 android:paddingRight="@dimen/dp_50"
                 android:textSize="@dimen/dp_50"/>
@@ -51,7 +51,7 @@
                 android:id="@+id/add_biaoqing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="表情包"
+                android:text="@string/dy_biaoqing"
                 android:paddingLeft="@dimen/dp_50"
                 android:paddingRight="@dimen/dp_50"
                 android:textSize="@dimen/dp_50"/>

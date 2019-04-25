@@ -31,28 +31,28 @@ public class Text2BitmapUtils {
             return null;
         }
 
-        int size=str.length();//字体个数
-        int fontSize=0;//字体大小
-        int line=1;//字体行数
+        int size = str.length();//字体个数
+        int fontSize = 0;//字体大小
+        int line = 1;//字体行数
         int oneLineSize;//单行字数
         /**
          * 计算单行字数
          */
-        if(size<=minLineSize){
-            oneLineSize=minLineSize;
-        }else if(size<maxLineSize){
-            oneLineSize=size;
+        if(size <= minLineSize){
+            oneLineSize = minLineSize;
+        }else if(size < maxLineSize){
+            oneLineSize = size;
         }else{
-            line=(size-1)/maxLineSize+1;
-            oneLineSize=maxLineSize;
+            line = (size-1) / maxLineSize + 1;
+            oneLineSize = maxLineSize;
         }
-        fontSize=width*9/10/oneLineSize;
+        fontSize = width * 9 / 10 / oneLineSize;
 
         /**
          * 字体相关配置
          */
-//        Typeface font=Typeface.create("宋体",Typeface.BOLD);
-        Typeface font=Typeface.createFromAsset(context.getAssets(),"fonts/myfont.ttf");
+        Typeface font=Typeface.create("宋体",Typeface.BOLD);
+//        Typeface font=Typeface.createFromAsset(context.getAssets(),"fonts/myfont.ttf");
         Paint p = new Paint();
         p.setColor(fontColor);
         p.setTypeface(font);
@@ -63,7 +63,7 @@ public class Text2BitmapUtils {
         /**
          * 先画背景
          */
-        int height=(line)*fontSize+(fontSize/3);
+        int height = (line) * fontSize + (fontSize / 3);
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
         canvas.drawColor(backColor);
@@ -84,7 +84,7 @@ public class Text2BitmapUtils {
                 x = (width - (oneLineSize * fontSize)) / 2;
             }
             int top=0;
-            int y=(i+1)*fontSize+top;
+            int y=(i + 1) * fontSize + top;
             canvas.drawText(str, start, end,x,y, p);
         }
         return  bmp;

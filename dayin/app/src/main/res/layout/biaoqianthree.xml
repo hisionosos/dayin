@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_800">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+    <View
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:background="#000"/>
+
+    <View
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+    <!-- 整体 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_60"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/biaoqianthree"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:textColor="#000"
+            android:gravity="center"
+            android:textSize="@dimen/sp_80"
+            android:hint="请输入文字"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

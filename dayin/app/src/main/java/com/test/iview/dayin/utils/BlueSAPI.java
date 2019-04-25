@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.sina.weibo.sdk.utils.ImageUtils;
+import com.test.iview.dayin.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +55,7 @@ public class BlueSAPI {
                     ClsUtils.createBond(device.getClass(), device);
 
                 } catch (Exception var6) {
-                    System.out.println("配对不成功");
+                    System.out.println(R.string.dy_blue_error);
                     isConnect = false;
                     return  2003;
                 }
@@ -600,12 +601,12 @@ public class BlueSAPI {
      * @param type 打印内容类型
      */
     public void printContent(Context content, final Bitmap bitmap, final int type) {
-        if (!isConnect) {
-            ToastUtils.showShort("请连接打印机");
+        if (isConnect) {
+            ToastUtils.showShort(R.string.connect_printer);
         } else {
             // 打印至蓝牙打印机
             final ProgressDialog pd = new ProgressDialog(content);
-            pd.setTitle("提示");
+            pd.setTitle(content.getString(R.string.dy_tips));
             pd.setMessage("正在打印，请稍候……");
             pd.show();
 
@@ -670,8 +671,8 @@ public class BlueSAPI {
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
                                 Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
                                         + "," + mp.getRowBytes());
-                                blueApi.PrintImage(mp);
-//                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
+//                                blueApi.PrintImage(mp);
+                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
 
 
 

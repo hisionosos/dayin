@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_800">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+    <View
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:background="#000"/>
+
+    <View
+        android:layout_width="@dimen/dp_2"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_marginRight="@dimen/dp_60"
+        android:background="#000"/>
+
+    <!-- 整体 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_60"
+        android:orientation="vertical">
+        <!-- 第一行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textSize="@dimen/sp_80"
+                android:text="出货标签"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="#000"/>
+
+        <!-- 第二行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_40"
+                    android:text="品名"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="#000"/>
+
+                <EditText
+                    android:id="@+id/biaoqian_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_110"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:paddingLeft="@dimen/dp_40"
+                    android:paddingRight="@dimen/dp_40"
+                    android:hint="输入文字"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="#000"/>
+
+        <!-- 第三行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_40"
+                    android:text="规格"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="#000"/>
+
+                <EditText
+                    android:id="@+id/biaoqian_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_110"
+                    android:background="@null"
+                    android:paddingLeft="@dimen/dp_40"
+                    android:singleLine="true"
+                    android:paddingRight="@dimen/dp_40"
+                    android:hint="输入文字"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="#000"/>
+
+        <!-- 第四行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_40"
+                    android:text="数量"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="#000"/>
+
+                <EditText
+                    android:id="@+id/biaoqian_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_110"
+                    android:background="@null"
+                    android:paddingLeft="@dimen/dp_40"
+                    android:singleLine="true"
+                    android:paddingRight="@dimen/dp_40"
+                    android:hint="输入文字"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_2"
+            android:background="#000"/>
+
+        <!-- 第五行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_40"
+                    android:text="检验员"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_2"
+                    android:layout_height="match_parent"
+                    android:background="#000"/>
+                <EditText
+                    android:id="@+id/biaoqian_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_110"
+                    android:background="@null"
+                    android:paddingRight="@dimen/dp_40"
+                    android:paddingLeft="@dimen/dp_40"
+                    android:singleLine="true"
+                    android:hint="输入文字"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

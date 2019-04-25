@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center_vertical"
-                android:text="中文"
+                android:text="@string/dy_chinese"
                 android:layout_centerVertical="true"
                 android:textColor="#f333"
                 android:textSize="@dimen/sp_40" />
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center_vertical"
-                android:text="英文"
+                android:text="@string/dy_english"
                 android:layout_centerVertical="true"
                 android:textColor="#f333"
                 android:textSize="@dimen/sp_40" />
@@ -76,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_130"
             android:background="#fff"
+            android:visibility="invisible"
             android:paddingLeft="@dimen/dp_50"
             android:paddingRight="@dimen/dp_50">
 
@@ -106,6 +107,7 @@
             android:layout_height="@dimen/dp_130"
             android:background="#fff"
             android:paddingLeft="@dimen/dp_50"
+            android:visibility="invisible"
             android:paddingRight="@dimen/dp_50">
 
 
@@ -135,6 +137,7 @@
             android:layout_height="@dimen/dp_130"
             android:background="#fff"
             android:paddingLeft="@dimen/dp_50"
+            android:visibility="invisible"
             android:paddingRight="@dimen/dp_50">
 
 
@@ -163,6 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_130"
             android:background="#fff"
+            android:visibility="invisible"
             android:paddingLeft="@dimen/dp_50"
             android:paddingRight="@dimen/dp_50">
 
@@ -193,6 +197,7 @@
             android:layout_height="@dimen/dp_130"
             android:background="#fff"
             android:paddingLeft="@dimen/dp_50"
+            android:visibility="invisible"
             android:paddingRight="@dimen/dp_50">
 
 
@@ -251,6 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:button="@drawable/radio_button_style" />
 
         <RadioButton
@@ -258,6 +264,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:button="@drawable/radio_button_style" />
 
         <RadioButton
@@ -265,6 +272,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:button="@drawable/radio_button_style" />
 
         <RadioButton
@@ -272,11 +280,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:button="@drawable/radio_button_style" />
 
         <RadioButton
             android:id="@+id/choose6"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_button_style" />

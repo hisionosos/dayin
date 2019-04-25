@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.activity.XiaoJiActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -38,7 +39,7 @@ public class YuLeActivity extends BaseActivity {
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
-        commonTitle.setText("娱乐打印");
+        commonTitle.setText(R.string.dy_yuledayin);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class YuLeActivity extends BaseActivity {
         return R.layout.yule_lay;
     }
 
-    @OnClick({R.id.back,R.id.work1, R.id.work2, R.id.work3, R.id.work4, R.id.work5})
+    @OnClick({R.id.back,R.id.work1, R.id.work2, R.id.work3, R.id.work4, R.id.work5, R.id.work6})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -71,6 +72,9 @@ public class YuLeActivity extends BaseActivity {
                 break;
             case R.id.work5:
                 startActivity(new Intent(this,TuKuangActivity.class));
+                break;
+                case R.id.work6:
+                startActivity(new Intent(this, XiaoJiActivity.class));
                 break;
         }
     }

@@ -8,12 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.global.MyApplication;
+import com.test.iview.dayin.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class NickActivity extends BaseActivity {
+    @BindView(R.id.back)
+    ImageView back;
     @BindView(R.id.home_add)
     ImageView homeAdd;
     @BindView(R.id.common_txt)
@@ -29,14 +33,17 @@ public class NickActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         homeAdd.setVisibility(View.GONE);
         commonTxt.setVisibility(View.VISIBLE);
-        commonTxt.setText("保存");
-        commonTitle.setText("设置昵称");
+        commonTxt.setText(R.string.dy_save);
+        commonTitle.setText(R.string.dy_setnick);
 
     }
 
     @Override
     public void initData() {
-
+        String nick = MyApplication.mCache.getAsString("user_nick");
+        if (nick != null){
+            nickEdt.setText(nick);
+        }
     }
 
     @Override
@@ -45,14 +52,23 @@ public class NickActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.common_txt, R.id.clear_nick})
+    @OnClick({R.id.back,R.id.common_txt, R.id.clear_nick})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.back:
+                finish();
+                break;
             case R.id.common_txt:
-
+                String nick = nickEdt.getText().toString();
+                if (nick != null && nick.length() > 0){
+                    MyApplication.mCache.put("user_nick",nick);
+                    finish();
+                }else{
+                    ToastUtils.showShort(getString(R.string.dy_put_nick));
+                }
                 break;
             case R.id.clear_nick:
-
+                nickEdt.setText("");
                 break;
         }
     }

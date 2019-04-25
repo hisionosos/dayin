@@ -7,21 +7,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.view.SingleTouchView;
-import com.test.iview.dayin.view.common.SettingPopuWindow;
 import com.test.iview.dayin.view.imagecut.IMGEditActivity;
 import com.test.iview.dayin.view.imagecut.IMGGalleryActivity;
 import com.test.iview.dayin.view.imagecut.gallery.model.IMGChooseMode;
@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class TuPianActivity extends BaseActivity implements SettingPopuWindow.callBack{
+public class TuPianActivity extends BaseActivity{
     @BindView(R.id.home_add)
     ImageView homeAdd;
     @BindView(R.id.common_txt)
@@ -57,6 +57,10 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
     RadioButton mainTab3;
     @BindView(R.id.main_tab4)
     RadioButton mainTab4;
+    @BindView(R.id.wangge_lay)
+    LinearLayout wanggeLay;
+    @BindView(R.id.size_seek)
+    SeekBar sizeSeek;
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
@@ -64,7 +68,7 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
         DisplayMetrics metrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(metrics);
         mScreenWidth = metrics.widthPixels;
-        commonTitle.setText("图片打印");
+        commonTitle.setText(R.string.dy_photodayin);
 
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
@@ -77,6 +81,22 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
             @Override
             public void onClick(View v) {
                 editTxt.setCursorVisible(true);
+            }
+        });
+        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                editTxt.setTextSize(progress/5 + 15);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
     }
@@ -113,8 +133,10 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
                 break;
             case R.id.home_add:
                 for (int i = 0; i < arrs.size(); i++) {
-                    arrs.get(i).setEditable(false);
-
+                    SingleTouchView singleTouchView = arrs.get(i);
+                    if (null != singleTouchView){
+                        arrs.get(i).setEditable(false);
+                    }
                 }
                 editTxt.setCursorVisible(false);
                 BitmapUtil.getInstance().getCutImage(canv);
@@ -215,20 +237,11 @@ public class TuPianActivity extends BaseActivity implements SettingPopuWindow.ca
 
     private int mScreenWidth;
     private void setting() {
-
-        SettingPopuWindow popupWindow = new SettingPopuWindow(this,
-                mScreenWidth - 100,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
-        popupWindow.showAtLocation(mainTab2, Gravity.BOTTOM | Gravity.CENTER,
-                0, 80);
-        popupWindow.setCallback(this);
-
-
+        if (wanggeLay.getVisibility() == View.VISIBLE){
+            wanggeLay.setVisibility(View.INVISIBLE);
+        }else{
+            wanggeLay.setVisibility(View.VISIBLE);
+        }
     }
 
-    @Override
-    public void setFontSize(float font, int index) {
-        editTxt.setTextSize(font);
-    }
 }

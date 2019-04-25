@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/dy_cannel"
             android:textColor="#FFFFFF"
             android:textSize="16dp" />
 
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="旋转"
+            android:text="@string/dy_xuanzhuan"
             android:textColor="#FFFFFF"
             android:textSize="16dp" />
 
@@ -44,7 +44,7 @@
             android:layout_marginLeft="100dp"
             android:layout_marginRight="20dp"
             android:singleLine="true"
-            android:text="移动和缩放"
+            android:text="@string/dy_move"
             android:textColor="#FFFFFF"
             android:textSize="18dp" />
     </RelativeLayout>

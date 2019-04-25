@@ -86,7 +86,7 @@
 
                 <data
                     android:host="android"
-                    android:scheme="jianlouwang" />
+                    android:scheme="dayin" />
             </intent-filter>
         </activity>
         <activity
@@ -112,6 +112,9 @@
         <activity
             android:name="com.test.iview.dayin.activity.MyInfosActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.XiaoJiActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.test.iview.dayin.activity.NickActivity"
@@ -119,6 +122,9 @@
 
         <activity
             android:name="com.test.iview.dayin.activity.SexActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.BiaoQianActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.RegisterActivity"
@@ -336,7 +342,7 @@
 
         <provider
             android:name="com.test.iview.dayin.view.MyProvider"
-            android:authorities="com.test.iview.dayin.imagePicker.provider"
+            android:authorities="com.test.iview.dayin.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
