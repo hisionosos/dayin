@@ -2,10 +2,12 @@ package com.test.iview.dayin.activity.common;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +26,13 @@ import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.view.SingleTouchView;
 import com.test.iview.dayin.view.imagecut.IMGEditActivity;
 import com.test.iview.dayin.view.imagecut.IMGGalleryActivity;
+import com.test.iview.dayin.view.imagecut.MyImageCutActivity;
+import com.test.iview.dayin.view.imagecut.core.IMGMode;
+import com.test.iview.dayin.view.imagecut.core.IMGText;
+import com.test.iview.dayin.view.imagecut.core.file.IMGAssetFileDecoder;
+import com.test.iview.dayin.view.imagecut.core.file.IMGDecoder;
+import com.test.iview.dayin.view.imagecut.core.file.IMGFileDecoder;
+import com.test.iview.dayin.view.imagecut.core.util.IMGUtils;
 import com.test.iview.dayin.view.imagecut.gallery.model.IMGChooseMode;
 import com.test.iview.dayin.view.imagecut.gallery.model.IMGImageInfo;
 
@@ -34,7 +43,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class TuPianActivity extends BaseActivity{
+public class TuPianActivity extends MyImageCutActivity {
     @BindView(R.id.home_add)
     ImageView homeAdd;
     @BindView(R.id.common_txt)
@@ -45,8 +54,6 @@ public class TuPianActivity extends BaseActivity{
     RadioGroup mainTab;
     @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.edit_txt)
-    EditText editTxt;
     @BindView(R.id.canv)
     RelativeLayout canv;
     @BindView(R.id.main_tab1)
@@ -62,49 +69,11 @@ public class TuPianActivity extends BaseActivity{
     @BindView(R.id.size_seek)
     SeekBar sizeSeek;
 
-    @Override
-    public void initView(@Nullable Bundle savedInstanceState) {
-        WindowManager manager = this.getWindowManager();
-        DisplayMetrics metrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(metrics);
-        mScreenWidth = metrics.widthPixels;
-        commonTitle.setText(R.string.dy_photodayin);
 
-        homeAdd.setVisibility(View.VISIBLE);
-        homeAdd.setImageResource(R.drawable.printer);
-        commonTxt.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void initData() {
-        editTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTxt.setCursorVisible(true);
-            }
-        });
-        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                editTxt.setTextSize(progress/5 + 15);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-
-    @Override
-    public int initLayout() {
-        return R.layout.tupian_lay;
-    }
+//    @Override
+//    public int initLayout() {
+//        return R.layout.tupian_lay;
+//    }
 
     @OnClick({R.id.back,R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4,R.id.home_add})
     public void onViewClicked(View view) {
@@ -138,7 +107,7 @@ public class TuPianActivity extends BaseActivity{
                         arrs.get(i).setEditable(false);
                     }
                 }
-                editTxt.setCursorVisible(false);
+
                 BitmapUtil.getInstance().getCutImage(canv);
 
                 break;
@@ -170,19 +139,26 @@ public class TuPianActivity extends BaseActivity{
         }
     }
 
+    private Uri uri;
+    private String imgPath;
     private void onChooseImages(List<IMGImageInfo> images) {
-        if (null != images){
+        if (null != images && images.size() > 0){
             IMGImageInfo image = images.get(0);
 
             if (image != null) {
                 final String fileName = System.currentTimeMillis() + "_screen.png";
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + fileName;
 
+                uri = image.getUri();
+                imgPath = filePath;
+
+                mImgView.setImageBitmap(getBit());
+
 //                File mImageFile = new File(getCacheDir(), UUID.randomUUID().toString() + ".jpg");
-                Intent intent = new Intent(this, IMGEditActivity.class);
-                intent.putExtra(IMGEditActivity.EXTRA_IMAGE_URI, image.getUri());
-                intent.putExtra(IMGEditActivity.EXTRA_IMAGE_SAVE_PATH, filePath);
-                startActivityForResult(intent,3000);
+//                Intent intent = new Intent(this, IMGEditActivity.class);
+//                intent.putExtra(IMGEditActivity.EXTRA_IMAGE_URI, image.getUri());
+//                intent.putExtra(IMGEditActivity.EXTRA_IMAGE_SAVE_PATH, filePath);
+//                startActivityForResult(intent,3000);
 
             }
         }
@@ -243,5 +219,193 @@ public class TuPianActivity extends BaseActivity{
             wanggeLay.setVisibility(View.VISIBLE);
         }
     }
+
+
+
+
+
+
+
+
+    private static final int MAX_WIDTH = 1024;
+
+    private static final int MAX_HEIGHT = 1024;
+
+    public static final String EXTRA_IMAGE_URI = "IMAGE_URI";
+
+    public static final String EXTRA_IMAGE_SAVE_PATH = "IMAGE_SAVE_PATH";
+
+    @Override
+    public void onCreated() {
+        WindowManager manager = this.getWindowManager();
+        DisplayMetrics metrics = new DisplayMetrics();
+        manager.getDefaultDisplay().getMetrics(metrics);
+        mScreenWidth = metrics.widthPixels;
+        commonTitle.setText(R.string.dy_photodayin);
+
+        homeAdd.setVisibility(View.VISIBLE);
+        homeAdd.setImageResource(R.drawable.printer);
+        commonTxt.setVisibility(View.GONE);
+
+
+        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+    }
+
+
+    private Bitmap getBit(){
+        IMGDecoder decoder = null;
+
+        String path = uri.getPath();
+        if (!TextUtils.isEmpty(path)) {
+            switch (uri.getScheme()) {
+                case "asset":
+                    decoder = new IMGAssetFileDecoder(this, uri);
+                    break;
+                case "file":
+                    decoder = new IMGFileDecoder(uri);
+                    break;
+            }
+        }
+
+        if (decoder == null) {
+            return null;
+        }
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 1;
+        options.inJustDecodeBounds = true;
+
+        decoder.decode(options);
+
+        if (options.outWidth > MAX_WIDTH) {
+            options.inSampleSize = IMGUtils.inSampleSize(Math.round(1f * options.outWidth / MAX_WIDTH));
+        }
+
+        if (options.outHeight > MAX_HEIGHT) {
+            options.inSampleSize = Math.max(options.inSampleSize,
+                    IMGUtils.inSampleSize(Math.round(1f * options.outHeight / MAX_HEIGHT)));
+        }
+
+        options.inJustDecodeBounds = false;
+
+        Bitmap bitmap = decoder.decode(options);
+        if (bitmap == null) {
+            return null;
+        }
+
+        return bitmap;
+    }
+
+
+
+    @Override
+    public void onText(IMGText text) {
+        mImgView.addStickerText(text);
+    }
+
+    @Override
+    public void onModeClick(IMGMode mode) {
+        IMGMode cm = mImgView.getMode();
+        if (cm == mode) {
+            mode = IMGMode.NONE;
+        }
+        mImgView.setMode(mode);
+        updateModeUI();
+
+        if (mode == IMGMode.CLIP) {
+            setOpDisplay(OP_CLIP);
+        }
+    }
+
+    @Override
+    public void onUndoClick() {
+        IMGMode mode = mImgView.getMode();
+        if (mode == IMGMode.DOODLE) {
+            mImgView.undoDoodle();
+        } else if (mode == IMGMode.MOSAIC) {
+            mImgView.undoMosaic();
+        }
+    }
+
+    @Override
+    public void onCancelClick() {
+        finish();
+    }
+
+    @Override
+    public void onDoneClick() {
+        String path = getIntent().getStringExtra(EXTRA_IMAGE_SAVE_PATH);
+        if (!TextUtils.isEmpty(path)) {
+            Bitmap bitmap = mImgView.saveBitmap();
+            if (bitmap != null) {
+                MyApplication.mCache.put("cut_img",bitmap);
+//                BlueSAPI.getInstance().printContent(getApplicationContext(),bitmap,5);
+//                FileOutputStream fout = null;
+//                try {
+//                    fout = new FileOutputStream(path);
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fout);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    if (fout != null) {
+//                        try {
+//                            fout.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }
+                setResult(RESULT_OK);
+                finish();
+                return;
+            }
+        }
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
+    @Override
+    public void onCancelClipClick() {
+        mImgView.cancelClip();
+        setOpDisplay(mImgView.getMode() == IMGMode.CLIP ? OP_CLIP : OP_NORMAL);
+    }
+
+    @Override
+    public void onDoneClipClick() {
+        mImgView.doClip();
+        setOpDisplay(mImgView.getMode() == IMGMode.CLIP ? OP_CLIP : OP_NORMAL);
+    }
+
+    @Override
+    public void onResetClipClick() {
+        mImgView.resetClip();
+    }
+
+    @Override
+    public void onRotateClipClick() {
+        mImgView.doRotate();
+    }
+
+    @Override
+    public void onColorChanged(int checkedColor) {
+        mImgView.setPenColor(checkedColor);
+    }
+
 
 }

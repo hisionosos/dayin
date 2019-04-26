@@ -102,5 +102,6 @@
     <string name="dy_from_local">从相册选取</string>
     <string name="dy_put">输入文字</string>
     <string name="dy_add">添加</string>
+    <string name="dy_caijian">裁剪</string>
 
 </resources>
