@@ -52,7 +52,7 @@ public class DateUtils {
      * @return String 返回时间
      */
     public static String getNowTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         return sdf.format(Calendar.getInstance().getTime());
     }
 

@@ -63,15 +63,32 @@
                 android:id="@+id/canv_soll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:scrollbars="none">
                 <LinearLayout
                     android:id="@+id/biaoqian1_lay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
-
                     <include layout="@layout/xiaopiaoone" />
                 </LinearLayout>
+
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/canv_soll2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/biaoqian2_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <include layout="@layout/xiaopiaotwo" />
+                </LinearLayout>
+
             </ScrollView>
 
 
@@ -102,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:text="@string/dy_size"
+                android:text="@string/dy_add"
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
@@ -118,6 +135,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_ajust"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_tiaozheng"
                 android:layout_weight="1"/>
@@ -143,6 +161,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_cuxi"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_cuxi"
                 android:layout_weight="1"/>
@@ -154,6 +173,7 @@
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_erweima"
+                android:visibility="gone"
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_ercode"

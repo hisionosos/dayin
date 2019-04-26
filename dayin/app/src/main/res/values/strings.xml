@@ -101,5 +101,6 @@
     <string name="dy_take_photo">拍照</string>
     <string name="dy_from_local">从相册选取</string>
     <string name="dy_put">输入文字</string>
+    <string name="dy_add">添加</string>
 
 </resources>
