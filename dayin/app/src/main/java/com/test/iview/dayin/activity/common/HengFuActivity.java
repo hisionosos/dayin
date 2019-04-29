@@ -1,7 +1,11 @@
 package com.test.iview.dayin.activity.common;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,6 +31,7 @@ import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.CameraUtils;
 import com.test.iview.dayin.utils.DimensUtils;
 import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.utils.ToastUtils;
@@ -51,6 +56,7 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
 public class HengFuActivity extends BaseActivity{
     @BindView(R.id.home_add)
@@ -70,7 +76,12 @@ public class HengFuActivity extends BaseActivity{
     Button getTxt;
     @BindView(R.id.canv)
     StickerView canv;
-
+    @BindView(R.id.code_bar)
+    RelativeLayout codeBar;
+    @BindView(R.id.get_rcode)
+    Button getRcode;
+    @BindView(R.id.txt_url)
+    EditText txtUrl;
     String flag = "";
 //    private String[] tab_title = {getString(R.string.dy_xuanzhuan),getString(R.string.dy_ziti),getString(R.string.dy_photo), getString(R.string.dy_biaoqing),  getString(R.string.dy_erweima),};
     private int[] tab_imgs = { R.drawable.tab_xuanzhuan, R.drawable.tab_ziti, R.drawable.tab_tupian, R.drawable.tab_biaoqing, R.drawable.tab_ercode};
@@ -132,6 +143,7 @@ public class HengFuActivity extends BaseActivity{
             @Override
             public void onStickerDeleted(@NonNull Sticker sticker) {
                 Log.d(TAG, "onStickerDeleted");
+                isexsit = false;
             }
 
             @Override
@@ -164,18 +176,124 @@ public class HengFuActivity extends BaseActivity{
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1000 && null != data) {
+            int id = data.getIntExtra("img",0);
+            addCusView(id);
+        }
+        if (requestCode == CameraUtils.CODE_ALBUM_CHOOSE && null != data) {
+//              int s = BitmapUtil.getBitmapBytes(MediaStore.Images.Media.getBitmap(getContentResolver(),data.getData()));
+            addImage(data.getData());
+        }
+
+    }
+
+
+    private void addCusView(int id){
+        if (id != 0){
+            SingleTouchView singleTouchView = new SingleTouchView(this);
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            singleTouchView.setLayoutParams(layoutParams);
+            singleTouchView.setImageResource(id);
+            canv.addView(singleTouchView);
+            arrs.add(singleTouchView);
+        }
+
+    }
+
+
+    private void addImage(Uri uri){
+        showLoadingDialog();
+        BitmapUtil.createScaledBitmap(this,uri,350, new BitmapUtil.MyCallback() {
+            @Override
+            public void onPrepare() {
+
+            }
+
+            @Override
+            public void onSucceed(final Object object) {
+                hideLaodingDialog();
+                HengFuActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SingleTouchView singleTouchView = new SingleTouchView(HengFuActivity.this);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        singleTouchView.setLayoutParams(layoutParams);
+                        singleTouchView.setImageBitamp((Bitmap) object);
+                        canv.addView(singleTouchView);
+                        arrs.add(singleTouchView);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError() {
+                hideLaodingDialog();
+            }
+        });
+    }
+
+    @Override
     public int initLayout() {
         return R.layout.hengfu_lay;
     }
-
-    @OnClick({R.id.back,R.id.get_txt,R.id.home_add})
+    TextSticker textSticker;
+    String txt;
+    @OnClick({R.id.back,R.id.get_txt,R.id.home_add,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
                 break;
+            case R.id.main_tab3:
+
+                CameraUtils.albumChoose(this,null);
+                break;
+            case R.id.main_tab4:
+                Intent intent = new Intent(this,SuCaiKuActivity.class);
+                intent.putExtra("sucai","biaoqing");
+                startActivityForResult(intent,1000);
+                break;
+            case R.id.main_tab5:
+                if (codeBar.getVisibility() == View.VISIBLE){
+                    codeBar.setVisibility(View.GONE);
+                }else{
+                    codeBar.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.main_tab2:
+                if (isexsit){
+                    canv.remove(textSticker);
+                    textSticker =  new TextSticker(getApplicationContext())
+                            .setText(txt)
+                            .setTypeface(Typeface.create("宋体",Typeface.BOLD))
+                            .setMaxTextSize(60)
+                            .resizeText();
+                    addCusView();
+                }else{
+                    ToastUtils.showShort("请输入文字");
+                }
+
+                break;
             case R.id.get_txt:
-                addCusView(editTxt.getText().toString());
+                txt = editTxt.getText().toString();
+
+
+                if (txt != null && txt.length() > 0){
+                    textSticker =  new TextSticker(getApplicationContext())
+                            .setText(txt)
+                            .setTypeface(Typeface.create("宋体",Typeface.NORMAL))
+                            .setMaxTextSize(60)
+                            .resizeText();
+                    addCusView();
+                }else{
+                    ToastUtils.showShort("请输入文字");
+                }
+
                 break;
             case R.id.home_add:
                 for (int i = 0; i < arrs.size(); i++) {
@@ -187,12 +305,40 @@ public class HengFuActivity extends BaseActivity{
                 editTxt.setCursorVisible(false);
                 BitmapUtil.getInstance().getCutImage(canv);
                 break;
+            case R.id.get_rcode:
+                String str = txtUrl.getText().toString();
+                Bitmap bitmap = null;
+                if (str.length() > 0){
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    if (bitmap != null){
+                        SingleTouchView singleTouchView = new SingleTouchView(HengFuActivity.this);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        singleTouchView.setLayoutParams(layoutParams);
+                        singleTouchView.setImageBitamp(bitmap);
+                        canv.addView(singleTouchView);
+                        arrs.add(singleTouchView);
+                        if (codeBar.getVisibility() == View.VISIBLE){
+                            codeBar.setVisibility(View.GONE);
+                        }else{
+                            codeBar.setVisibility(View.VISIBLE);
+                        }
+                    }else{
+                        ToastUtils.showShort("error");
+                    }
 
+
+                }else{
+                    ToastUtils.showShort(R.string.input_text);
+                }
+
+                break;
         }
     }
 
     private ArrayList<SingleTouchView> arrs = new ArrayList<>();
-    private void addCusView(String txt){
+    private boolean isexsit = false;
+    private void addCusView(){
 //        if (null != txt && txt.length() > 0){
 //            SingleTouchView singleTouchView = new SingleTouchView(this);
 //            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -207,13 +353,11 @@ public class HengFuActivity extends BaseActivity{
 //        Drawable drawable = ContextCompat.getDrawable(this, R.mipmap.tuya_1);
 //
 //        canv.addSticker(new DrawableSticker(drawable));
-        canv.addSticker(
-                new TextSticker(getApplicationContext())
-                        .setText(txt)
-                        .setMaxTextSize(14)
-                        .resizeText()
-                , Sticker.Position.CENTER);
-
+        if (isexsit){
+            return;
+        }
+        canv.addSticker(textSticker, Sticker.Position.CENTER);
+        isexsit = true;
 
     }
 

@@ -112,7 +112,7 @@ public class TuKuangActivity extends BaseActivity{
             case R.id.main_tab1:
                 Intent intent = new Intent(this,SuCaiKuActivity.class);
                 intent.putExtra("sucai","tukuang");
-                startActivityForResult(intent,1000);
+                startActivityForResult(intent,6000);
                 break;
             case R.id.main_tab2:
                 CameraUtils.albumChoose(this,null);
@@ -143,9 +143,16 @@ public class TuKuangActivity extends BaseActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1000) {
-            int id = data.getIntExtra("img",0);
-            addCusView(id);
+            if (requestCode == 6000) {
+                int id = data.getIntExtra("img",0);
+                canv.setBackgroundResource(id);
+            }else{
+                int id = data.getIntExtra("img",0);
+                addCusView(id);
+            }
+
         }
+
         if (requestCode == CameraUtils.CODE_ALBUM_CHOOSE && null != data.getData()) {
 //              int s = BitmapUtil.getBitmapBytes(MediaStore.Images.Media.getBitmap(getContentResolver(),data.getData()));
             addImage(data.getData());

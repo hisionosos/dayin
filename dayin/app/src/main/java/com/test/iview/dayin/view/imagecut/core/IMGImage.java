@@ -135,7 +135,7 @@ public class IMGImage {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(IMGPath.BASE_DOODLE_WIDTH);
-        mPaint.setColor(Color.RED);
+        mPaint.setColor(Color.BLACK);
         mPaint.setPathEffect(new CornerPathEffect(IMGPath.BASE_DOODLE_WIDTH));
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -522,11 +522,14 @@ public class IMGImage {
         canvas.clipRect(mClipWin.isClipping() ? mFrame : mClipFrame);
 
         // 绘制图片
-        canvas.drawBitmap(mImage, null, mFrame, null);
+        if (!mImage.isRecycled()){
+            canvas.drawBitmap(mImage, null, mFrame, null);
+        }
+
 
         if (DEBUG) {
             // Clip 区域
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(Color.BLACK);
             mPaint.setStrokeWidth(6);
             canvas.drawRect(mFrame, mPaint);
             canvas.drawRect(mClipFrame, mPaint);

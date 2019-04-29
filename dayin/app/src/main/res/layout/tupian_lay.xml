@@ -33,13 +33,13 @@
                     android:id="@+id/image_canvas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#000" />
+                    android:background="#fff" />
 
                 <ViewSwitcher
                     android:id="@+id/vs_op"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone"
+
                     android:inAnimation="@anim/image_fade_in"
                     android:outAnimation="@anim/image_fade_out">
 
@@ -75,7 +75,7 @@
                 android:background="@color/transparent"
                 android:layout_weight="1"/>
             <RadioButton
-                android:id="@+id/main_tab2"
+                android:id="@+id/main_tab22"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
@@ -83,6 +83,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_tuya"
                 android:layout_weight="1"/>
@@ -95,6 +96,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_xuanzhuan"
                 android:layout_weight="1"/>
@@ -104,6 +106,7 @@
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:text="@string/dy_caijian"
+                android:onClick="onClick"
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"

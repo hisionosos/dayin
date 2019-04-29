@@ -58,8 +58,8 @@ public class TuPianActivity extends MyImageCutActivity {
     RelativeLayout canv;
     @BindView(R.id.main_tab1)
     RadioButton mainTab1;
-    @BindView(R.id.main_tab2)
-    RadioButton mainTab2;
+//    @BindView(R.id.main_tab2)
+//    RadioButton mainTab2;
     @BindView(R.id.main_tab3)
     RadioButton mainTab3;
     @BindView(R.id.main_tab4)
@@ -75,7 +75,7 @@ public class TuPianActivity extends MyImageCutActivity {
 //        return R.layout.tupian_lay;
 //    }
 
-    @OnClick({R.id.back,R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4,R.id.home_add})
+    @OnClick({R.id.back,R.id.main_tab1, R.id.home_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -88,18 +88,15 @@ public class TuPianActivity extends MyImageCutActivity {
                         4000);
 
                 break;
-            case R.id.main_tab2:
-                //涂鸦
 
-                break;
-            case R.id.main_tab3:
-                setting();
-                break;
-            case R.id.main_tab4:
-                Intent intent4 = new Intent(this,SuCaiKuActivity.class);
-                intent4.putExtra("sucai","biaoqing");
-                startActivityForResult(intent4,1000);
-                break;
+//            case R.id.main_tab3:
+//                setting();
+//                break;
+//            case R.id.main_tab4:
+//                Intent intent4 = new Intent(this,SuCaiKuActivity.class);
+//                intent4.putExtra("sucai","biaoqing");
+//                startActivityForResult(intent4,1000);
+//                break;
             case R.id.home_add:
                 for (int i = 0; i < arrs.size(); i++) {
                     SingleTouchView singleTouchView = arrs.get(i);

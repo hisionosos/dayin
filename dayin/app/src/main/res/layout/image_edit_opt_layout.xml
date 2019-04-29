@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="0dp"
     android:layout_gravity="bottom"
     android:orientation="vertical">
 
@@ -76,13 +76,13 @@
                     android:layout_height="@dimen/image_color"
                     android:layout_margin="@dimen/image_color_margin"
                     android:button="@null"
-                    app:image_color="@color/image_color_red" />
+                    app:image_color="@color/image_color_black" />
 
                 <com.test.iview.dayin.view.imagecut.view.IMGColorRadio
                     android:layout_width="@dimen/image_color"
                     android:layout_height="@dimen/image_color"
                     android:layout_margin="@dimen/image_color_margin"
-                    app:image_color="@color/image_color_black" />
+                    app:image_color="@color/image_color_red" />
 
                 <com.test.iview.dayin.view.imagecut.view.IMGColorRadio
                     android:layout_width="@dimen/image_color"

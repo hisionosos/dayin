@@ -331,7 +331,7 @@ public class TuYaActivity extends BaseActivity {
         // 初始画笔大小
         mDoodleParams.mPaintUnitSize = DEFAULT_SIZE;
         // 画笔颜色
-        mDoodleParams.mPaintColor = Color.RED;
+        mDoodleParams.mPaintColor = Color.BLACK;
         // 是否支持缩放item
         mDoodleParams.mSupportScaleItem = true;
 

@@ -7,6 +7,42 @@
     <include layout="@layout/common_title"/>
 
     <RelativeLayout
+        android:id="@+id/code_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#fff"
+        android:layout_marginTop="@dimen/dp_20"
+        android:visibility="gone"
+        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginLeft="@dimen/dp_60"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/get_rcode"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_100"
+            android:layout_alignParentRight="true"
+            android:background="#0E6EB8"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/to_qcode"/>
+
+        <EditText
+            android:id="@+id/txt_url"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_120"
+            android:hint="@string/input_text"
+
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@+id/get_rcode"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:background="@null"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EFEFEF">

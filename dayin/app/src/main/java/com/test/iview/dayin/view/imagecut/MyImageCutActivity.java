@@ -122,7 +122,13 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
     @Override
     public void onClick(View v) {
         int vid = v.getId();
-        if (vid == R.id.rb_doodle) {
+        if (vid ==  R.id.main_tab3){
+            onRotateClipClick();
+        }else if (vid ==R.id.main_tab4){
+            onModeClick(IMGMode.CLIP);
+        }else if (vid ==R.id.main_tab22){
+            onModeClick(IMGMode.DOODLE);
+        } else if (vid == R.id.rb_doodle) {
             onModeClick(IMGMode.DOODLE);
         } else if (vid == R.id.btn_text) {
             onTextModeClick();

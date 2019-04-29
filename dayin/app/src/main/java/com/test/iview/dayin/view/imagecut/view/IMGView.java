@@ -65,7 +65,7 @@ public class IMGView extends FrameLayout implements Runnable, ScaleGestureDetect
         // 涂鸦画刷
         mDoodlePaint.setStyle(Paint.Style.STROKE);
         mDoodlePaint.setStrokeWidth(IMGPath.BASE_DOODLE_WIDTH);
-        mDoodlePaint.setColor(Color.RED);
+        mDoodlePaint.setColor(Color.BLACK);
         mDoodlePaint.setPathEffect(new CornerPathEffect(IMGPath.BASE_DOODLE_WIDTH));
         mDoodlePaint.setStrokeCap(Paint.Cap.ROUND);
         mDoodlePaint.setStrokeJoin(Paint.Join.ROUND);

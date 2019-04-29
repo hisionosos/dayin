@@ -42,7 +42,7 @@ public class IMGStickerX {
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     {
-        mPaint.setColor(Color.RED);
+        mPaint.setColor(Color.BLACK);
         mPaint.setStrokeWidth(STROKE_FRAME);
         mPaint.setStyle(Paint.Style.STROKE);
 

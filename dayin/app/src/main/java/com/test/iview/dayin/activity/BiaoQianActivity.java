@@ -136,7 +136,7 @@ public class BiaoQianActivity extends BaseActivity {
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (flag.equals("2")) {
+//                if (flag.equals("2")) {
                     if (moban == 1){
                         biaoqian1.setTextSize(progress/5 + 15);
                         biaoqian2.setTextSize(progress/5 + 15);
@@ -158,7 +158,7 @@ public class BiaoQianActivity extends BaseActivity {
                         biaoqianfour6.setTextSize(progress/5 + 15);
                     }
 
-                }
+//                }
             }
 
             @Override
@@ -182,7 +182,7 @@ public class BiaoQianActivity extends BaseActivity {
     private boolean isBlod = false;
     private int editGrave = 0;
 
-    @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.home_add, R.id.get_rcode})
+    @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.main_tab6, R.id.home_add, R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -198,7 +198,7 @@ public class BiaoQianActivity extends BaseActivity {
                 break;
             case R.id.main_tab3://调整
                 if (editGrave == 0) {
-                    if (flag.equals("2")) {
+//                    if (flag.equals("2")) {
                         if (moban == 1){
                             biaoqian1.setGravity(Gravity.CENTER);
                             biaoqian2.setGravity(Gravity.CENTER);
@@ -220,10 +220,10 @@ public class BiaoQianActivity extends BaseActivity {
                             biaoqianfour6.setGravity(Gravity.CENTER);
                         }
 
-                    }
+//                    }
                     editGrave++;
                 } else if (editGrave == 1) {
-                    if (flag.equals("2")) {
+//                    if (flag.equals("2")) {
                         if (moban == 1){
                             biaoqian1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
                             biaoqian2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
@@ -245,11 +245,11 @@ public class BiaoQianActivity extends BaseActivity {
                             biaoqianfour6.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
                         }
 
-                    }
+//                    }
 
                     editGrave++;
                 } else if (editGrave == 2) {
-                    if (flag.equals("2")) {
+//                    if (flag.equals("2")) {
                         if (moban == 1){
                             biaoqian1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                             biaoqian2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
@@ -270,13 +270,13 @@ public class BiaoQianActivity extends BaseActivity {
                             biaoqianfour5.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                             biaoqianfour6.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                         }
-                    }
+//                    }
                     editGrave--;
                     editGrave--;
                 }
                 break;
             case R.id.main_tab4://粗细
-                if (flag.equals("2")) {
+//                if (flag.equals("2")) {
                     if (isBlod) {
 
                         if (moban == 1){
@@ -323,7 +323,9 @@ public class BiaoQianActivity extends BaseActivity {
                             biaoqianfour6.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
                         }
                         isBlod = true;
-                    }
+//                    }
+
+
                 }
                 break;
             case R.id.main_tab5://二维码
@@ -332,6 +334,11 @@ public class BiaoQianActivity extends BaseActivity {
                 } else {
                     codeBar.setVisibility(View.VISIBLE);
                 }
+                break;
+            case R.id.main_tab6:
+                Intent intent4 = new Intent(this,SuCaiKuActivity.class);
+                intent4.putExtra("sucai","biaoqing");
+                startActivityForResult(intent4,1000);
                 break;
             case R.id.home_add:
                 for (int i = 0; i < arrs.size(); i++) {
@@ -403,7 +410,6 @@ public class BiaoQianActivity extends BaseActivity {
                 addCusView(id);
             }
         }
-
 
     }
 

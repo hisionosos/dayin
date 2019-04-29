@@ -178,6 +178,18 @@
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_ercode"
                 android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/main_tab6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:textSize="@dimen/sp_30"
+                android:textColor="@color/text_color_selecter"
+                android:text="@string/dy_biaoqing"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/tab_biaoqing"
+                android:layout_weight="1"/>
         </RadioGroup>
 
         <LinearLayout

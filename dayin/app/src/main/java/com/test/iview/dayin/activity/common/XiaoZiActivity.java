@@ -134,13 +134,13 @@ public class XiaoZiActivity extends BaseActivity {
                 break;
             case R.id.main_tab2:
                 if (editGrave == 0){
-                    editTxt.setGravity(Gravity.CENTER);
+                    editTxt.setGravity(Gravity.CENTER_HORIZONTAL);
                     editGrave ++;
                 }else if (editGrave == 1){
-                    editTxt.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+                    editTxt.setGravity(Gravity.RIGHT);
                     editGrave ++;
                 }else if (editGrave == 2){
-                    editTxt.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
+                    editTxt.setGravity(Gravity.LEFT);
                     editGrave --;
                     editGrave --;
                 }
