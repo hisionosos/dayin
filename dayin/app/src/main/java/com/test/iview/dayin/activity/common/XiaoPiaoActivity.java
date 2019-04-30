@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -508,6 +509,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
 
     private void addTitleView() {
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
         int txtSize = 6;
         int realSize = DimensUtils.dp2px(this, 50);
         int secSize = DimensUtils.dp2px(this, 100);
@@ -534,7 +536,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title = new TextView(this);
         title.setTextColor(Color.parseColor("#000000"));
         title.setGravity(Gravity.CENTER);
-        title.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title.setText("序号");
         title.setLayoutParams(txtLayParams);
         headlinearLayout1.addView(title);
@@ -573,7 +575,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title1 = new TextView(this);
         title1.setTextColor(Color.parseColor("#000000"));
         title1.setGravity(Gravity.CENTER);
-        title1.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title1.setText("商品名称");
         title1.setLayoutParams(txtLayParams);
         headlinearLayout.addView(title1);
@@ -600,7 +602,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title2 = new TextView(this);
         title2.setTextColor(Color.parseColor("#000000"));
         title2.setGravity(Gravity.CENTER);
-        title2.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title2.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title2.setText("数量");
         title2.setLayoutParams(txtLayParams);
         headlinearLayout3.addView(title2);
@@ -627,7 +629,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title3 = new TextView(this);
         title3.setTextColor(Color.parseColor("#000000"));
         title3.setGravity(Gravity.CENTER);
-        title3.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title3.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title3.setText("单价");
         title3.setLayoutParams(txtLayParams);
         headlinearLayout4.addView(title3);
@@ -654,7 +656,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title4 = new TextView(this);
         title4.setTextColor(Color.parseColor("#000000"));
         title4.setGravity(Gravity.CENTER);
-        title4.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title4.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title4.setText("金额");
         title4.setLayoutParams(txtLayParams);
         headlinearLayout5.addView(title4);
@@ -681,6 +683,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
     private void addGoodView() {
         int txtSize = 6;
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
         int realSize = DimensUtils.dp2px(this, 50);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -710,7 +713,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title = new TextView(this);
         title.setTextColor(Color.parseColor("#000000"));
         title.setGravity(Gravity.CENTER);
-        title.setTextSize(DimensUtils.sp2px(this, txtSize));
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         title.setText("1");
         title.setLayoutParams(txtLayParams);
         headlinearLayout1.addView(title);
@@ -750,7 +753,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         EditText edit = new EditText(this);
         edit.setTextColor(Color.parseColor("#000000"));
         edit.setGravity(Gravity.CENTER);
-        edit.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit.setBackground(null);
         edit.setLayoutParams(editLayParams);
         headlinearLayout.addView(edit);
@@ -779,7 +782,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         final EditText edit5 = new EditText(this);
         edit3.setTextColor(Color.parseColor("#000000"));
         edit3.setGravity(Gravity.CENTER);
-        edit3.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit3.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit3.setText("0");
         edit3.setBackground(null);
         edit3.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -840,7 +843,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         edit4.setTextColor(Color.parseColor("#000000"));
         edit4.setGravity(Gravity.CENTER);
-        edit4.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit4.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit4.setBackground(null);
         edit4.setText("1");
         edit4.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -903,7 +906,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         edit5.setTextColor(Color.parseColor("#000000"));
         edit5.setGravity(Gravity.CENTER);
-        edit5.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit5.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit5.setBackground(null);
         edit5.setEnabled(false);
         edit5.setText("1.00");

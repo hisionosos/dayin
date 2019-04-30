@@ -54,14 +54,12 @@ public class PlayFragment extends BaseFragment {
     @BindView(R.id.home_vsrl)
     VpSwipeRefreshLayout home_vsrl;
     LinearLayout no;
-    Unbinder unbinder;
+
     private String type = "0";
     private int page = 1;
     private boolean isOne = true;
     private MyAdapter adapter;
     private HotBean hotBean;
-    private int width;
-    private HotBean hotBean1;
     private boolean isShuaXin = true;
 
     public PlayFragment() {
