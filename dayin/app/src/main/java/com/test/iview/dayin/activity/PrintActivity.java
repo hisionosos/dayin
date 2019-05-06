@@ -27,6 +27,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.iview.dayin.R;
@@ -36,10 +38,21 @@ import com.test.iview.dayin.utils.PrinterImageUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * @author Javen Wong 完成打印功能的Activity
  */
 public class PrintActivity extends Activity {
+	@BindView(R.id.home_add)
+	ImageView homeAdd;
+	@BindView(R.id.common_txt)
+	TextView commonTxt;
+	@BindView(R.id.common_title)
+	TextView commonTitle;
+	@BindView(R.id.back)
+	ImageView back;
 
 	private EditText etMAC;
 	private EditText toPrintText;
@@ -51,10 +64,16 @@ public class PrintActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.print_page);
+		ButterKnife.bind(this);
 		context = this;
-		
+		commonTitle.setText(R.string.dy_add_device);
+		homeAdd.setVisibility(View.GONE);
+		homeAdd.setImageResource(R.drawable.printer);
+		commonTxt.setVisibility(View.GONE);
+
 		btapi=  new BlueSAPI();
 		verifyStoragePermissions(this);
 		etMAC = (EditText) findViewById(R.id.EditText01);
@@ -69,7 +88,12 @@ public class PrintActivity extends Activity {
 		Button btnAsciiPrint = (Button) findViewById(R.id.Button05);
 		Button btnCurvePrint = (Button) findViewById(R.id.Button06);
 		 bImageView = (ImageView) findViewById(R.id.bitmap);
-
+		back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		bImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -505,74 +505,82 @@ public class BlueSAPI {
                 if (this.outStream == null) {
                     return 2007;
                 } else {
+
                     try {
+                        this.outStream.write(data);
+                        this.outStream.flush();
+                        Thread.sleep(20);
 
-                        for (int i = 0;i < data.length;i += limitData){
-                            if (limitData  + i > data.length){
-                                byte[] bytes = new byte[limitData];
-                                System.arraycopy(data,i,bytes,0,data.length - i);
-                                vb.add(bytes);
-                            }else{
-                                byte[] bytes = new byte[limitData];
-                                System.arraycopy(data,i,bytes,0,limitData);
-                                vb.add(bytes);
-                            }
-                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
 
 
-                        do {
-                            if (!isprint){
-                                isprint = true;
-                                this.outStream.write(vb.get(writeCount));
-                                this.outStream.flush();
-                            }
 
-                            byte[] read = new byte[20];
-                            this.inStream.read(read);
-                            System.out.println("" + read[0]);
-
-                            if (inStream.read() == 0x11 && isprint){
-                                writeCount ++;
-                                if (writeCount < vb.size()){
-                                    this.outStream.write(vb.get(writeCount));
-                                    this.outStream.flush();
-                                }else{
-                                    break;
-                                }
-
-                            }
-                        }while (true);
-
-
-
+//                    try {
+//
 //                        for (int i = 0;i < data.length;i += limitData){
 //                            if (limitData  + i > data.length){
-//                                this.outStream.write(data,i,data.length - i);
-//                                this.outStream.flush();
+//                                byte[] bytes = new byte[limitData];
+//                                System.arraycopy(data,i,bytes,0,data.length - i);
+//                                vb.add(bytes);
 //                            }else{
-//                                this.outStream.write(data,i,limitData);
+//                                byte[] bytes = new byte[limitData];
+//                                System.arraycopy(data,i,bytes,0,limitData);
+//                                vb.add(bytes);
+//                            }
+//                        }
+//
+//
+//
+//                        do {
+//                            if (!isprint){
+//                                isprint = true;
+//                                this.outStream.write(vb.get(writeCount));
 //                                this.outStream.flush();
 //                            }
 //
 //                            byte[] read = new byte[20];
 //                            this.inStream.read(read);
-//                            if (read[0] == 0x11){
-//                                writeCount++;
-//                            }else{
-////                                Thread.sleep(10);
-//                                break;
+//                            System.out.println("" + read[0]);
+//
+//                            if (inStream.read() == 0x11 && isprint){
+//                                writeCount ++;
+//                                if (writeCount < vb.size()){
+//                                    this.outStream.write(vb.get(writeCount));
+//                                    this.outStream.flush();
+//                                }else{
+//                                    break;
+//                                }
+//
 //                            }
-//                        }
-
-
-                    } catch (UnsupportedEncodingException var3) {
-                        var3.printStackTrace();
-                    } catch (IOException var4) {
-                        var4.printStackTrace();
-                    }
-//                    catch (InterruptedException e) {
-//                        e.printStackTrace();
+//                        }while (true);
+//
+//
+//
+////                        for (int i = 0;i < data.length;i += limitData){
+////                            if (limitData  + i > data.length){
+////                                this.outStream.write(data,i,data.length - i);
+////                                this.outStream.flush();
+////                            }else{
+////                                this.outStream.write(data,i,limitData);
+////                                this.outStream.flush();
+////                            }
+////
+////                            byte[] read = new byte[20];
+////                            this.inStream.read(read);
+////                            if (read[0] == 0x11){
+////                                writeCount++;
+////                            }else{
+//////                                Thread.sleep(10);
+////                                break;
+////                            }
+////                        }
+//
+//
+//                    }catch (Exception var4) {
+//                        var4.printStackTrace();
 //                    }
 
                     return 0;
@@ -601,14 +609,14 @@ public class BlueSAPI {
      * @param type 打印内容类型
      */
     public void printContent(Context content, final Bitmap bitmap, final int type) {
-        if (isConnect) {
+        if (!isConnect) {
             ToastUtils.showShort(R.string.connect_printer);
         } else {
             // 打印至蓝牙打印机
-            final ProgressDialog pd = new ProgressDialog(content);
-            pd.setTitle(content.getString(R.string.dy_tips));
-            pd.setMessage("正在打印，请稍候……");
-            pd.show();
+//            final ProgressDialog pd = new ProgressDialog(content);
+//            pd.setTitle(content.getString(R.string.dy_tips));
+//            pd.setMessage("正在打印，请稍候……");
+//            pd.show();
 
             /**
              * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
@@ -671,8 +679,8 @@ public class BlueSAPI {
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
                                 Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
                                         + "," + mp.getRowBytes());
-//                                blueApi.PrintImage(mp);
-                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
+                                blueApi.PrintImage(mp);
+//                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
 
 
 
@@ -722,7 +730,7 @@ public class BlueSAPI {
                         msg.getData().putString("error", e.getMessage());
                         Log.e("printException",e.toString());
                     } finally {
-                        pd.dismiss();
+//                        pd.dismiss();
 
                     }
                 }

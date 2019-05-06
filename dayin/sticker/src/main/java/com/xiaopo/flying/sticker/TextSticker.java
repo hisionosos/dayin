@@ -2,10 +2,12 @@ package com.xiaopo.flying.sticker;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Dimension;
 import android.support.annotation.IntRange;
@@ -73,6 +75,7 @@ public class TextSticker extends Sticker {
     this.drawable = drawable;
     if (drawable == null) {
       this.drawable = ContextCompat.getDrawable(context, R.drawable.sticker_transparent_background);
+//      this.drawable = createShape();
     }
     textPaint = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
     realBounds = new Rect(0, 0, getWidth(), getHeight());
@@ -81,6 +84,18 @@ public class TextSticker extends Sticker {
     maxTextSizePixels = convertSpToPx(32);
     alignment = Layout.Alignment.ALIGN_CENTER;
     textPaint.setTextSize(maxTextSizePixels);
+  }
+
+  public GradientDrawable createShape(){
+    GradientDrawable drawable = new GradientDrawable();
+    drawable.setSize(dp2px(context,200),dp2px(context,50));
+    drawable.setShape(GradientDrawable.RECTANGLE);
+    drawable.setColor(Color.TRANSPARENT);// 设置颜色
+    return drawable;
+  }
+
+  public int dp2px(Context context, float dpValue){
+    return (int)(dpValue * (context.getResources().getDisplayMetrics().density) + 0.5f);
   }
 
   @Override public void draw(@NonNull Canvas canvas) {

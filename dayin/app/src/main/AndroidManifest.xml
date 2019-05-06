@@ -249,6 +249,12 @@
             android:name="com.test.iview.dayin.activity.FootprintActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.test.iview.dayin.activity.PrintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.test.iview.dayin.activity.BTDeviceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.test.iview.dayin.activity.AddressActivity"
             android:screenOrientation="portrait" />
         <activity

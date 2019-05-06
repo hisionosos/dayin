@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.PiaojuActivity;
+import com.test.iview.dayin.activity.PrintActivity;
 import com.test.iview.dayin.activity.WebViewActivity;
 import com.test.iview.dayin.activity.common.PiaojuDetailActivity;
 import com.test.iview.dayin.activity.common.WorkActivity;
@@ -120,6 +121,7 @@ public class HomeFragment extends BaseFragment {
         add_device.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PrintActivity.class));
                 popWindow.dissmiss();
             }
         });

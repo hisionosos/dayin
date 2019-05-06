@@ -239,6 +239,9 @@ public class BTDeviceListActivity extends TabActivity {
 			ToastUtils.showShort("打印机连接失败");
 		}else {
 			ToastUtils.showShort("打印机连接成功");
+			Intent intent = new Intent();
+			intent.putExtra(EXTRA_DEVICE_ADDRESS, deviceid);
+			setResult(Activity.RESULT_OK, intent);
 			finish();
 		}
 	}
