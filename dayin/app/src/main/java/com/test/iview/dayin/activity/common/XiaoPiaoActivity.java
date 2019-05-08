@@ -378,6 +378,7 @@ public class XiaoPiaoActivity extends BaseActivity {
     private void addTwoView(){
         tworowCount ++;
         int txtSize = 6;
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
         int realSize = DimensUtils.dp2px(this, 50);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -397,7 +398,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         EditText edit1 = new EditText(this);
         edit1.setTextColor(Color.parseColor("#000000"));
         edit1.setGravity(Gravity.CENTER);
-        edit1.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit1.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit1.setBackground(null);
         edit1.setLayoutParams(editLayParams);
         linearLayout.addView(edit1);
@@ -407,7 +408,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         final EditText edit3 = new EditText(this);
         edit2.setTextColor(Color.parseColor("#000000"));
         edit2.setGravity(Gravity.CENTER);
-        edit2.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit2.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit2.setBackground(null);
         edit2.setText("0");
         edit2.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -458,7 +459,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         edit3.setTextColor(Color.parseColor("#000000"));
         edit3.setGravity(Gravity.CENTER);
-        edit3.setTextSize(DimensUtils.sp2px(this, txtSize));
+        edit3.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
         edit3.setBackground(null);
         edit3.setText("1");
         edit3.setInputType(InputType.TYPE_CLASS_NUMBER| InputType.TYPE_NUMBER_FLAG_DECIMAL);

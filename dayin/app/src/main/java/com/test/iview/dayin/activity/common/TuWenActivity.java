@@ -85,7 +85,8 @@ public class TuWenActivity extends BaseActivity {
     @BindView(R.id.get_rcode)
     Button getRcode;
     @BindView(R.id.txt_url)
-    EditText txtUrl;
+    EditText txtUrl;@BindView(R.id.e_delete)
+    TextView eDelete;
 //    private String[] tab_title = {getString(R.string.wangge), getString(R.string.dy_photo), getString(R.string.dy_ajust), getString(R.string.dy_biaoqing), getString(R.string.dy_erweima)};
     private int[] tab_imgs = {R.drawable.tab_biaoge, R.drawable.tab_tupian, R.drawable.tab_tiaozheng, R.drawable.tab_biaoqing,
             R.drawable.tab_ercode};
@@ -125,12 +126,17 @@ public class TuWenActivity extends BaseActivity {
 
     private int editGrave = 0;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @OnClick({R.id.back, R.id.hang_mis, R.id.hang_add, R.id.lie_mis, R.id.lie_add, R.id.wangge_guding,
-            R.id.main_tab1,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
+    @OnClick({R.id.back, R.id.hang_mis, R.id.hang_add, R.id.lie_mis, R.id.lie_add, R.id.wangge_guding,R.id.home_add,
+            R.id.main_tab1,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode,R.id.e_delete})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
+                break;
+            case R.id.e_delete:
+                eds.clear();
+                gridLay.removeAllViews();
+                gridLay.setBackgroundColor(Color.WHITE);
                 break;
             case R.id.main_tab1:
                 if (wanggeLay.getVisibility() == View.VISIBLE){
@@ -143,6 +149,15 @@ public class TuWenActivity extends BaseActivity {
                 break;
             case R.id.main_tab2:
                 CameraUtils.albumChoose(this,null);
+                break;
+            case R.id.home_add:
+                for (int i = 0; i < arrs.size(); i++) {
+                    SingleTouchView singleTouchView = arrs.get(i);
+                    if (null != singleTouchView){
+                        arrs.get(i).setEditable(false);
+                    }
+                }
+                BitmapUtil.getInstance().getCutImage(canv);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){

@@ -243,6 +243,7 @@ public class HengFuActivity extends BaseActivity{
     }
     TextSticker textSticker;
     String txt;
+    private boolean isBold = false;
     @OnClick({R.id.back,R.id.get_txt,R.id.home_add,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -267,13 +268,22 @@ public class HengFuActivity extends BaseActivity{
                 break;
             case R.id.main_tab2:
                 if (isexsit){
-                    canv.remove(textSticker);
-                    textSticker =  new TextSticker(getApplicationContext())
-                            .setText(txt)
-                            .setTypeface(Typeface.create("宋体",Typeface.BOLD))
-                            .setMaxTextSize(60)
-                            .resizeText();
-                    addCusView();
+//                    canv.remove(textSticker);
+                    if (isBold){
+                        isBold = false;
+                        textSticker.setTypeface(Typeface.DEFAULT);
+                    }else{
+                        isBold = true;
+                        textSticker.setTypeface(Typeface.DEFAULT_BOLD);
+                    }
+
+                    canv.invalidate();
+//                    textSticker =  new TextSticker(getApplicationContext())
+//                            .setText(txt)
+//                            .setTypeface(Typeface.create("宋体",Typeface.BOLD))
+//                            .setMaxTextSize(60)
+//                            .resizeText();
+//                    addCusView();
                 }else{
                     ToastUtils.showShort("请输入文字");
                 }
@@ -281,12 +291,14 @@ public class HengFuActivity extends BaseActivity{
                 break;
             case R.id.get_txt:
                 txt = editTxt.getText().toString();
-
+                if (isexsit){
+                    return;
+                }
 
                 if (txt != null && txt.length() > 0){
                     textSticker =  new TextSticker(getApplicationContext())
                             .setText(txt)
-                            .setTypeface(Typeface.create("宋体",Typeface.NORMAL))
+                            .setTypeface(Typeface.DEFAULT)
                             .setMaxTextSize(60)
                             .resizeText();
                     addCusView();

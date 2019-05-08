@@ -111,6 +111,7 @@
                 android:text="@string/dy_xuanzhuan"
                 android:gravity="center"
                 android:textSize="@dimen/sp_30"
+                android:visibility="gone"
                 android:textColor="@color/text_color_selecter"
                 android:drawableTop="@drawable/tab_xuanzhuan"
                 android:background="@color/transparent"

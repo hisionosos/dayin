@@ -222,8 +222,11 @@ public class BTDeviceListActivity extends TabActivity {
 			// View
 			String info = ((TextView) v).getText().toString();//20:13:08:12:32:16
 			String address = info.substring(info.length() - 17);
-			connectDevice(address);
-
+//			connectDevice(address);
+			Intent intent = new Intent();
+			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
+			setResult(Activity.RESULT_OK, intent);
+			finish();
 //			Intent intent = new Intent();
 //			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
 //			setResult(Activity.RESULT_OK, intent);
@@ -239,10 +242,7 @@ public class BTDeviceListActivity extends TabActivity {
 			ToastUtils.showShort("打印机连接失败");
 		}else {
 			ToastUtils.showShort("打印机连接成功");
-			Intent intent = new Intent();
-			intent.putExtra(EXTRA_DEVICE_ADDRESS, deviceid);
-			setResult(Activity.RESULT_OK, intent);
-			finish();
+
 		}
 	}
 

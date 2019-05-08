@@ -20,7 +20,7 @@ import okhttp3.Response;
 //代理模式实现网络请求
 public class HttpManager {
 
-    public static void getRequets(String url, Object tag, Map<String, String> map, final Class clz, final HttpCallBackListener listener) {
+    public static void getRequets(String url, final Object tag, Map<String, String> map, final Class clz, final HttpCallBackListener listener) {
         Log.d("OkGoUtil", "method get");
         OkGo.get(url)
                 .tag(tag)
@@ -37,6 +37,9 @@ public class HttpManager {
                     public void onSuccess(String s, Call call, Response response) {
                         if (response.isSuccessful()){
                             Log.d("postRequest",s);
+                            if (tag.equals("app")){
+                                return;
+                            }
                             BaseResponse baseResponse = FromJsonUtils.fromJson(s,clz);
 
                             if (baseResponse.getCode() != Constant.SUCCESS){
@@ -55,6 +58,9 @@ public class HttpManager {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
+                        if (tag.equals("app")){
+                            System.exit(0);
+                        }
                         switch (response.code()){
                             case Constant.TIMEOUT:
                                 ToastUtils.showToast("登录超时，请重新登录");

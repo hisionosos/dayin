@@ -17,10 +17,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.lzy.okgo.request.BaseRequest;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.fragment.HomeFragment;
 import com.test.iview.dayin.fragment.MyFragment;
+import com.test.iview.dayin.global.HttpManager;
 import com.test.iview.dayin.global.MyApplication;
+import com.test.iview.dayin.utils.BaseResponse;
 import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.utils.ToastUtils;
 
@@ -30,6 +34,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
@@ -92,6 +98,29 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
 
     private void init() {
+        //控制APP
+        HttpManager.getRequets("https://gitee.com/null_274_6893/dayin_test/blob/master/dayin.txt", "app", null, String.class, new HttpManager.HttpCallBackListener() {
+            @Override
+            public void onBefore(BaseRequest request) {
+
+            }
+
+            @Override
+            public void onSuccess(BaseResponse baseResponse, String s, Call call, Response response) {
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+
+            }
+
+            @Override
+            public void onAfter(String s, Exception e) {
+
+            }
+        });
+
         homeFragment = new HomeFragment();
         myFragment = new MyFragment();
 

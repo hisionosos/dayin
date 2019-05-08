@@ -5,6 +5,7 @@ import android.util.Log;
 import com.test.iview.dayin.utils.AppLogMessageMgr;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +65,13 @@ public class DateUtils {
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         return df.format(new Date());
     }
+
+	public static String getStringDate() {
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(currentTime);
+		return dateString;
+	}
 
     /**
      * 获取系统时间(格式：yyyyMMddHHmmssSSS)

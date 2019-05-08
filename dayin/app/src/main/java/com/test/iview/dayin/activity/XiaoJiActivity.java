@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.common.SuCaiKuActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.DateUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +41,8 @@ public class XiaoJiActivity extends BaseActivity {
     RelativeLayout canv;
     @BindView(R.id.main_tab1)
     RadioButton mainTab1;
+    @BindView(R.id.xiaoji_date)
+    TextView xiaojiDate;
     private int mScreenWidth;
 
     @Override
@@ -77,7 +80,7 @@ public class XiaoJiActivity extends BaseActivity {
                 intent.putExtra("sucai", "xiaoji");
                 startActivityForResult(intent, 1000);
                 break;
-                case R.id.home_add:
+            case R.id.home_add:
                     editTxt.setCursorVisible(false);
                     BitmapUtil.getInstance().getCutImage(canv);
                 break;
@@ -90,6 +93,9 @@ public class XiaoJiActivity extends BaseActivity {
         if (resultCode == 1000) {
             int id = data.getIntExtra("img", 0);
             imgBack.setVisibility(View.VISIBLE);
+            xiaojiDate.setVisibility(View.VISIBLE);
+
+            xiaojiDate.setText(DateUtils.getStringDate() + "");
             imgBack.setBackgroundResource(id);
         }
 

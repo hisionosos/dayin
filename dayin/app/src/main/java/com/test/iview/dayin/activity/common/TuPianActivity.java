@@ -66,6 +66,8 @@ public class TuPianActivity extends MyImageCutActivity {
     RadioButton mainTab4;
     @BindView(R.id.wangge_lay)
     LinearLayout wanggeLay;
+    @BindView(R.id.undo_lay)
+    LinearLayout undoLay;
     @BindView(R.id.size_seek)
     SeekBar sizeSeek;
 
@@ -319,9 +321,17 @@ public class TuPianActivity extends MyImageCutActivity {
     @Override
     public void onModeClick(IMGMode mode) {
         IMGMode cm = mImgView.getMode();
+        if (mode == IMGMode.DOODLE){
+            undoLay.setVisibility(View.VISIBLE);
+        }else{
+            undoLay.setVisibility(View.GONE);
+        }
+
         if (cm == mode) {
             mode = IMGMode.NONE;
+            undoLay.setVisibility(View.GONE);
         }
+
         mImgView.setMode(mode);
         updateModeUI();
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.ViewSwitcher;
 
@@ -136,6 +137,8 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
             onModeClick(IMGMode.MOSAIC);
         } else if (vid == R.id.btn_clip) {
             onModeClick(IMGMode.CLIP);
+        } else if (vid == R.id.undo_btn) {
+            onUndoClick();
         } else if (vid == R.id.btn_undo) {
             onUndoClick();
         } else if (vid == R.id.tv_done) {

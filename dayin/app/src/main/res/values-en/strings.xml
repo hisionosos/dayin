@@ -105,4 +105,6 @@
 	<string name="dy_put">input text</string>
 	<string name="dy_add">add</string>
 	<string name="dy_caijian">Tailoring</string>
+	<string name="dy_delete">del</string>
+	<string name="dy_chexiao">undo</string>
 </resources>

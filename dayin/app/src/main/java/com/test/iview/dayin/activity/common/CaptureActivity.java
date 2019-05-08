@@ -82,12 +82,11 @@ public class CaptureActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.home_add:
-//                for (int i = 0; i < arrs.size(); i++) {
-//                    arrs.get(i).setEditable(false);
-//
-//                }
-//                editTxt.setCursorVisible(false);
-//                BitmapUtil.getInstance().getCutImage(canv);
+                for (int i = 0; i < arrs.size(); i++) {
+                    arrs.get(i).setEditable(false);
+
+                }
+                BitmapUtil.getInstance().getCutImage(canv);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

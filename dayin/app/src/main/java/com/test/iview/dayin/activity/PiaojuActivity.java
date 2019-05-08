@@ -54,7 +54,7 @@ public class PiaojuActivity extends BaseActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
 
-        homeAdd.setVisibility(View.VISIBLE);
+        homeAdd.setVisibility(View.INVISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
         commonTitle.setText(getString(R.string.dy_piaojudayin));
