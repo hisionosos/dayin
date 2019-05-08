@@ -8,7 +8,7 @@ android {
             keyAlias 'duduji'
             keyPassword 'duduji'
             storePassword 'duduji'
-            storeFile file('E:/dayin_project/dayin/duduji.jks')
+            storeFile file('../duduji.jks')
         }
     }
     compileSdkVersion 26
