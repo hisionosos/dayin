@@ -44,6 +44,7 @@ public class BlueSAPI {
 
         public BlueSAPI() { }
 
+
         public int openPrinter(String Deviveid, String Pwd) {
             int res = 0;
             this.mBtAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -509,7 +510,7 @@ public class BlueSAPI {
                     try {
                         this.outStream.write(data);
                         this.outStream.flush();
-                        Thread.sleep(20);
+                        Thread.sleep(10);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -613,10 +614,10 @@ public class BlueSAPI {
             ToastUtils.showShort(R.string.connect_printer);
         } else {
             // 打印至蓝牙打印机
-//            final ProgressDialog pd = new ProgressDialog(content);
-//            pd.setTitle(content.getString(R.string.dy_tips));
-//            pd.setMessage("正在打印，请稍候……");
-//            pd.show();
+            final ProgressDialog pd = new ProgressDialog(content);
+            pd.setTitle(content.getString(R.string.dy_tips));
+            pd.setMessage("正在打印，请稍候……");
+            pd.show();
 
             /**
              * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
@@ -675,13 +676,14 @@ public class BlueSAPI {
 //                                Intent intent = new Intent(Intent.ACTION_PICK,
 //                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                                startActivityForResult(intent, 2);
+                                Log.e("11111vv","11");
                                 Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap));
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
                                 Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
                                         + "," + mp.getRowBytes());
                                 blueApi.PrintImage(mp);
 //                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
-
+                                Log.e("11111vv","22");
 
 
                             }
@@ -730,7 +732,7 @@ public class BlueSAPI {
                         msg.getData().putString("error", e.getMessage());
                         Log.e("printException",e.toString());
                     } finally {
-//                        pd.dismiss();
+                        pd.dismiss();
 
                     }
                 }

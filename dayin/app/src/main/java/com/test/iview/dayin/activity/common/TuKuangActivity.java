@@ -51,6 +51,8 @@ public class TuKuangActivity extends BaseActivity{
     RadioButton mainTab3;
     @BindView(R.id.main_tab4)
     RadioButton mainTab4;
+    @BindView(R.id.canv_img)
+    ImageView canvImg;
 
     @BindView(R.id.wangge_lay)
     LinearLayout wanggeLay;
@@ -145,7 +147,7 @@ public class TuKuangActivity extends BaseActivity{
         if (resultCode == 1000) {
             if (requestCode == 6000) {
                 int id = data.getIntExtra("img",0);
-                canv.setBackgroundResource(id);
+                canvImg.setBackgroundResource(id);
             }else{
                 int id = data.getIntExtra("img",0);
                 addCusView(id);

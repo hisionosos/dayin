@@ -228,9 +228,8 @@ public class TuWenActivity extends BaseActivity {
             case R.id.wangge_guding:
                 wanggeLay.setVisibility(View.GONE);
                 gridLay.removeAllViews();
-                gridLay.setBackgroundColor(Color.BLACK);
                 addGridView();
-
+                gridLay.setBackgroundColor(Color.BLACK);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

@@ -60,7 +60,7 @@ public class PrintActivity extends Activity {
 	private ImageView bImageView;
 	private PrintActivity context = null;
 
-	private BlueSAPI btapi;
+//	private static BlueSAPI btapi;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,6 @@ public class PrintActivity extends Activity {
 		homeAdd.setImageResource(R.drawable.printer);
 		commonTxt.setVisibility(View.GONE);
 
-		btapi=  new BlueSAPI();
 		verifyStoragePermissions(this);
 		etMAC = (EditText) findViewById(R.id.EditText01);
 		toPrintText = (EditText) findViewById(R.id.EditText02);
@@ -123,7 +122,7 @@ public class PrintActivity extends Activity {
                 String deviceid = etMAC.getText().toString();
                 String pwd = "0000";
 				
-				int res = btapi.openPrinter(deviceid, pwd);
+				int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd);
 				if (res != 0) {
 					Toast.makeText(PrintActivity.this, "打印机连接失败", Toast.LENGTH_SHORT).show();
 				}
@@ -258,7 +257,7 @@ public class PrintActivity extends Activity {
 			/**
 			 * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
 			 */
-			btapi.initPrinter();
+			BlueSAPI.getInstance().initPrinter();
 
 			// //新开线程 打印
 			new Thread() {
@@ -268,26 +267,26 @@ public class PrintActivity extends Activity {
 						switch (type) {
 						case 0: {		
 							String code ="12345678";
-							rtn = btapi.PrintOnedimCode(200,50,10,code,0);
+							rtn = BlueSAPI.getInstance().PrintOnedimCode(200,50,10,code,0);
 						};
 							break;
 						case 1: {							
 							String code ="12345678";
-							rtn = btapi.PrintOnedimCode(200,50,10,code,1);
+							rtn = BlueSAPI.getInstance().PrintOnedimCode(200,50,10,code,1);
 						}
 							break;
 						case 2: {							
 							String code ="1234567";
-							rtn = btapi.PrintOnedimCode(200,50,10,code,2);
+							rtn = BlueSAPI.getInstance().PrintOnedimCode(200,50,10,code,2);
 						}
 							break;
 						case 3: {
 							String code ="123456789012";
-							rtn = btapi.PrintOnedimCode(200,50,10,code,3);
+							rtn = BlueSAPI.getInstance().PrintOnedimCode(200,50,10,code,3);
 						}
 							break;
 						case 4: {
-							rtn = btapi.PrintTwoCode("http://www.baidu.com");
+							rtn = BlueSAPI.getInstance().PrintTwoCode("http://www.baidu.com");
 						}
 							break;
 						case 5: {
@@ -320,7 +319,7 @@ public class PrintActivity extends Activity {
 							}
 							break;
 						case 6: {
-							rtn = btapi.PrintByte(new byte[] { 0x0A, 0x20, 0x21,
+							rtn = BlueSAPI.getInstance().PrintByte(new byte[] { 0x0A, 0x20, 0x21,
 									0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
 									0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
 									0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
@@ -338,14 +337,14 @@ public class PrintActivity extends Activity {
 						}
 							break;
 						case 7: {							
-							rtn = btapi.PrintByte(toPrintText.getText().toString().getBytes("GBK"));
+							rtn = BlueSAPI.getInstance().PrintByte(toPrintText.getText().toString().getBytes("GBK"));
 						
 						}
 							break;
 						default:
 							break;
 						}
-						rtn = btapi.PrintLn();
+						rtn = BlueSAPI.getInstance().PrintLn();
 						if(rtn == 0)
 						{
 						// 提示 打印完成
@@ -416,7 +415,7 @@ public class PrintActivity extends Activity {
 			bImageView.setImageBitmap(mp);
 			Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
 									+ "," + mp.getRowBytes());
-			btapi.PrintImage(mp);
+			BlueSAPI.getInstance().PrintImage(mp);
 //			BitmapUtil.createScaledBitmap(this,data.getData(),374, new BitmapUtil.MyCallback() {
 //				@Override
 //				public void onPrepare() {
@@ -729,7 +728,7 @@ public class PrintActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 
-		btapi.closePrinter();
+//		BlueSAPI.getInstance().closePrinter();
 		super.onDestroy();
 	}
 

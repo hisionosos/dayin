@@ -154,21 +154,24 @@ public class BitmapUtil {
 
         //原图宽度大于传入的宽度才压缩，否则不压缩，直接返回原图路径
         final int[] size = getBitmapWidthHeight(imagePath);
-        if (size[0] <= imageWidth) {
-            callback.onSucceed(imagePath);
-            return;
-        }
+
 
         new Thread() {
             @Override
             public void run() {
                 super.run();
 
+
                 int imageHeight = (int) (size[1] * 1f * imageWidth * 1f / size[0] * 1f);
                 float scale = size[0] * 1f / imageWidth * 1f;
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = getOptionSize(scale);
+                if (size[0] <= imageWidth) {
+                    options.inSampleSize = 1;
+                }else{
+                    options.inSampleSize = getOptionSize(scale);
+                }
+
                 options.inPreferredConfig = Bitmap.Config.RGB_565;
                 Bitmap targetBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(imagePath, options), imageWidth, imageHeight, true);
                 callback.onSucceed(targetBitmap);
