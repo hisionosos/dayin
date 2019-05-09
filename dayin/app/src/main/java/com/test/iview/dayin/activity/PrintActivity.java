@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.util.Log;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.utils.PrinterImageUtils;
+import com.test.iview.dayin.utils.ToastUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,7 +46,7 @@ import butterknife.ButterKnife;
 /**
  * @author Javen Wong 完成打印功能的Activity
  */
-public class PrintActivity extends Activity {
+public class PrintActivity extends BaseActivity {
 	@BindView(R.id.home_add)
 	ImageView homeAdd;
 	@BindView(R.id.common_txt)
@@ -60,14 +62,8 @@ public class PrintActivity extends Activity {
 	private ImageView bImageView;
 	private PrintActivity context = null;
 
-//	private static BlueSAPI btapi;
-	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.print_page);
-		ButterKnife.bind(this);
+	public void initView(@Nullable Bundle savedInstanceState) {
 		context = this;
 		commonTitle.setText(R.string.dy_add_device);
 		homeAdd.setVisibility(View.GONE);
@@ -86,7 +82,7 @@ public class PrintActivity extends Activity {
 		Button btnCharacterPrint = (Button) findViewById(R.id.Button04);
 		Button btnAsciiPrint = (Button) findViewById(R.id.Button05);
 		Button btnCurvePrint = (Button) findViewById(R.id.Button06);
-		 bImageView = (ImageView) findViewById(R.id.bitmap);
+		bImageView = (ImageView) findViewById(R.id.bitmap);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -111,7 +107,7 @@ public class PrintActivity extends Activity {
 				startActivityForResult(intent, 0);
 			}
 		});
-		
+
 		/**
 		 * 连接打印机
 		 */
@@ -119,17 +115,44 @@ public class PrintActivity extends Activity {
 		bconn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-                String deviceid = etMAC.getText().toString();
-                String pwd = "0000";
-				
-				int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd);
-				if (res != 0) {
-					Toast.makeText(PrintActivity.this, "打印机连接失败", Toast.LENGTH_SHORT).show();
+				showLoadingDialog();
+				String deviceid = etMAC.getText().toString();
+				if (null == deviceid ||deviceid.length() == 0){
+					ToastUtils.showShort("请选择蓝牙设备");
+					return;
 				}
-				else
-				{
-					Toast.makeText(PrintActivity.this, "打印机连接成功", Toast.LENGTH_SHORT).show();
-				}
+				String pwd = "0000";
+
+				int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd, new BlueSAPI.CallBack() {
+					@Override
+					public void predo() {
+						showLoadingDialog();
+					}
+
+					@Override
+					public void success() {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								hideLaodingDialog();
+								ToastUtils.showShort("打印机连接成功");
+							}
+						});
+					}
+
+					@Override
+					public void errors() {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								hideLaodingDialog();
+								ToastUtils.showShort("打印机连接失败");
+							}
+						});
+					}
+				});
+
+
 			}
 		});
 
@@ -149,10 +172,10 @@ public class PrintActivity extends Activity {
 		bENA8.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				printContent(0);			
+				printContent(0);
 			}
 		});
-		
+
 		/**
 		 * 打印ENA13条形码
 		 */
@@ -162,7 +185,7 @@ public class PrintActivity extends Activity {
 				printContent(1);
 			}
 		});
-		
+
 		/**
 		 * 打印CODE39条形码
 		 */
@@ -172,7 +195,7 @@ public class PrintActivity extends Activity {
 				printContent(2);
 			}
 		});
-		
+
 		/**
 		 * 打印CODE128条形码
 		 */
@@ -192,7 +215,7 @@ public class PrintActivity extends Activity {
 				printContent(5);
 			}
 		});
-		
+
 		/**
 		 * 打印Ascii码
 		 */
@@ -202,7 +225,7 @@ public class PrintActivity extends Activity {
 				printContent(6);
 			}
 		});
-		
+
 		/**
 		 * 打印文本框输入内容
 		 */
@@ -216,27 +239,36 @@ public class PrintActivity extends Activity {
 		handler = new Handler() {
 			public void handleMessage(Message msg) {
 				switch (msg.what) {
-				case 0:
-					Builder builder = new Builder(PrintActivity.this);
-					builder.setTitle("提示");
-					builder.setMessage("和蓝牙打印机通讯时发生错误！\n"
-							+ msg.getData().getString("error"));
-					builder.setPositiveButton("确定", null);
-					builder.show();
-					break;
-				case 1:
-					builder = new Builder(PrintActivity.this);
-					builder.setTitle("提示");
-					builder.setMessage("打印完成！");
-					builder.setPositiveButton("确定", null);
-					builder.show();
-					break;
+					case 0:
+						Builder builder = new Builder(PrintActivity.this);
+						builder.setTitle("提示");
+						builder.setMessage("和蓝牙打印机通讯时发生错误！\n"
+								+ msg.getData().getString("error"));
+						builder.setPositiveButton("确定", null);
+						builder.show();
+						break;
+					case 1:
+						builder = new Builder(PrintActivity.this);
+						builder.setTitle("提示");
+						builder.setMessage("打印完成！");
+						builder.setPositiveButton("确定", null);
+						builder.show();
+						break;
 				}
 			}
 		};
+
 	}
 
+	@Override
+	public void initData() {
 
+	}
+
+	@Override
+	public int initLayout() {
+		return R.layout.print_page;
+	}
 
 
 	/**
@@ -383,8 +415,7 @@ public class PrintActivity extends Activity {
 			/**
 			 * 保存选择打印机地址
 			 */
-			etMAC.setText(data
-					.getStringExtra(BTDeviceListActivity.EXTRA_DEVICE_ADDRESS));
+			etMAC.setText(data.getStringExtra(BTDeviceListActivity.EXTRA_DEVICE_ADDRESS));
 
 		}
 
@@ -731,6 +762,8 @@ public class PrintActivity extends Activity {
 //		BlueSAPI.getInstance().closePrinter();
 		super.onDestroy();
 	}
+
+
 
 	private static final int REQUEST_EXTERNAL_STORAGE = 1;
 	private static String[] PERMISSIONS_STORAGE = {

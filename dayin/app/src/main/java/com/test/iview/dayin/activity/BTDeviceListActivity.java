@@ -227,24 +227,21 @@ public class BTDeviceListActivity extends TabActivity {
 			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
 			setResult(Activity.RESULT_OK, intent);
 			finish();
-//			Intent intent = new Intent();
-//			intent.putExtra(EXTRA_DEVICE_ADDRESS, address);
-//			setResult(Activity.RESULT_OK, intent);
-//			finish();
+
 		}
 	};
 
-	private void connectDevice(String deviceid){
-		String pwd = "0000";
-
-		int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd);
-		if (res != 0) {
-			ToastUtils.showShort("打印机连接失败");
-		}else {
-			ToastUtils.showShort("打印机连接成功");
-
-		}
-	}
+//	private void connectDevice(String deviceid){
+//		String pwd = "0000";
+//
+//		int res = BlueSAPI.getInstance().openPrinter(deviceid, pwd);
+//		if (res != 0) {
+//			ToastUtils.showShort("打印机连接失败");
+//		}else {
+//			ToastUtils.showShort("打印机连接成功");
+//
+//		}
+//	}
 
 	// The BroadcastReceiver that listens for discovered devices and
 	// changes the title when discovery is finished

@@ -271,7 +271,6 @@ public class BitmapUtil {
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
                     BlueSAPI.getInstance().printContent(dView.getContext(),bmp,5);
 //                    savePicture(bmp, fileName);// 保存图片
-                    ToastUtils.showShort("保存成功");
                     dView.destroyDrawingCache(); // 保存过后释放资源
                     bmp.recycle();
 

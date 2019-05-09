@@ -45,7 +45,16 @@ public class BlueSAPI {
         public BlueSAPI() { }
 
 
-        public int openPrinter(String Deviveid, String Pwd) {
+        public interface CallBack{
+            void predo();
+            void success();
+            void errors();
+        }
+
+        public int openPrinter(String Deviveid, String Pwd, final CallBack callBack) {
+            if (null != callBack){
+                callBack.predo();
+            }
             int res = 0;
             this.mBtAdapter = BluetoothAdapter.getDefaultAdapter();
             this.device = this.mBtAdapter.getRemoteDevice(Deviveid);
@@ -73,7 +82,7 @@ public class BlueSAPI {
                                 e.printStackTrace();
                             }
                             if (device.getBondState() == 12){
-                                connectDevice();
+                                connectDevice(callBack);
 
                             }
 
@@ -82,7 +91,7 @@ public class BlueSAPI {
                     }
                 }).start();
             }else{
-                connectDevice();
+                connectDevice(callBack);
             }
 
 
@@ -90,7 +99,7 @@ public class BlueSAPI {
             return res;
         }
 
-        private int connectDevice(){
+        private int connectDevice(CallBack callBack){
             int res = 0;
             try {
                 this.btSocket = this.device.createRfcommSocketToServiceRecord(MY_UUID);
@@ -98,10 +107,17 @@ public class BlueSAPI {
                 this.outStream = this.btSocket.getOutputStream();
                 this.inStream = this.btSocket.getInputStream();
                 isConnect = true;
+                if (null != callBack){
+                    callBack.success();
+                }
             } catch (IOException var5) {
                 var5.printStackTrace();
                 res = 2002;
                 isConnect = false;
+                if (null != callBack){
+                    callBack.errors();
+                }
+
             }
 
             return res;
