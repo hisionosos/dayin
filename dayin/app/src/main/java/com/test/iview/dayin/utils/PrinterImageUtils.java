@@ -140,7 +140,7 @@ public class PrinterImageUtils {
         return size;
     }
 
-    public static Bitmap convertToBlackWhite(Bitmap var0) {
+    public static Bitmap convertToBlackWhite(Bitmap var0 ,int h) {
         ToastUtils.showShort("数据处理中...");
         int var3 = var0.getWidth();
         int var4 = var0.getHeight();
@@ -165,6 +165,9 @@ public class PrinterImageUtils {
             var1 = 681;
         }
 
+        if (h > 0){
+            var1 = h;
+        }
         return ThumbnailUtils.extractThumbnail(var0, 384, var1);
     }
 
@@ -195,7 +198,7 @@ public class PrinterImageUtils {
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeFile(param0, options);
 
-        return imageFloydSteinberg(convertToBlackWhite(bitmap));
+        return imageFloydSteinberg(convertToBlackWhite(bitmap,0));
     }
 
     public static Bitmap getVideoThumbnail(String var0, int var1, int var2) {

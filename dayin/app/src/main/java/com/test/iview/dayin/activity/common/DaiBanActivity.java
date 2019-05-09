@@ -101,7 +101,7 @@ public class DaiBanActivity extends BaseActivity {
                     }
                 }
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv);
+                BitmapUtil.getInstance().getCutImage(canv,0);
                 break;
         }
     }

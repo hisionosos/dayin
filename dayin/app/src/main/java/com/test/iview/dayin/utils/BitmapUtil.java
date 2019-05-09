@@ -256,7 +256,7 @@ public class BitmapUtil {
 
     }
 
-    public String getCutImage(final View dView){
+    public String getCutImage(final View dView, final int h){
 
         dView.setDrawingCacheEnabled(true);
         dView.buildDrawingCache();
@@ -269,10 +269,13 @@ public class BitmapUtil {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView.getContext(),bmp,5);
+                    BlueSAPI.getInstance().printContent(dView.getContext(),bmp,5,h);
 //                    savePicture(bmp, fileName);// 保存图片
                     dView.destroyDrawingCache(); // 保存过后释放资源
-                    bmp.recycle();
+                    if (null != bmp){
+                        bmp.recycle();
+                    }
+
 
                 }
             },500);
@@ -284,7 +287,7 @@ public class BitmapUtil {
         return filePath;
     }
 
-    public static String getBitmapScrollView(final ScrollView scrollView) {
+    public static String getBitmapScrollView(final ScrollView scrollView,final int hei) {
         int h = 0;
 
         final String fileName = System.currentTimeMillis() + "_screen.png";
@@ -310,8 +313,8 @@ public class BitmapUtil {
                     scrollView.draw(canvas);
 
 
-                    BlueSAPI.getInstance().printContent(scrollView.getContext(),bitmap,5);
-                    ToastUtils.showShort("保存成功");
+                    BlueSAPI.getInstance().printContent(scrollView.getContext(),bitmap,5,hei);
+//                    ToastUtils.showShort("保存成功");
 
 
                 }

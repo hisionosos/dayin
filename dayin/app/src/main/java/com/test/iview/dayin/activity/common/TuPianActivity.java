@@ -107,7 +107,7 @@ public class TuPianActivity extends MyImageCutActivity {
                     }
                 }
 
-                BitmapUtil.getInstance().getCutImage(canv);
+                BitmapUtil.getInstance().getCutImage(canv,0);
 
                 break;
         }

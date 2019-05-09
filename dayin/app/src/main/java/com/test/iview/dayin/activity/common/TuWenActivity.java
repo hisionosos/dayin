@@ -157,7 +157,7 @@ public class TuWenActivity extends BaseActivity {
                         arrs.get(i).setEditable(false);
                     }
                 }
-                BitmapUtil.getInstance().getCutImage(canv);
+                BitmapUtil.getInstance().getCutImage(canv,0);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){

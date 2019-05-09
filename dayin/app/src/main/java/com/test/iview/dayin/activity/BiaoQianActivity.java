@@ -341,13 +341,14 @@ public class BiaoQianActivity extends BaseActivity {
                 startActivityForResult(intent4,1000);
                 break;
             case R.id.home_add:
+
                 for (int i = 0; i < arrs.size(); i++) {
                     SingleTouchView singleTouchView = arrs.get(i);
                     if (null != singleTouchView) {
                         arrs.get(i).setEditable(false);
                     }
                 }
-                BitmapUtil.getInstance().getCutImage(canv);
+                BitmapUtil.getInstance().getCutImage(canv,50);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

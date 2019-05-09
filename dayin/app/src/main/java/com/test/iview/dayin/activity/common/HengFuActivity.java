@@ -315,7 +315,7 @@ public class HengFuActivity extends BaseActivity{
                     }
                 }
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv);
+                BitmapUtil.getInstance().getCutImage(canv,0);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

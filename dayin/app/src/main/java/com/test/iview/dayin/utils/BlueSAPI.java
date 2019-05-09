@@ -625,7 +625,7 @@ public class BlueSAPI {
      * 打印
      * @param type 打印内容类型
      */
-    public void printContent(Context content, final Bitmap bitmap, final int type) {
+    public void printContent(Context content, final Bitmap bitmap, final int type, final int h) {
         if (!isConnect) {
             ToastUtils.showShort(R.string.connect_printer);
         } else {
@@ -693,7 +693,7 @@ public class BlueSAPI {
 //                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                                startActivityForResult(intent, 2);
                                 Log.e("11111vv","11");
-                                Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap));
+                                Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
                                 Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
                                         + "," + mp.getRowBytes());

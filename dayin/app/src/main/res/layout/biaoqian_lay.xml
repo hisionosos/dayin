@@ -51,13 +51,13 @@
             android:id="@+id/canv"
             android:layout_marginTop="@dimen/dp_30"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/code_bar"
             android:background="@drawable/shape_pop_dialog"
             android:layout_marginLeft="@dimen/dp_50"
             android:layout_marginRight="@dimen/dp_50"
             android:layout_marginBottom="@dimen/dp_20"
-            android:layout_above="@+id/main_tab">
+            >
 
             <LinearLayout
                 android:id="@+id/biaoqian1_lay"
