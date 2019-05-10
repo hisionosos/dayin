@@ -376,7 +376,7 @@ public class PrintActivity extends BaseActivity {
 						default:
 							break;
 						}
-						rtn = BlueSAPI.getInstance().PrintLn();
+//						rtn = BlueSAPI.getInstance().PrintLn();
 						if(rtn == 0)
 						{
 						// 提示 打印完成

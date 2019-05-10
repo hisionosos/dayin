@@ -141,7 +141,7 @@ public class PrinterImageUtils {
     }
 
     public static Bitmap convertToBlackWhite(Bitmap var0 ,int h) {
-        ToastUtils.showShort("数据处理中...");
+//        ToastUtils.showShort("数据处理中...");
         int var3 = var0.getWidth();
         int var4 = var0.getHeight();
         int[] var6 = new int[var3 * var4];

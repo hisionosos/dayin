@@ -348,7 +348,7 @@ public class BiaoQianActivity extends BaseActivity {
                         arrs.get(i).setEditable(false);
                     }
                 }
-                BitmapUtil.getInstance().getCutImage(canv,50);
+                BitmapUtil.getInstance().getCutImage(canv,330);//330  220  100
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

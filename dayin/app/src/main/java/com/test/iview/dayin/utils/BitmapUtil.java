@@ -269,12 +269,12 @@ public class BitmapUtil {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView.getContext(),bmp,5,h);
+                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,h);
 //                    savePicture(bmp, fileName);// 保存图片
-                    dView.destroyDrawingCache(); // 保存过后释放资源
-                    if (null != bmp){
-                        bmp.recycle();
-                    }
+//                    dView.destroyDrawingCache(); // 保存过后释放资源
+//                    if (null != bmp){
+//                        bmp.recycle();
+//                    }
 
 
                 }
@@ -313,7 +313,7 @@ public class BitmapUtil {
                     scrollView.draw(canvas);
 
 
-                    BlueSAPI.getInstance().printContent(scrollView.getContext(),bitmap,5,hei);
+                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,hei);
 //                    ToastUtils.showShort("保存成功");
 
 

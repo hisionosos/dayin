@@ -401,7 +401,10 @@ public class BlueSAPI {
                 PrintLn();
                 PrintLn();
                 PrintLn();
-                PrintLn();
+//                PrintLn();
+//                PrintLn();
+//                PrintLn();
+//                PrintLn();
 
                 return 0;
             }
@@ -526,7 +529,7 @@ public class BlueSAPI {
                     try {
                         this.outStream.write(data);
                         this.outStream.flush();
-                        Thread.sleep(10);
+                        Thread.sleep(150);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -625,7 +628,7 @@ public class BlueSAPI {
      * 打印
      * @param type 打印内容类型
      */
-    public void printContent(Context content, final Bitmap bitmap, final int type, final int h) {
+    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final int h) {
         if (!isConnect) {
             ToastUtils.showShort(R.string.connect_printer);
         } else {
@@ -694,13 +697,17 @@ public class BlueSAPI {
 //                                startActivityForResult(intent, 2);
                                 Log.e("11111vv","11");
                                 Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
+
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
                                 Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
                                         + "," + mp.getRowBytes());
                                 blueApi.PrintImage(mp);
 //                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
                                 Log.e("11111vv","22");
-
+                                view.destroyDrawingCache(); // 保存过后释放资源
+                                if (null != bitmap){
+                                    bitmap.recycle();
+                                }
 
                             }
                             break;
@@ -730,7 +737,7 @@ public class BlueSAPI {
                             default:
                                 break;
                         }
-                        rtn = blueApi.PrintLn();
+//                        rtn = blueApi.PrintLn();
                         if(rtn == 0) {
                             // 提示 打印完成
 //                            handler.sendEmptyMessage(1);

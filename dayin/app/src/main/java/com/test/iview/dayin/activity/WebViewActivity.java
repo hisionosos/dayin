@@ -34,6 +34,7 @@ import com.test.iview.dayin.R;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.util.DiaLog;
 import com.test.iview.dayin.util.QqShare;
+import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.wbapi.WBShareActivity;
 import java.io.BufferedOutputStream;
@@ -179,10 +180,11 @@ public class WebViewActivity extends BaseActivity {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
-                    ToastUtils.showShort("保存成功");
-                    dView.destroyDrawingCache(); // 保存过后释放资源
-                    bmp.recycle();
+                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,0);
+//                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
+//                    ToastUtils.showShort("保存成功");
+//                    dView.destroyDrawingCache(); // 保存过后释放资源
+//                    bmp.recycle();
 
                 }
             },500);
@@ -220,10 +222,11 @@ public class WebViewActivity extends BaseActivity {
             new Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
-                    ToastUtils.showShort("保存成功");
-                    webView.destroyDrawingCache(); // 保存过后释放资源
-                    bm.recycle();
+                    BlueSAPI.getInstance().printContent(webView,webView.getContext(),bm,5,0);
+//                    savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
+//                    ToastUtils.showShort("保存成功");
+//                    webView.destroyDrawingCache(); // 保存过后释放资源
+//                    bm.recycle();
                 }
             });
 
