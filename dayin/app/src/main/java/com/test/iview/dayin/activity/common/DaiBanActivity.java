@@ -81,7 +81,7 @@ public class DaiBanActivity extends BaseActivity {
                 break;
             case R.id.main_tab1:
                 Intent intent = new Intent(this, SuCaiKuActivity.class);
-                intent.putExtra("sucai", "kechengbiao");
+                intent.putExtra("sucai", "daiban");
                 startActivityForResult(intent, 1000);
                 break;
             case R.id.main_tab2:

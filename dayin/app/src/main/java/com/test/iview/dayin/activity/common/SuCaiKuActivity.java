@@ -90,6 +90,9 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
     private int[] xiaopiao_data = {R.mipmap.xiaopiao_1,R.mipmap.xiaopiao_2};
     private int[] xiaoji_data = {R.drawable.xiaoji_1,R.drawable.xiaoji_2,R.drawable.xiaoji_3};
 
+
+    private int[] daiban_data = {R.mipmap.biaoqian_24,R.mipmap.biaoqian_26 ,R.mipmap.biaoqian_27,R.mipmap.biaoqian_29
+            ,R.mipmap.biaoqian_30,R.mipmap.biaoqian_31};
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         sucaiku.setLayoutManager(new GridLayoutManager(this, 3));
@@ -131,8 +134,11 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
                 case "xiaopiao":
                     datas = xiaopiao_data;
                     break;
-                    case "xiaoji":
+                case "xiaoji":
                     datas = xiaoji_data;
+                    break;
+                case "daiban":
+                    datas = daiban_data;
                     break;
 
             }
