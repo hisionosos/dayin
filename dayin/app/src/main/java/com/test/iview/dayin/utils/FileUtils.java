@@ -1238,4 +1238,64 @@ public class FileUtils {
 
 
 
+    public static  void saveStorage2SDCard(ArrayList tArrayList, String path) {
+
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        FileInputStream fileInputStream = null;
+        try {
+            File file = getFile(path);
+            fileOutputStream = new FileOutputStream(file.toString());  //新建一个内容为空的文件
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(tArrayList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (objectOutputStream != null) {
+            try {
+                objectOutputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (fileOutputStream != null) {
+            try {
+                fileOutputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public static ArrayList getStorageEntities(String path) {
+        ObjectInputStream objectInputStream = null;
+        FileInputStream fileInputStream = null;
+        ArrayList savedArrayList = new ArrayList<>();
+        try {
+            File file = getFile(path);
+            fileInputStream = new FileInputStream(file.toString());
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            savedArrayList = (ArrayList) objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return savedArrayList;
+    }
+
+    public static File getFile(String filePath) {
+        //获取SDCard根目录
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
 }

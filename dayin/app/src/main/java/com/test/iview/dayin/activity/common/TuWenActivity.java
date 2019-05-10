@@ -87,6 +87,8 @@ public class TuWenActivity extends BaseActivity {
     @BindView(R.id.txt_url)
     EditText txtUrl;@BindView(R.id.e_delete)
     TextView eDelete;
+    @BindView(R.id.edit_txt)
+    EditText editTxt;
 //    private String[] tab_title = {getString(R.string.wangge), getString(R.string.dy_photo), getString(R.string.dy_ajust), getString(R.string.dy_biaoqing), getString(R.string.dy_erweima)};
     private int[] tab_imgs = {R.drawable.tab_biaoge, R.drawable.tab_tupian, R.drawable.tab_tiaozheng, R.drawable.tab_biaoqing,
             R.drawable.tab_ercode};
@@ -137,6 +139,7 @@ public class TuWenActivity extends BaseActivity {
                 eds.clear();
                 gridLay.removeAllViews();
                 gridLay.setBackgroundColor(Color.WHITE);
+                gridLay.setVisibility(View.GONE);
                 break;
             case R.id.main_tab1:
                 if (wanggeLay.getVisibility() == View.VISIBLE){
@@ -157,6 +160,7 @@ public class TuWenActivity extends BaseActivity {
                         arrs.get(i).setEditable(false);
                     }
                 }
+                editTxt.setCursorVisible(false);
                 BitmapUtil.getInstance().getCutImage(canv,0);
                 break;
             case R.id.main_tab3:
@@ -230,6 +234,7 @@ public class TuWenActivity extends BaseActivity {
                 gridLay.removeAllViews();
                 addGridView();
                 gridLay.setBackgroundColor(Color.BLACK);
+                gridLay.setVisibility(View.VISIBLE);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

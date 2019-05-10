@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.utils.PrinterImageUtils;
 import com.test.iview.dayin.utils.ToastUtils;
@@ -61,9 +62,12 @@ public class PrintActivity extends BaseActivity {
 	private Handler handler;
 	private ImageView bImageView;
 	private PrintActivity context = null;
+	private String address ;
 
 	@Override
 	public void initView(@Nullable Bundle savedInstanceState) {
+
+		address = getIntent().getStringExtra("address");
 		context = this;
 		commonTitle.setText(R.string.dy_add_device);
 		homeAdd.setVisibility(View.GONE);
@@ -96,6 +100,9 @@ public class PrintActivity extends BaseActivity {
 			}
 		});
 
+		if (null != address){
+			etMAC.setText(address);
+		}
 		/**
 		 * 打开蓝牙打印机选择界面
 		 */
@@ -116,7 +123,7 @@ public class PrintActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				showLoadingDialog();
-				String deviceid = etMAC.getText().toString();
+				final String deviceid = etMAC.getText().toString();
 				if (null == deviceid ||deviceid.length() == 0){
 					ToastUtils.showShort("请选择蓝牙设备");
 					return;
@@ -136,6 +143,7 @@ public class PrintActivity extends BaseActivity {
 							public void run() {
 								hideLaodingDialog();
 								ToastUtils.showShort("打印机连接成功");
+
 							}
 						});
 					}

@@ -127,6 +127,9 @@
             android:name="com.test.iview.dayin.activity.BiaoQianActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.test.iview.dayin.activity.DeviceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.test.iview.dayin.activity.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity

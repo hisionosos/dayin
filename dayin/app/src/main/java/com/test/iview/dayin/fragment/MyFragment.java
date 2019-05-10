@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.activity.DeviceListActivity;
 import com.test.iview.dayin.activity.LanguageActivity;
 import com.test.iview.dayin.activity.MyInfosActivity;
 import com.test.iview.dayin.entity.MyBean;
@@ -79,10 +80,10 @@ public class MyFragment extends BaseFragment {
     @Override
     public void initData() {
         //显示头像
-        Bitmap bitmap = MyApplication.mCache.getAsBitmap("user_head");
-        if (null != bitmap){
-            myShezhi.setImageBitmap(bitmap);
-        }
+//        Bitmap bitmap = MyApplication.mCache.getAsBitmap("user_head");
+//        if (null != bitmap){
+//            myShezhi.setImageBitmap(bitmap);
+//        }
 
 
     }
@@ -95,6 +96,11 @@ public class MyFragment extends BaseFragment {
             nickTxt.setText(nick);
         }else{
             nickTxt.setText(R.string.dy_app_name);
+        }
+
+        Bitmap bitmap = MyApplication.mCache.getAsBitmap("user_head");
+        if (null != bitmap){
+            myShezhi.setImageBitmap(bitmap);
         }
     }
 
@@ -113,6 +119,7 @@ public class MyFragment extends BaseFragment {
             case R.id.item3:
                 break;
             case R.id.item4:
+                startActivity(new Intent(MyFragment.this.getActivity(), DeviceListActivity.class));
                 break;
             case R.id.my_shezhi:
                 showCusDialog();

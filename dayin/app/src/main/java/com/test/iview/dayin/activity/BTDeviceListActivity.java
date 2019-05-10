@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -25,8 +27,12 @@ import android.widget.Toast;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.utils.BlueSAPI;
+import com.test.iview.dayin.utils.FileUtils;
+import com.test.iview.dayin.utils.SharedPreferencesUtils;
 import com.test.iview.dayin.utils.ToastUtils;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -168,13 +174,16 @@ public class BTDeviceListActivity extends TabActivity {
 	private void doGetBondedDevices() {
 		// Get a set of currently paired devices
 		Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
-
+		ArrayList list = new ArrayList();
 		// If there are paired devices, add each one to the ArrayAdapter
 		if (pairedDevices.size() > 0) {
 			for (BluetoothDevice device : pairedDevices) {
 				mPairedDevicesArrayAdapter.add(device.getName() + "\n"
 						+ device.getAddress());
+				list.add(device.getName() + "\n"
+						+ device.getAddress());
 			}
+			FileUtils.saveStorage2SDCard(list,Environment.getExternalStorageDirectory() + "/dayin.txt");
 		} else {
 			mPairedDevicesArrayAdapter.add("没有已配对的蓝牙设备");
 		}
