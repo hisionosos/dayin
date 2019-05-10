@@ -30,6 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
+            <LinearLayout
+                android:id="@+id/edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
             <EditText
                 android:id="@+id/edit_txt"
                 android:layout_width="match_parent"
@@ -39,7 +46,7 @@
                 android:textColor="#929292"
                 android:cursorVisible="false"
                 android:padding="@dimen/dp_30"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:background="@null"/>
 
 
