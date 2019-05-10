@@ -2,30 +2,30 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_800">
+    android:layout_height="@dimen/dp_850">
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_2"
-        android:layout_marginTop="@dimen/dp_60"
-        android:layout_marginLeft="@dimen/dp_60"
-        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
         android:background="#000"/>
 
     <View
         android:layout_width="@dimen/dp_2"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_60"
-        android:layout_marginLeft="@dimen/dp_60"
-        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_20"
         android:background="#000"/>
 
     <View
         android:layout_width="@dimen/dp_2"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_70"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/dp_60"
-        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_30"
         android:background="#000"/>
 
 
@@ -34,16 +34,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_2"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_60"
-        android:layout_marginLeft="@dimen/dp_60"
-        android:layout_marginRight="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
         android:background="#000"/>
 
     <!-- 整体 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_70"
+        android:layout_marginLeft="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_20"
         android:orientation="vertical">
 
         <EditText
