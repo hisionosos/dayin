@@ -2,12 +2,16 @@ package com.test.iview.dayin.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -16,6 +20,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
+
+import com.test.iview.dayin.activity.PrintActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -257,7 +263,11 @@ public class BitmapUtil {
     }
 
     public String getCutImage(final View dView, final int h){
-
+        boolean b = BlueSAPI.getInstance().isConnect();
+        if (!b){
+            dView.getContext().startActivity(new Intent(dView.getContext(), PrintActivity.class));
+            return "";
+        }
         dView.setDrawingCacheEnabled(true);
         dView.buildDrawingCache();
         final String fileName = System.currentTimeMillis() + "_screen.png";
@@ -289,7 +299,11 @@ public class BitmapUtil {
 
     public static String getBitmapScrollView(final ScrollView scrollView,final int hei) {
         int h = 0;
-
+        boolean b = BlueSAPI.getInstance().isConnect();
+        if (!b){
+            scrollView.getContext().startActivity(new Intent(scrollView.getContext(), PrintActivity.class));
+            return "";
+        }
         final String fileName = System.currentTimeMillis() + "_screen.png";
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + fileName;
         for (int i = 0; i < scrollView.getChildCount(); i++) {
@@ -364,6 +378,40 @@ public class BitmapUtil {
         void onSucceed(Object object);
         void onError();
     }
+
+
+
+    public static Bitmap imageoperation (Bitmap mbitmap ,float hue,float saturation,float lum){
+        //传入的Bitmap默认不可修改，需啊哟创建新的Bitmap
+        Bitmap mbitmap_fu=Bitmap.createBitmap(mbitmap.getWidth(),mbitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        //创建画布，在新的bitmap上绘制
+        Canvas canvas=new Canvas(mbitmap_fu);
+        //设置画笔抗锯齿，后面在Bitmap上绘制需要使用到画笔
+        Paint mpaint=new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        ColorMatrix huematrix=new ColorMatrix();
+        huematrix.setRotate(0,hue);
+        huematrix.setRotate(1,hue);
+        huematrix.setRotate(2, hue);
+
+        ColorMatrix saturationmatrix=new ColorMatrix();
+        saturationmatrix.setSaturation(saturation);
+
+//        ColorMatrix lummatrix=new ColorMatrix();
+        //参数：rscale gscale bscale 透明度
+//        lummatrix.setScale(lum,lum,lum,1);
+
+        ColorMatrix imagematrix=new ColorMatrix();
+        imagematrix.postConcat(huematrix);
+        imagematrix.postConcat(saturationmatrix);
+//        imagematrix.postConcat(lummatrix);
+        //通过画笔的setColorFilter进行设置
+        mpaint.setColorFilter(new ColorMatrixColorFilter(imagematrix));
+        canvas.drawBitmap(mbitmap,0,0,mpaint);
+        return mbitmap_fu;
+    }
+
+
 }
 
 

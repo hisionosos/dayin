@@ -65,13 +65,13 @@ public class MyApplication extends MultiDexApplication {
         registerReceiver(receiver, filter);
 
         //极光推送
-        JPushInterface.setDebugMode(false);                // Log
-        JPushInterface.init(this);              //初始化
-        String registrationID = JPushInterface.getRegistrationID(this);
+//        JPushInterface.setDebugMode(false);                // Log
+//        JPushInterface.init(this);              //初始化
+//        String registrationID = JPushInterface.getRegistrationID(this);
         //极光统计
-        JAnalyticsInterface.setDebugMode(false);           // Log
-        JAnalyticsInterface.init(this);         //初始化
-        JAnalyticsInterface.stopCrashHandler(this); //关闭Crash 集成了Bugly
+//        JAnalyticsInterface.setDebugMode(false);           // Log
+//        JAnalyticsInterface.init(this);         //初始化
+//        JAnalyticsInterface.stopCrashHandler(this); //关闭Crash 集成了Bugly
 
         OkGo.init(this);
 

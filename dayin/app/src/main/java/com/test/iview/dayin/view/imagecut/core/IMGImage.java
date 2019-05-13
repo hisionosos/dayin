@@ -167,6 +167,9 @@ public class IMGImage {
         onImageChanged();
     }
 
+    public Bitmap getBitmaps(){
+        return mImage;
+    }
     public IMGMode getMode() {
         return mMode;
     }

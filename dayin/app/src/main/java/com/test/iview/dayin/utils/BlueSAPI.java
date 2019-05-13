@@ -44,8 +44,15 @@ public class BlueSAPI {
 
         public BlueSAPI() { }
 
+    public boolean isConnect() {
+        return isConnect;
+    }
 
-        public interface CallBack{
+    public void setConnect(boolean connect) {
+        isConnect = connect;
+    }
+
+    public interface CallBack{
             void predo();
             void success();
             void errors();
@@ -260,7 +267,7 @@ public class BlueSAPI {
                         this.outStream.flush();
                         byte[] read = new byte[20];
                         this.inStream.read(read);
-                        System.out.println("" + read[0]);
+                        System.out.println("" + read);
                     } catch (UnsupportedEncodingException var2) {
                         var2.printStackTrace();
                     } catch (IOException var3) {
@@ -396,6 +403,33 @@ public class BlueSAPI {
                     }
 
                     this.PrintByte(body);
+
+                    try {
+                        int count = 0;
+                        while(count == 0 && isConnect){
+                            count = inStream.available();
+                            Log.e("dedd",count + "");
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if( count != 0 ) {
+                            System.out.println(count);
+                            byte[] bt = new byte[count];
+                            int readCount = 0;
+                            while (readCount < count) {
+                                readCount += inStream.read(bt, readCount, count - readCount);
+                            }
+                            System.out.println("12345rf" + readCount);
+                            String xx = new String(bt);
+                            System.out.println(xx);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 Log.e("printwriteCount",writeCount + "");
                 PrintLn();
@@ -515,7 +549,7 @@ public class BlueSAPI {
 
         }
 
-        private int limitData = 146;
+        private int limitData = 512;
         private int writeCount = 0;
         private Vector<byte[]> vb = new Vector<>();
         private boolean isprint = false;
@@ -529,13 +563,37 @@ public class BlueSAPI {
                     try {
                         this.outStream.write(data);
                         this.outStream.flush();
-                        Thread.sleep(150);
+
+                        Thread.sleep(100);
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-
+//                    try {
+//
+//                        for (int i = 0;i < data.length;i += limitData){
+//                            if (limitData  + i > data.length){
+//                                this.outStream.write(data,i,data.length - i);
+//                                this.outStream.flush();
+//                                Thread.sleep(100);
+//
+//                                writeCount++;
+//                            }else{
+//                                this.outStream.write(data,i,limitData);
+//                                this.outStream.flush();
+//                                writeCount++;
+//                                Thread.sleep(100);
+//                            }
+//
+//                        }
+//
+//
+//                    } catch (UnsupportedEncodingException var3) {
+//                        var3.printStackTrace();
+//                    } catch (Exception var4) {
+//                        var4.printStackTrace();
+//                    }
 
 
 //                    try {
@@ -642,7 +700,7 @@ public class BlueSAPI {
              * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
              */
             blueApi.initPrinter();
-
+//            blueApi.CheckPrinterStatus();
             // //新开线程 打印
             new Thread() {
                 public void run() {
@@ -699,8 +757,8 @@ public class BlueSAPI {
                                 Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
 
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
-                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
-                                        + "," + mp.getRowBytes());
+//                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
+//                                        + "," + mp.getRowBytes());
                                 blueApi.PrintImage(mp);
 //                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
                                 Log.e("11111vv","22");

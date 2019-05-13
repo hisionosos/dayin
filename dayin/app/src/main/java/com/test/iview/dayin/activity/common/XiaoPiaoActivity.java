@@ -283,7 +283,12 @@ public class XiaoPiaoActivity extends BaseActivity {
                         arrs.get(i).setEditable(false);
                     }
                 }
-                BitmapUtil.getInstance().getBitmapScrollView(canvSoll,0);
+                if (moban == 1){
+                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll,0);
+                }else{
+                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll2,0);
+                }
+
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

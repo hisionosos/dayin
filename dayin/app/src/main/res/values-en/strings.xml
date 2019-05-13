@@ -107,4 +107,7 @@
 	<string name="dy_caijian">Tailoring</string>
 	<string name="dy_delete">del</string>
 	<string name="dy_chexiao">undo</string>
+	<string name="dy_liangdu">brightness</string>
+	<string name="dy_sediao">tone</string>
+	<string name="dy_baohedu">saturation</string>
 </resources>

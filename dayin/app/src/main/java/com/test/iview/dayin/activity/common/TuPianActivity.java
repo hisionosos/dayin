@@ -66,10 +66,17 @@ public class TuPianActivity extends MyImageCutActivity {
     RadioButton mainTab4;
     @BindView(R.id.wangge_lay)
     LinearLayout wanggeLay;
+
+    @BindView(R.id.wangge_lay1)
+    LinearLayout wanggeLay1;
     @BindView(R.id.undo_lay)
     LinearLayout undoLay;
     @BindView(R.id.size_seek)
     SeekBar sizeSeek;
+    @BindView(R.id.size_seek1)
+    SeekBar sizeSeek1;
+    @BindView(R.id.size_seek2)
+    SeekBar sizeSeek2;
 
 
 //    @Override
@@ -77,7 +84,7 @@ public class TuPianActivity extends MyImageCutActivity {
 //        return R.layout.tupian_lay;
 //    }
 
-    @OnClick({R.id.back,R.id.main_tab1, R.id.home_add})
+    @OnClick({R.id.back,R.id.main_tab1, R.id.home_add,R.id.main_tab5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -91,9 +98,9 @@ public class TuPianActivity extends MyImageCutActivity {
 
                 break;
 
-//            case R.id.main_tab3:
-//                setting();
-//                break;
+            case R.id.main_tab5:
+                setting();
+                break;
 //            case R.id.main_tab4:
 //                Intent intent4 = new Intent(this,SuCaiKuActivity.class);
 //                intent4.putExtra("sucai","biaoqing");
@@ -152,7 +159,7 @@ public class TuPianActivity extends MyImageCutActivity {
                 imgPath = filePath;
 
                 mImgView.setImageBitmap(getBit());
-
+                curBit = getBit();
 //                File mImageFile = new File(getCacheDir(), UUID.randomUUID().toString() + ".jpg");
 //                Intent intent = new Intent(this, IMGEditActivity.class);
 //                intent.putExtra(IMGEditActivity.EXTRA_IMAGE_URI, image.getUri());
@@ -212,10 +219,10 @@ public class TuPianActivity extends MyImageCutActivity {
 
     private int mScreenWidth;
     private void setting() {
-        if (wanggeLay.getVisibility() == View.VISIBLE){
-            wanggeLay.setVisibility(View.INVISIBLE);
+        if (wanggeLay1.getVisibility() == View.VISIBLE){
+            wanggeLay1.setVisibility(View.INVISIBLE);
         }else{
-            wanggeLay.setVisibility(View.VISIBLE);
+            wanggeLay1.setVisibility(View.VISIBLE);
         }
     }
 
@@ -226,6 +233,7 @@ public class TuPianActivity extends MyImageCutActivity {
 
 
 
+    private Bitmap curBit;
     private static final int MAX_WIDTH = 1024;
 
     private static final int MAX_HEIGHT = 1024;
@@ -234,6 +242,9 @@ public class TuPianActivity extends MyImageCutActivity {
 
     public static final String EXTRA_IMAGE_SAVE_PATH = "IMAGE_SAVE_PATH";
 
+
+    private float mhue = 0;
+    private float msaturation = 0;
     @Override
     public void onCreated() {
         WindowManager manager = this.getWindowManager();
@@ -247,9 +258,40 @@ public class TuPianActivity extends MyImageCutActivity {
         commonTxt.setVisibility(View.GONE);
 
 
-        sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        sizeSeek1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mhue = (progress-127)*1.0f/255*180;
+
+                if (null != curBit){
+                    Bitmap b = BitmapUtil.imageoperation(curBit,mhue,msaturation,0);
+                    mImgView.setImageBitmap(b);
+//                    mImgView.doliangdu();
+
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        sizeSeek2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                msaturation = progress*1.0f/127;
+                if (null != curBit){
+                    Bitmap b = BitmapUtil.imageoperation(curBit,mhue,msaturation,0);
+                    mImgView.setImageBitmap(b);
+//                    mImgView.doliangdu();
+                }
 
             }
 

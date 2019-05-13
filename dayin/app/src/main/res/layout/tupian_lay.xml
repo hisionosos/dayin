@@ -100,6 +100,21 @@
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_xuanzhuan"
                 android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/main_tab5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="@string/dy_liangdu"
+                android:onClick="onClick"
+                android:textColor="@color/text_color_selecter"
+                android:textSize="@dimen/sp_30"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/tab_biaoqing"
+                android:layout_weight="1"/>
+
             <RadioButton
                 android:id="@+id/main_tab4"
                 android:layout_width="wrap_content"
@@ -113,6 +128,7 @@
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_biaoqing"
                 android:layout_weight="1"/>
+
 
         </RadioGroup>
 
@@ -195,6 +211,107 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/wangge_lay1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_360"
+            android:layout_above="@+id/main_tab"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_marginRight="@dimen/dp_60"
+            android:paddingLeft="@dimen/dp_60"
+            android:paddingRight="@dimen/dp_60"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:gravity="center"
+            android:background="#fff"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/min_txt1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:text="@string/dy_sediao"/>
+
+                    <SeekBar
+                        android:id="@+id/size_seek1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/max_txt1"
+                        android:layout_toRightOf="@+id/min_txt1"
+                        android:layout_centerVertical="true"
+                        android:progress="127"
+                        android:max="255"
+                        android:thumb="@drawable/pain_u"
+                        android:layout_marginRight="@dimen/dp_60"
+                        android:layout_marginLeft="@dimen/dp_60"/>
+
+                    <TextView
+                        android:id="@+id/max_txt1"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:text="15"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/min_txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:text="@string/dy_baohedu"/>
+
+                    <SeekBar
+                        android:id="@+id/size_seek2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/max_txt2"
+                        android:layout_toRightOf="@+id/min_txt2"
+                        android:layout_centerVertical="true"
+                        android:progress="127"
+                        android:max="255"
+                        android:thumb="@drawable/pain_u"
+                        android:layout_marginRight="@dimen/dp_60"
+                        android:layout_marginLeft="@dimen/dp_60"/>
+
+                    <TextView
+                        android:id="@+id/max_txt2"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:text="15"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

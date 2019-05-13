@@ -76,23 +76,57 @@
             android:layout_marginRight="@dimen/dp_60"
             android:background="@drawable/shape_button_selector"/>
 
-        <com.xiaopo.flying.sticker.StickerView
-            android:id="@+id/canv"
-            android:layout_marginTop="@dimen/dp_30"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/edit_txt"
-            android:background="@drawable/shape_pop_dialog"
+            android:layout_marginTop="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_50"
             android:layout_marginRight="@dimen/dp_50"
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_above="@+id/main_tab"
-            android:layout_weight="1"
-            app:showBorder="true"
-            app:showIcons="true"
-            >
+            android:background="@drawable/shape_pop_dialog">
 
-        </com.xiaopo.flying.sticker.StickerView>
+            <com.xiaopo.flying.sticker.StickerView
+                android:id="@+id/canv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:background="#567"
+                app:showBorder="true"
+                app:showIcons="true"
+                >
+
+            </com.xiaopo.flying.sticker.StickerView>
+            <ScrollView
+                android:id="@+id/canv_soll3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null">
+
+                    <LinearLayout
+                        android:id="@+id/canv_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@null"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+            </ScrollView>
+
+
+
+
+
+
+
+
+        </FrameLayout>
+
 
 
         <RadioGroup
@@ -121,12 +155,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
-                android:text="@string/dy_ziti"
+                android:text="@string/dy_xuanzhuan"
                 android:textColor="@color/text_color_selecter"
                 android:textSize="@dimen/sp_30"
                 android:gravity="center"
                 android:background="@color/transparent"
-                android:drawableTop="@drawable/tab_ziti"
+                android:drawableTop="@drawable/tab_xuanzhuan"
                 android:layout_weight="1"/>
             <RadioButton
                 android:id="@+id/main_tab3"
@@ -136,6 +170,7 @@
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_photo"
+                android:visibility="gone"
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_tupian"
@@ -148,6 +183,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_biaoqing"
                 android:textSize="@dimen/sp_30"
+                android:visibility="gone"
                 android:gravity="center"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_biaoqing"
@@ -158,6 +194,7 @@
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:textSize="@dimen/sp_30"
+                android:visibility="gone"
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_erweima"
                 android:gravity="center"

@@ -3,24 +3,18 @@ package com.test.iview.dayin.activity.common;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -32,19 +26,10 @@ import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
 import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.utils.CameraUtils;
-import com.test.iview.dayin.utils.DimensUtils;
-import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.view.SingleTouchView;
-import com.test.iview.dayin.view.Text2BitmapUtils;
-import com.test.iview.dayin.view.imagecut.core.IMGText;
-import com.test.iview.dayin.view.imagecut.core.sticker.IMGSticker;
-import com.test.iview.dayin.view.imagecut.core.sticker.IMGStickerPortrait;
-import com.test.iview.dayin.view.imagecut.view.IMGStickerImageView;
-import com.test.iview.dayin.view.imagecut.view.IMGStickerTextView;
 import com.xiaopo.flying.sticker.BitmapStickerIcon;
 import com.xiaopo.flying.sticker.DeleteIconEvent;
-import com.xiaopo.flying.sticker.DrawableSticker;
 import com.xiaopo.flying.sticker.FlipHorizontallyEvent;
 import com.xiaopo.flying.sticker.Sticker;
 import com.xiaopo.flying.sticker.StickerView;
@@ -70,12 +55,15 @@ public class HengFuActivity extends BaseActivity{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.edit_txt)
-    EditText editTxt;
+    EditText editTxt;@BindView(R.id.canv_soll3)
+    ScrollView canvSoll3;
 
     @BindView(R.id.get_txt)
     Button getTxt;
     @BindView(R.id.canv)
     StickerView canv;
+    @BindView(R.id.canv_lay)
+    LinearLayout canvLay;
     @BindView(R.id.code_bar)
     RelativeLayout codeBar;
     @BindView(R.id.get_rcode)
@@ -267,26 +255,47 @@ public class HengFuActivity extends BaseActivity{
                 }
                 break;
             case R.id.main_tab2:
+                txt = editTxt.getText().toString();
                 if (isexsit){
-//                    canv.remove(textSticker);
-                    if (isBold){
-                        isBold = false;
-                        textSticker.setTypeface(Typeface.DEFAULT);
-                    }else{
-                        isBold = true;
-                        textSticker.setTypeface(Typeface.DEFAULT_BOLD);
-                    }
-
-                    canv.invalidate();
-//                    textSticker =  new TextSticker(getApplicationContext())
-//                            .setText(txt)
-//                            .setTypeface(Typeface.create("宋体",Typeface.BOLD))
-//                            .setMaxTextSize(60)
-//                            .resizeText();
-//                    addCusView();
-                }else{
-                    ToastUtils.showShort("请输入文字");
+                    return;
                 }
+
+                if (txt != null && txt.length() > 0) {
+                    canvLay.removeAllViews();
+                    LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    for (int i = 0; i < txt.length(); i++) {
+                        TextView title1 = new TextView(this);
+                        title1.setTextColor(Color.parseColor("#000000"));
+                        title1.setLayoutParams(txtLayParams);
+                        title1.setText(txt.substring(i, i + 1));
+                        title1.setGravity(Gravity.CENTER);
+                        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
+                        title1.setRotation(90);
+                        canvLay.addView(title1);
+                    }
+                }
+
+//                if (isexsit){
+////                    canv.remove(textSticker);
+//                    if (isBold){
+//                        isBold = false;
+//                        textSticker.setTypeface(Typeface.DEFAULT);
+//                    }else{
+//                        isBold = true;
+//                        textSticker.setTypeface(Typeface.DEFAULT_BOLD);
+//                    }
+//
+//                    canv.invalidate();
+////                    textSticker =  new TextSticker(getApplicationContext())
+////                            .setText(txt)
+////                            .setTypeface(Typeface.create("宋体",Typeface.BOLD))
+////                            .setMaxTextSize(60)
+////                            .resizeText();
+////                    addCusView();
+//                }else{
+//                    ToastUtils.showShort("请输入文字");
+//                }
 
                 break;
             case R.id.get_txt:
@@ -296,12 +305,38 @@ public class HengFuActivity extends BaseActivity{
                 }
 
                 if (txt != null && txt.length() > 0){
-                    textSticker =  new TextSticker(getApplicationContext())
-                            .setText(txt)
-                            .setTypeface(Typeface.DEFAULT)
-                            .setMaxTextSize(60)
-                            .resizeText();
-                    addCusView();
+                    canvLay.removeAllViews();
+                    LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    for (int i = 0; i < txt.length(); i++) {
+                        TextView title1 = new TextView(this);
+                        title1.setTextColor(Color.parseColor("#000000"));
+                        title1.setLayoutParams(txtLayParams);
+                        title1.setText(txt.substring(i, i+1));
+                        title1.setGravity(Gravity.CENTER);
+                        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_300));
+//                        title1.setRotation(90);
+                        canvLay.addView(title1);
+                    }
+//                    ttt.setText(txt);
+//                    vTxt.setText(txt);
+//                    ttt.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+//                    ttt.setRotation(90);
+//                    LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
+//                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                    TextView title1 = new TextView(this);
+//                    title1.setTextColor(Color.parseColor("#000000"));
+//                    title1.setGravity(Gravity.CENTER);
+//                    title1.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_40));
+//                    title1.setText(txt);
+//                    title1.setLayoutParams(txtLayParams);
+//                    canvLay.addView();
+//                    textSticker =  new TextSticker(getApplicationContext())
+//                            .setText(txt)
+//                            .setTypeface(Typeface.DEFAULT)
+//                            .setMaxTextSize(60)
+//                            .resizeText();
+//                    addCusView();
                 }else{
                     ToastUtils.showShort("请输入文字");
                 }
@@ -315,7 +350,8 @@ public class HengFuActivity extends BaseActivity{
                     }
                 }
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
+//                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,0);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

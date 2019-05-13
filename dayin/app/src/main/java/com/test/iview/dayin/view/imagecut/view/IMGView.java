@@ -153,16 +153,41 @@ public class IMGView extends FrameLayout implements Runnable, ScaleGestureDetect
         }
     }
 
+    public Bitmap getthisBitmap(){
+        return mImage.getBitmaps();
+    }
+
     public void resetClip() {
         mImage.resetClip();
         onHoming();
     }
 
+    private int xx = 0;
+    private int yy = 0;
     public void doClip() {
         mImage.clip(getScrollX(), getScrollY());
+        xx = getScrollX();
+        yy = getScrollY();
         setMode(mPreMode);
         onHoming();
     }
+
+    public void doliangdu(){
+        mImage.clip(xx, yy);
+        setMode(mPreMode);
+        invalidate();
+        stopHoming();
+//        if (xx == 0 && yy == 0){
+//            startHoming(mImage.getStartHoming(getScrollX(), getScrollY()),
+//                    mImage.getEndHoming(getScrollX(), getScrollY()));
+//
+//        }else{
+//            startHoming(mImage.getStartHoming(xx, yy),
+//                    mImage.getEndHoming(xx, yy));
+//        }
+
+    }
+
 
     public void cancelClip() {
         mImage.toBackupClip();
