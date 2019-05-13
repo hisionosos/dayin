@@ -182,6 +182,7 @@ public class BiaoQianActivity extends BaseActivity {
     private boolean isBlod = false;
     private int editGrave = 0;
 
+    private boolean isImg = false;
     @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.main_tab6, R.id.home_add, R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -348,7 +349,7 @@ public class BiaoQianActivity extends BaseActivity {
                         arrs.get(i).setEditable(false);
                     }
                 }
-                BitmapUtil.getInstance().getCutImage(canv,330);//330  220  100
+                BitmapUtil.getInstance().getCutImage(canv,isImg,330,true);//330  220  100
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -362,6 +363,7 @@ public class BiaoQianActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
+                        isImg = true;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE) {
                             codeBar.setVisibility(View.INVISIBLE);
@@ -455,6 +457,7 @@ public class BiaoQianActivity extends BaseActivity {
             singleTouchView.setLayoutParams(layoutParams);
             singleTouchView.setImageResource(id);
             canv.addView(singleTouchView);
+            isImg = true;
             arrs.add(singleTouchView);
         }
 

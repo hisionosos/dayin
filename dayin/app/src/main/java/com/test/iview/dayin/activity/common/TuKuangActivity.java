@@ -156,7 +156,7 @@ public class TuKuangActivity extends BaseActivity{
                     edit1.setCursorVisible(false);
                 }
 
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
 
                 break;
         }

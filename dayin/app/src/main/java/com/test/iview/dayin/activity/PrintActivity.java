@@ -454,7 +454,7 @@ public class PrintActivity extends BaseActivity {
 			bImageView.setImageBitmap(mp);
 			Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
 									+ "," + mp.getRowBytes());
-			BlueSAPI.getInstance().PrintImage(mp);
+			BlueSAPI.getInstance().PrintImage(mp,false);
 //			BitmapUtil.createScaledBitmap(this,data.getData(),374, new BitmapUtil.MyCallback() {
 //				@Override
 //				public void onPrepare() {

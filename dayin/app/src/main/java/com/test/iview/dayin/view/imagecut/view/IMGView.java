@@ -55,9 +55,17 @@ public class IMGView extends FrameLayout implements Runnable, ScaleGestureDetect
 
     private int mPointerCount = 0;
 
-    private Paint mDoodlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public Paint mDoodlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private Paint mMosaicPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    public Paint getmDoodlePaint() {
+        return mDoodlePaint;
+    }
+
+    public void setmDoodlePaint(Paint mDoodlePaint) {
+        this.mDoodlePaint = mDoodlePaint;
+    }
 
     private static final boolean DEBUG = true;
 

@@ -23,7 +23,7 @@
 	<string name="dy_shijian">time</string>
 	<string name="dy_myinfo">Personal Center</string>
 	<string name="dy_app_name">Dudu machine</string>
-	<string name="dy_qq">QQ group</string>
+	<string name="dy_qq">QQ group:850810714</string>
 	<string name="dy_yuyan">Language settings</string>
 	<string name="dy_caozuo">Operation guide</string>
 	<string name="dy_shebei">Device list</string>
@@ -107,7 +107,7 @@
 	<string name="dy_caijian">Tailoring</string>
 	<string name="dy_delete">del</string>
 	<string name="dy_chexiao">undo</string>
-	<string name="dy_liangdu">brightness</string>
+	<string name="dy_liangdu">effects</string>
 	<string name="dy_sediao">tone</string>
 	<string name="dy_baohedu">saturation</string>
 </resources>

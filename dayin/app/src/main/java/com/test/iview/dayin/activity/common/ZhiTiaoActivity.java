@@ -96,7 +96,7 @@ public class ZhiTiaoActivity extends BaseActivity {
                 break;
             case R.id.home_add:
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
 
                 break;
             case R.id.main_tab1:

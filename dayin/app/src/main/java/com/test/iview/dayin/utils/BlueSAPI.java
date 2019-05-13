@@ -347,7 +347,7 @@ public class BlueSAPI {
         }
 
         @SuppressLint({"NewApi"})
-        public int PrintImage(Bitmap bmp) {
+        public int PrintImage(Bitmap bmp , boolean isBiaoqian) {
             if (bmp == null) {
                 return -1;
             } else {
@@ -410,7 +410,7 @@ public class BlueSAPI {
                             count = inStream.available();
                             Log.e("dedd",count + "");
                             try {
-                                Thread.sleep(100);
+                                Thread.sleep(10);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -435,10 +435,16 @@ public class BlueSAPI {
                 PrintLn();
                 PrintLn();
                 PrintLn();
-//                PrintLn();
-//                PrintLn();
-//                PrintLn();
-//                PrintLn();
+                if (!isBiaoqian){
+                PrintLn();
+                PrintLn();
+                PrintLn();
+                PrintLn();
+                PrintLn();
+                PrintLn();
+                PrintLn();
+
+                }
 
                 return 0;
             }
@@ -564,7 +570,7 @@ public class BlueSAPI {
                         this.outStream.write(data);
                         this.outStream.flush();
 
-                        Thread.sleep(100);
+                        Thread.sleep(10);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -686,7 +692,7 @@ public class BlueSAPI {
      * 打印
      * @param type 打印内容类型
      */
-    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final int h) {
+    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final boolean isImg, final int h,final boolean isBiaoqian) {
         if (!isConnect) {
             ToastUtils.showShort(R.string.connect_printer);
         } else {
@@ -754,12 +760,18 @@ public class BlueSAPI {
 //                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                                startActivityForResult(intent, 2);
                                 Log.e("11111vv","11");
-                                Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
+                                Bitmap mp;
+                                if (isImg){
+                                    mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
+                                }else{
+                                    mp = PrinterImageUtils.convertToBlackWhite(bitmap,h);
+                                }
+
 
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
 //                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
 //                                        + "," + mp.getRowBytes());
-                                blueApi.PrintImage(mp);
+                                blueApi.PrintImage(mp,isBiaoqian);
 //                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
                                 Log.e("11111vv","22");
                                 view.destroyDrawingCache(); // 保存过后释放资源

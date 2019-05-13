@@ -1,6 +1,7 @@
 package com.test.iview.dayin.utils;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
@@ -9,10 +10,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.test.iview.dayin.utils.AppLogMessageMgr;
@@ -23,6 +28,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 
@@ -680,5 +686,98 @@ public class AppUtils {
         }
         return permissions;
     }
+
+
+
+    /**
+     * 语言国际化操作
+     *
+     */
+    public static Context selectLanguage(Context context, String language) {
+        Context updateContext;
+        //设置语言类型
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            updateContext =  createConfigurationResources(context, language);
+        } else {
+            applyLanguage(context, language);
+            updateContext =  context;
+        }
+        //保存设置语言的类型
+        SharedPreferencesUtils.setParam(context, Constant.APP_LANGUAGE, language);
+        return updateContext;
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    private static Context createConfigurationResources(Context context, String language) {
+        //设置语言类型
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        Locale locale = null;
+        switch (language) {
+            case "en":
+                locale = Locale.ENGLISH;
+                break;
+            case "zh":
+                locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            default:
+                locale = Locale.getDefault();
+                break;
+        }
+        configuration.setLocale(locale);
+        return context.createConfigurationContext(configuration);
+    }
+
+    private static void applyLanguage(Context context, String language) {
+        //设置语言类型
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Locale locale = null;
+        switch (language) {
+            case "en":
+                locale = Locale.ENGLISH;
+                break;
+            case "zh":
+                locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            default:
+                locale = Locale.getDefault();
+                break;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // apply locale
+            configuration.setLocale(locale);
+        } else {
+            // updateConfiguration
+            configuration.locale = locale;
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            resources.updateConfiguration(configuration, dm);
+        }
+    }
+
+    public static Context updateLanguage(Context context) {
+        String curLanguage = (String)SharedPreferencesUtils.getParam(Constant.APP_LANGUAGE,"zh");
+        return selectLanguage(context, curLanguage);
+    }
+
+    public static boolean switchLanguage(Context context, String value) {
+        String curLanguage = (String)SharedPreferencesUtils.getParam(Constant.APP_LANGUAGE,"zh");
+        if (value.equals(curLanguage)) {
+            return false;
+        }
+        if (null == curLanguage || TextUtils.isEmpty(curLanguage)) {
+            SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,"zh");
+        } else {
+            if (value.equals("zh")) {
+                SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,"zh");
+            } else {
+                SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,"en");
+            }
+        }
+        selectLanguage(context, (String)SharedPreferencesUtils.getParam(Constant.APP_LANGUAGE,"zh"));
+        return true;
+    }
+
 
 }

@@ -180,7 +180,7 @@ public class WebViewActivity extends BaseActivity {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,0);
+                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,true,0 ,false);
 //                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
 //                    ToastUtils.showShort("保存成功");
 //                    dView.destroyDrawingCache(); // 保存过后释放资源
@@ -222,7 +222,7 @@ public class WebViewActivity extends BaseActivity {
             new Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    BlueSAPI.getInstance().printContent(webView,webView.getContext(),bm,5,0);
+                    BlueSAPI.getInstance().printContent(webView,webView.getContext(),bm,5,true,0,false);
 //                    savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
 //                    ToastUtils.showShort("保存成功");
 //                    webView.destroyDrawingCache(); // 保存过后释放资源

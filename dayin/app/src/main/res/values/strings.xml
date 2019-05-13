@@ -21,7 +21,7 @@
     <string name="dy_shijian">时间</string>
     <string name="dy_myinfo">个人中心</string>
     <string name="dy_app_name">嘟嘟机</string>
-    <string name="dy_qq">QQ群</string>
+    <string name="dy_qq">QQ群: 850810714</string>
     <string name="dy_yuyan">语言设置</string>
     <string name="dy_caozuo">操作指南</string>
     <string name="dy_shebei">设备列表</string>
@@ -106,7 +106,7 @@
     <string name="dy_delete">删除</string>
     <string name="dy_chexiao">撤销</string>
 
-    <string name="dy_liangdu">亮度</string>
+    <string name="dy_liangdu">特效</string>
     <string name="dy_sediao">色调</string>
     <string name="dy_baohedu">饱和度</string>
 </resources>

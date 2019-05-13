@@ -9,39 +9,79 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#FFF">
 
-
-
-
-        <RelativeLayout
-            android:id="@+id/canv"
-            android:layout_marginTop="@dimen/dp_30"
+        <ScrollView
+            android:id="@+id/scoll_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/title_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
-            android:layout_above="@+id/main_tab">
-            <EditText
-                android:id="@+id/edit_txt"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_400"
-                android:gravity="top"
-                android:hint="@string/input_text"
-                android:textColor="#929292"
+            android:scrollbars="none">
+            <RelativeLayout
+                android:id="@+id/canv"
                 android:layout_marginTop="@dimen/dp_30"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_pop_dialog"
                 android:layout_marginLeft="@dimen/dp_50"
                 android:layout_marginRight="@dimen/dp_50"
-                android:visibility="visible"
-                android:padding="@dimen/dp_20"
-                android:background="@drawable/shape_pop_dialog"/>
+                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_above="@+id/main_tab">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dp_40"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/head_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:id="@+id/mid_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_40" />
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000"
+                                android:layout_marginRight="@dimen/dp_40"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/bottom_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/edit_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:textColor="#929292"
+                        android:layout_marginTop="@dimen/dp_30"
+                        android:layout_marginLeft="@dimen/dp_50"
+                        android:layout_marginRight="@dimen/dp_50"
+                        android:visibility="gone"
+                        android:padding="@dimen/dp_20"
+                        android:background="@null"/>
+                </LinearLayout>
 
 
+            </RelativeLayout>
+        </ScrollView>
 
-        </RelativeLayout>
 
         <RadioGroup
             android:id="@+id/main_tab"
@@ -49,6 +89,7 @@
             android:layout_height="@dimen/dp_150"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp_10"
+            android:background="#fff"
             android:orientation="horizontal">
 
             <RadioButton
@@ -84,8 +125,22 @@
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_biaoqing"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_biaoqing"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/main_tab4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:textSize="@dimen/sp_30"
+                android:textColor="@color/text_color_selecter"
+                android:text="@string/dy_add"
+                android:gravity="center"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/tab_daxiao"
                 android:layout_weight="1"/>
         </RadioGroup>
     </RelativeLayout>

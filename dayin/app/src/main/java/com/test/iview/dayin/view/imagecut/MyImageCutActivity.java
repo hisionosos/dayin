@@ -1,6 +1,7 @@
 package com.test.iview.dayin.view.imagecut;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -20,6 +21,7 @@ import com.lzy.okgo.OkGo;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.util.AppManager;
+import com.test.iview.dayin.utils.AppUtils;
 import com.test.iview.dayin.view.common.HttpProgressDialog;
 import com.test.iview.dayin.view.imagecut.core.IMGMode;
 import com.test.iview.dayin.view.imagecut.core.IMGText;
@@ -78,8 +80,8 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
         setContentView(R.layout.tupian_lay);
         initViews();
         ButterKnife.bind(this);
-        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
-        updateActivity(local);
+//        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
+//        updateActivity(local);
         AppManager.getAppManager().addActivity(this);
         onCreated();
 //        Bitmap bitmap = getBitmap();
@@ -89,6 +91,11 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
 
 
 //        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(AppUtils.updateLanguage(newBase));
     }
 
 
@@ -128,7 +135,8 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
         }else if (vid ==R.id.main_tab4){
             onModeClick(IMGMode.CLIP);
         }else if (vid ==R.id.main_tab22){
-            onModeClick(IMGMode.DOODLE);
+//            onModeClick(IMGMode.DOODLE);
+            setPainSize();
         } else if (vid == R.id.rb_doodle) {
             onModeClick(IMGMode.DOODLE);
         } else if (vid == R.id.btn_text) {
@@ -232,6 +240,7 @@ public abstract class MyImageCutActivity extends Activity implements View.OnClic
     public abstract void onRotateClipClick();
 
     public abstract void onColorChanged(int checkedColor);
+    public abstract void setPainSize();
 
     @Override
     public abstract void onText(IMGText text);

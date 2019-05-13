@@ -46,7 +46,7 @@ public class DeviceListActivity extends BaseActivity {
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
-        commonTitle.setText(R.string.dy_tuwen);
+        commonTitle.setText(R.string.dy_shebei);
 
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);

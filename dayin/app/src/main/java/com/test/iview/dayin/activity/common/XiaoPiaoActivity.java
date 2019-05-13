@@ -284,9 +284,9 @@ public class XiaoPiaoActivity extends BaseActivity {
                     }
                 }
                 if (moban == 1){
-                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll,0);
+                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll,false,0);
                 }else{
-                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll2,0);
+                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll2,false,0);
                 }
 
                 break;
@@ -517,7 +517,7 @@ public class XiaoPiaoActivity extends BaseActivity {
     private void addTitleView() {
         int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
         int txtSize = 6;
-        int realSize = DimensUtils.dp2px(this, 50);
+        int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
         LinearLayout.LayoutParams linerLayParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 40));
@@ -528,7 +528,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         //1
         LinearLayout.LayoutParams headLayParams1 = new LinearLayout.LayoutParams(
-                DimensUtils.dp2px(this, 40), ViewGroup.LayoutParams.MATCH_PARENT);
+                DimensUtils.dp2px(this, 25), ViewGroup.LayoutParams.MATCH_PARENT);
         LinearLayout headlinearLayout1 = new LinearLayout(this);
         headlinearLayout1.setLayoutParams(headLayParams1);
         headlinearLayout1.setGravity(Gravity.CENTER);
@@ -590,7 +590,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         //第三个框布局
         LinearLayout.LayoutParams headLayParams3 = new LinearLayout.LayoutParams(
-                realSize, ViewGroup.LayoutParams.MATCH_PARENT);
+                DimensUtils.dp2px(this, 50), ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout headlinearLayout3 = new LinearLayout(this);
         headlinearLayout3.setLayoutParams(headLayParams3);
@@ -690,14 +690,14 @@ public class XiaoPiaoActivity extends BaseActivity {
     private void addGoodView() {
         int txtSize = 6;
         int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
-        int realSize = DimensUtils.dp2px(this, 50);
+        int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
 
         LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout.LayoutParams editLayParams = new LinearLayout.LayoutParams(
-                DimensUtils.dp2px(this, 60), ViewGroup.LayoutParams.MATCH_PARENT);
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout.LayoutParams linerLayParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);//DimensUtils.dp2px(this, 40));
@@ -706,7 +706,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 0.5f));
 
         LinearLayout.LayoutParams headLayParams1 = new LinearLayout.LayoutParams(
-                DimensUtils.dp2px(this, 40), ViewGroup.LayoutParams.MATCH_PARENT);
+                DimensUtils.dp2px(this, 25), ViewGroup.LayoutParams.MATCH_PARENT);
 
 
         LinearLayout headlinearLayout1 = new LinearLayout(this);
@@ -768,7 +768,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         //第三个框布局
         LinearLayout.LayoutParams headLayParams3 = new LinearLayout.LayoutParams(
-                realSize, ViewGroup.LayoutParams.MATCH_PARENT);
+                DimensUtils.dp2px(this, 50), ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout headlinearLayout3 = new LinearLayout(this);
         headlinearLayout3.setLayoutParams(headLayParams3);
@@ -806,11 +806,11 @@ public class XiaoPiaoActivity extends BaseActivity {
                 }
                 int rowcount = Integer.parseInt(ss);
                 double rowdanjia = Double.parseDouble(edit4.getText().toString());
-                DecimalFormat df = new DecimalFormat("#.00");
+                DecimalFormat df = new DecimalFormat("#,###.00");
                 edit5.setText(df.format(rowcount * rowdanjia) + "");
                 double tot = 0.00;
                 for (int i = 1; i < list1.size(); i++) {
-                    String total = ((EditText) list5.get(i)).getText().toString();
+                    String total = ((EditText) list5.get(i)).getText().toString().replace(",","");
                     if (null == total || total.length() == 0) {
                         total = "0.00";
                     }
@@ -867,12 +867,14 @@ public class XiaoPiaoActivity extends BaseActivity {
                 }
                 double rowdanjia = Double.parseDouble(ss);
                 int rowcount = Integer.parseInt(edit3.getText().toString());
-                DecimalFormat df = new DecimalFormat("#.00");
+                DecimalFormat df = new DecimalFormat("#,###.00");
+                String fil = df.format(rowcount * rowdanjia) + "";
+
                 edit5.setText(df.format(rowcount * rowdanjia) + "");
 
                 double tot = 0.00;
                 for (int i = 1; i < list1.size(); i++) {
-                    String total = ((EditText) list5.get(i)).getText().toString();
+                    String total = ((EditText) list5.get(i)).getText().toString().replace(",","");
                     if (null == total || total.length() == 0) {
                         total = "0.00";
                     }

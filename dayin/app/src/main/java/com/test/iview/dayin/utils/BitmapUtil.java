@@ -262,7 +262,7 @@ public class BitmapUtil {
 
     }
 
-    public String getCutImage(final View dView, final int h){
+    public String getCutImage(final View dView, final boolean isImg,final int h,final boolean isBiaoqian){
         boolean b = BlueSAPI.getInstance().isConnect();
         if (!b){
             dView.getContext().startActivity(new Intent(dView.getContext(), PrintActivity.class));
@@ -279,7 +279,7 @@ public class BitmapUtil {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,h);
+                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,isImg,h,isBiaoqian);
 //                    savePicture(bmp, fileName);// 保存图片
 //                    dView.destroyDrawingCache(); // 保存过后释放资源
 //                    if (null != bmp){
@@ -297,7 +297,7 @@ public class BitmapUtil {
         return filePath;
     }
 
-    public static String getBitmapScrollView(final ScrollView scrollView,final int hei) {
+    public static String getBitmapScrollView(final ScrollView scrollView,final boolean isImg,final int hei  ) {
         int h = 0;
         boolean b = BlueSAPI.getInstance().isConnect();
         if (!b){
@@ -327,7 +327,7 @@ public class BitmapUtil {
                     scrollView.draw(canvas);
 
 
-                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,hei);
+                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,isImg,hei,false);
 //                    ToastUtils.showShort("保存成功");
 
 

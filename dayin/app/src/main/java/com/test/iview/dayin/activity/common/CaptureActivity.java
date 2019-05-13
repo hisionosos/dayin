@@ -86,7 +86,7 @@ public class CaptureActivity extends BaseActivity {
                     arrs.get(i).setEditable(false);
 
                 }
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

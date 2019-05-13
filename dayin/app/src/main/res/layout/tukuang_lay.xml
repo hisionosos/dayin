@@ -43,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/input_text"
-                android:textColor="#929292"
+                android:textColor="#000"
                 android:cursorVisible="false"
                 android:padding="@dimen/dp_30"
                 android:visibility="gone"

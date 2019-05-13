@@ -232,6 +232,8 @@ public class HengFuActivity extends BaseActivity{
     TextSticker textSticker;
     String txt;
     private boolean isBold = false;
+    private boolean isheng = false;
+
     @OnClick({R.id.back,R.id.get_txt,R.id.home_add,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -261,19 +263,38 @@ public class HengFuActivity extends BaseActivity{
                 }
 
                 if (txt != null && txt.length() > 0) {
-                    canvLay.removeAllViews();
-                    LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                    for (int i = 0; i < txt.length(); i++) {
-                        TextView title1 = new TextView(this);
-                        title1.setTextColor(Color.parseColor("#000000"));
-                        title1.setLayoutParams(txtLayParams);
-                        title1.setText(txt.substring(i, i + 1));
-                        title1.setGravity(Gravity.CENTER);
-                        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
-                        title1.setRotation(90);
-                        canvLay.addView(title1);
+                    if (isheng){
+                        isheng = false;
+                        canvLay.removeAllViews();
+                        LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        for (int i = 0; i < txt.length(); i++) {
+                            TextView title1 = new TextView(this);
+                            title1.setTextColor(Color.parseColor("#000000"));
+                            title1.setLayoutParams(txtLayParams);
+                            title1.setText(txt.substring(i, i + 1));
+                            title1.setGravity(Gravity.CENTER);
+                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
+//                            title1.setRotation(90);
+                            canvLay.addView(title1);
+                        }
+                    }else{
+                        isheng = true;
+                        canvLay.removeAllViews();
+                        LinearLayout.LayoutParams txtLayParams = new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                        for (int i = 0; i < txt.length(); i++) {
+                            TextView title1 = new TextView(this);
+                            title1.setTextColor(Color.parseColor("#000000"));
+                            title1.setLayoutParams(txtLayParams);
+                            title1.setText(txt.substring(i, i + 1));
+                            title1.setGravity(Gravity.CENTER);
+                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
+                            title1.setRotation(90);
+                            canvLay.addView(title1);
+                        }
                     }
+
                 }
 
 //                if (isexsit){
@@ -351,7 +372,7 @@ public class HengFuActivity extends BaseActivity{
                 }
                 editTxt.setCursorVisible(false);
 //                BitmapUtil.getInstance().getCutImage(canv,0);
-                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,0);
+                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,true,0);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

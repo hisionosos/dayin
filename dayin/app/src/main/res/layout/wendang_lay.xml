@@ -29,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
+                android:textColor="#000"
                 android:visibility="invisible"
                 android:background="@null"/>
 

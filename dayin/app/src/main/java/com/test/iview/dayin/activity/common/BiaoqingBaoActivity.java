@@ -140,7 +140,7 @@ public class BiaoqingBaoActivity extends BaseActivity{
                     }
                 }
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
 
                 break;
         }

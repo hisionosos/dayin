@@ -28,6 +28,7 @@ import com.test.iview.dayin.view.imagecut.IMGEditActivity;
 import com.test.iview.dayin.view.imagecut.IMGGalleryActivity;
 import com.test.iview.dayin.view.imagecut.MyImageCutActivity;
 import com.test.iview.dayin.view.imagecut.core.IMGMode;
+import com.test.iview.dayin.view.imagecut.core.IMGPath;
 import com.test.iview.dayin.view.imagecut.core.IMGText;
 import com.test.iview.dayin.view.imagecut.core.file.IMGAssetFileDecoder;
 import com.test.iview.dayin.view.imagecut.core.file.IMGDecoder;
@@ -69,6 +70,9 @@ public class TuPianActivity extends MyImageCutActivity {
 
     @BindView(R.id.wangge_lay1)
     LinearLayout wanggeLay1;
+
+    @BindView(R.id.wangge_lay2)
+    LinearLayout wanggeLay2;
     @BindView(R.id.undo_lay)
     LinearLayout undoLay;
     @BindView(R.id.size_seek)
@@ -77,6 +81,16 @@ public class TuPianActivity extends MyImageCutActivity {
     SeekBar sizeSeek1;
     @BindView(R.id.size_seek2)
     SeekBar sizeSeek2;
+    @BindView(R.id.pain_1)
+    LinearLayout pain1;
+    @BindView(R.id.pain_2)
+    LinearLayout pain2;
+    @BindView(R.id.pain_3)
+    LinearLayout pain3;
+    @BindView(R.id.pain_4)
+    LinearLayout pain4;
+    @BindView(R.id.pain_5)
+    LinearLayout pain5;
 
 
 //    @Override
@@ -84,7 +98,8 @@ public class TuPianActivity extends MyImageCutActivity {
 //        return R.layout.tupian_lay;
 //    }
 
-    @OnClick({R.id.back,R.id.main_tab1, R.id.home_add,R.id.main_tab5})
+    private float painSize = 10f;
+    @OnClick({R.id.back,R.id.main_tab1, R.id.home_add,R.id.main_tab5,R.id.pain_1,R.id.pain_2,R.id.pain_3,R.id.pain_4,R.id.pain_5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
@@ -114,8 +129,49 @@ public class TuPianActivity extends MyImageCutActivity {
                     }
                 }
 
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
 
+                break;
+
+            case R.id.pain_1:
+                painSize = 3f;
+                wanggeLay2.setVisibility(View.GONE);
+                IMGPath.BASE_DOODLE_WIDTH = painSize;
+                mImgView.getmDoodlePaint().setStrokeWidth(painSize);
+                onModeClick(IMGMode.DOODLE);
+
+                break;
+
+            case R.id.pain_2:
+                painSize = 5f;
+                wanggeLay2.setVisibility(View.GONE);
+                IMGPath.BASE_DOODLE_WIDTH = painSize;
+                mImgView.getmDoodlePaint().setStrokeWidth(painSize);
+                onModeClick(IMGMode.DOODLE);
+                break;
+
+            case R.id.pain_3:
+                painSize = 10f;
+                wanggeLay2.setVisibility(View.GONE);
+                IMGPath.BASE_DOODLE_WIDTH = painSize;
+                mImgView.getmDoodlePaint().setStrokeWidth(painSize);
+                onModeClick(IMGMode.DOODLE);
+                break;
+
+            case R.id.pain_4:
+                painSize = 15f;
+                wanggeLay2.setVisibility(View.GONE);
+                IMGPath.BASE_DOODLE_WIDTH = painSize;
+                mImgView.getmDoodlePaint().setStrokeWidth(painSize);
+                onModeClick(IMGMode.DOODLE);
+                break;
+
+            case R.id.pain_5:
+                painSize = 20f;
+                wanggeLay2.setVisibility(View.GONE);
+                IMGPath.BASE_DOODLE_WIDTH = painSize;
+                mImgView.getmDoodlePaint().setStrokeWidth(painSize);
+                onModeClick(IMGMode.DOODLE);
                 break;
         }
     }
@@ -360,6 +416,13 @@ public class TuPianActivity extends MyImageCutActivity {
         mImgView.addStickerText(text);
     }
 
+
+    @Override
+    public void setPainSize() {
+        wanggeLay2.setVisibility(View.VISIBLE);
+    }
+
+
     @Override
     public void onModeClick(IMGMode mode) {
         IMGMode cm = mImgView.getMode();
@@ -369,7 +432,7 @@ public class TuPianActivity extends MyImageCutActivity {
             undoLay.setVisibility(View.GONE);
         }
 
-        if (cm == mode) {
+        if (cm == mode && mode != IMGMode.DOODLE) {
             mode = IMGMode.NONE;
             undoLay.setVisibility(View.GONE);
         }
@@ -396,6 +459,8 @@ public class TuPianActivity extends MyImageCutActivity {
     public void onCancelClick() {
         finish();
     }
+
+
 
     @Override
     public void onDoneClick() {

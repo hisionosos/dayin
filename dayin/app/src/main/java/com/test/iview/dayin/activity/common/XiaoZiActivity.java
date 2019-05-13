@@ -109,7 +109,7 @@ public class XiaoZiActivity extends BaseActivity {
     public int initLayout() {
         return R.layout.xiaozi_lay;
     }
-
+    private boolean isImg = true;
     private boolean isBlod = false;
     private int editGrave = 0;
     @OnClick({R.id.back,R.id.home_add,R.id.main_tab1,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
@@ -126,7 +126,7 @@ public class XiaoZiActivity extends BaseActivity {
                     }
                 }
                 editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().getCutImage(canv,isImg,0,false);
 
                 break;
             case R.id.main_tab1:
@@ -178,6 +178,7 @@ public class XiaoZiActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
+                        isImg = true;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
                             codeBar.setVisibility(View.INVISIBLE);
@@ -211,6 +212,7 @@ public class XiaoZiActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1000 && null != data) {
             int id = data.getIntExtra("img",0);
+            isImg = true;
             addCusView(id);
         }
 

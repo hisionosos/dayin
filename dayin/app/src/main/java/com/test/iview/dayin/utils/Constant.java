@@ -9,5 +9,5 @@ public class Constant {
     public static final int SERVICEERROR = 500;
 
     public static final int CODEERROR = 400001;
-
+    public final static String APP_LANGUAGE = "app_language";
 }

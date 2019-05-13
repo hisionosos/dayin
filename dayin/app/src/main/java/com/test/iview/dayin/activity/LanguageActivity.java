@@ -15,7 +15,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.entity.bean.EventMessage;
 import com.test.iview.dayin.global.MyApplication;
+import com.test.iview.dayin.utils.AppUtils;
+import com.test.iview.dayin.utils.Constant;
+import com.test.iview.dayin.utils.SharedPreferencesUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Locale;
 
@@ -71,16 +77,18 @@ public class LanguageActivity extends BaseActivity {
     }
 
     String local = "zh";
+    String cur_local = "zh";
     @Override
     public void initData() {
-        String local = MyApplication.mCache.getAsString("local");
-        if (null == local ||local.equals("zh")){
+        cur_local = (String) SharedPreferencesUtils.getParam(Constant.APP_LANGUAGE,"zh");
+        if (null == cur_local ||cur_local.equals("zh")){
             choose0.setChecked(true);
             choose1.setChecked(false);
         }else{
             choose0.setChecked(false);
             choose1.setChecked(true);
         }
+
     }
 
     @Override
@@ -124,10 +132,18 @@ public class LanguageActivity extends BaseActivity {
                 Log.e("check","choose6");
                 break;
             case R.id.common_txt:
-                MyApplication.mCache.put("local",local);
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+//                MyApplication.mCache.put("local",local);
+//                Intent intent = new Intent(this, MainActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+
+                if (!cur_local.equals(local)){
+                    showLoadingDialog();
+                    AppUtils.switchLanguage(this,local);
+                    EventBus.getDefault().post(new EventMessage("local"));
+                }
+
+                finish();
 
                 // 杀掉进程
 //                android.os.Process.killProcess(android.os.Process.myPid());

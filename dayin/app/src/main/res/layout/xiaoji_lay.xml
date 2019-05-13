@@ -46,7 +46,8 @@
                 android:hint="@string/dy_jilu"
                 android:layout_below="@+id/xiaoji_date"
                 android:layout_marginTop="@dimen/dp_20"
-                android:cursorVisible="false"
+                android:cursorVisible="true"
+                android:textColor="#000"
                 android:padding="@dimen/dp_30"
                 android:visibility="visible"
                 android:background="@null"/>

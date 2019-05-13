@@ -1,6 +1,8 @@
 package com.test.iview.dayin.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
@@ -15,8 +17,15 @@ import android.widget.TextView;
 
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.common.SuCaiKuActivity;
+import com.test.iview.dayin.activity.common.TuWenActivity;
+import com.test.iview.dayin.fragment.MyFragment;
+import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.CameraUtils;
 import com.test.iview.dayin.utils.DateUtils;
+import com.test.iview.dayin.view.SingleTouchView;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,13 +85,15 @@ public class XiaoJiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.main_tab1:
-                Intent intent = new Intent(this, SuCaiKuActivity.class);
-                intent.putExtra("sucai", "xiaoji");
-                startActivityForResult(intent, 1000);
+//                Intent intent = new Intent(this, SuCaiKuActivity.class);
+//                intent.putExtra("sucai", "xiaoji");
+//                startActivityForResult(intent, 1000);
+
+                CameraUtils.albumChoose(XiaoJiActivity.this, null);
                 break;
             case R.id.home_add:
                     editTxt.setCursorVisible(false);
-                    BitmapUtil.getInstance().getCutImage(canv,0);
+                    BitmapUtil.getInstance().getCutImage(canv,true,0,false);
                 break;
         }
     }
@@ -99,6 +110,41 @@ public class XiaoJiActivity extends BaseActivity {
             imgBack.setBackgroundResource(id);
         }
 
+        if (requestCode == CameraUtils.CODE_ALBUM_CHOOSE && resultCode == RESULT_OK && data != null) {
+            addImage(data.getData());
+
+        }
+
+    }
+
+    private void addImage(Uri uri){
+
+        BitmapUtil.createScaledBitmap(this,uri,350, new BitmapUtil.MyCallback() {
+            @Override
+            public void onPrepare() {
+                showLoadingDialog();
+            }
+
+            @Override
+            public void onSucceed(final Object object) {
+                hideLaodingDialog();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgBack.setVisibility(View.VISIBLE);
+                        xiaojiDate.setVisibility(View.VISIBLE);
+                        xiaojiDate.setText(DateUtils.getStringDate() + "");
+                        imgBack.setImageBitmap((Bitmap)object);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError() {
+                hideLaodingDialog();
+            }
+        });
     }
 
 
