@@ -394,7 +394,7 @@ public class BlueSAPI {
                                 ++j;
                             }
 
-                            if (r < 100 && g < 100 && b < 100) {
+                            if (r < 127 && g < 127 && b < 127) {
                                 body[j] = (byte)(body[j] * 2 + 1);
                             } else {
                                 body[j] = (byte)(body[j] * 2);
@@ -409,20 +409,15 @@ public class BlueSAPI {
                         while(count == 0 && isConnect){
                             count = inStream.available();
                             Log.e("dedd",count + "");
-                            try {
-                                Thread.sleep(10);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+
                         }
-                        if( count != 0 ) {
-                            System.out.println(count);
+                        if(count != 0) {
                             byte[] bt = new byte[count];
                             int readCount = 0;
                             while (readCount < count) {
                                 readCount += inStream.read(bt, readCount, count - readCount);
                             }
-                            System.out.println("12345rf" + readCount);
+
                             String xx = new String(bt);
                             System.out.println(xx);
                         }
@@ -436,14 +431,9 @@ public class BlueSAPI {
                 PrintLn();
                 PrintLn();
                 if (!isBiaoqian){
-                PrintLn();
-                PrintLn();
-                PrintLn();
-                PrintLn();
-                PrintLn();
-                PrintLn();
-                PrintLn();
-
+                    PrintLn();
+                    PrintLn();
+                    PrintLn();
                 }
 
                 return 0;
@@ -565,13 +555,10 @@ public class BlueSAPI {
                 if (this.outStream == null) {
                     return 2007;
                 } else {
-
                     try {
                         this.outStream.write(data);
                         this.outStream.flush();
-
                         Thread.sleep(10);
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -693,9 +680,9 @@ public class BlueSAPI {
      * @param type 打印内容类型
      */
     public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final boolean isImg, final int h,final boolean isBiaoqian) {
-        if (!isConnect) {
-            ToastUtils.showShort(R.string.connect_printer);
-        } else {
+//        if (!isConnect) {
+//            ToastUtils.showShort(R.string.connect_printer);
+//        } else {
             // 打印至蓝牙打印机
             final ProgressDialog pd = new ProgressDialog(content);
             pd.setTitle(content.getString(R.string.dy_tips));
@@ -766,7 +753,7 @@ public class BlueSAPI {
                                 }else{
                                     mp = PrinterImageUtils.convertToBlackWhite(bitmap,h);
                                 }
-
+//                                mp = PrinterImageUtils.convertGreyImgByFloyd(bitmap);
 
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
 //                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
@@ -830,7 +817,7 @@ public class BlueSAPI {
                     }
                 }
             }.start();
-        }
+//        }
     }
 
 

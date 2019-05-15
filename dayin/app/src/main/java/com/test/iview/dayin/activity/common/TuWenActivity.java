@@ -240,7 +240,7 @@ public class TuWenActivity extends BaseActivity {
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,Color.parseColor("#000000"));//二维码
                     if (bitmap != null){
                         SingleTouchView singleTouchView = new SingleTouchView(TuWenActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,

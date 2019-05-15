@@ -159,7 +159,7 @@ public class PrinterImageUtils {
 
         var0 = Bitmap.createBitmap(var3, var4, Bitmap.Config.RGB_565);
         var0.setPixels(var6, 0, var3, 0, 0, var3, var4);
-        var2 = (int)(384.0F / (float)var3 * (float)var4);
+        var2 = (int)(374.0F / (float)var3 * (float)var4);
         var1 = var2;
         if (var2 == 682) {
             var1 = 681;
@@ -168,7 +168,7 @@ public class PrinterImageUtils {
         if (h > 0){
             var1 = h;
         }
-        return ThumbnailUtils.extractThumbnail(var0, 384, var1);
+        return ThumbnailUtils.extractThumbnail(var0, 374, var1);
     }
 
     public static Bitmap convertToBlackWhiteLogo(Bitmap var0) {
@@ -209,4 +209,55 @@ public class PrinterImageUtils {
         FileOutputStream var2 = new FileOutputStream(var1);
         var0.compress(Bitmap.CompressFormat.JPEG, 100, var2);
     }
+
+
+    public static Bitmap convertGreyImgByFloyd(Bitmap img) {
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        int[] pixels = new int[width * height]; //通过位图的大小创建像素点数组  
+        img.getPixels(pixels, 0, width, 0, 0, width, height);
+        int[] gray=new int[height*width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int grey = pixels[width * i + j];
+                int red = ((grey&0x00FF0000) >> 16);
+                gray[width*i+j]=red;
+            }
+        }
+
+
+        int e=0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int g=gray[width*i+j];
+                if (g>=128) {
+                    pixels[width*i+j]=0xffffffff;
+                    e=g-255;
+                }else {
+                    pixels[width*i+j]=0xff000000;
+                    e=g-0;
+                }
+                if (j<width-1&&i<height-1) {
+//右边像素处理
+                    gray[width*i+j+1]+=3*e/8;
+//下
+                    gray[width*(i+1)+j]+=3*e/8;
+//右下
+                    gray[width*(i+1)+j+1]+=e/4;
+                }else if (j==width-1&&i<height-1) {//靠右或靠下边的像素的情况
+//下方像素处理
+                    gray[width*(i+1)+j]+=3*e/8;
+                }else if (j<width-1&&i==height-1) {
+//右边像素处理
+                    gray[width*(i)+j+1]+=e/4;
+                }
+            }
+        }
+
+        Bitmap mBitmap=Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        mBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return mBitmap;
+    }
+
 }

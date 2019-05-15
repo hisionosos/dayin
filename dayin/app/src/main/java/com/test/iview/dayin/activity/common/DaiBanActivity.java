@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DaiBanActivity extends BaseActivity {

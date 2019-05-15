@@ -2,6 +2,7 @@ package com.test.iview.dayin.activity.common;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -170,7 +171,7 @@ public class XiaoZiActivity extends BaseActivity {
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350, Color.parseColor("#000000"));//二维码
                     if (bitmap != null){
                         SingleTouchView singleTouchView = new SingleTouchView(XiaoZiActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,

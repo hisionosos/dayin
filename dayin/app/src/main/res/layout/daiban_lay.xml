@@ -8,13 +8,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:id="@+id/scoll_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#fff"
             android:scrollbars="none">
             <RelativeLayout
                 android:id="@+id/canv"

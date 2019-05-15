@@ -272,9 +272,11 @@ public class HengFuActivity extends BaseActivity{
                             TextView title1 = new TextView(this);
                             title1.setTextColor(Color.parseColor("#000000"));
                             title1.setLayoutParams(txtLayParams);
+                            title1.setLineSpacing(10,1);
+                            title1.setLetterSpacing(0.05f);
                             title1.setText(txt.substring(i, i + 1));
                             title1.setGravity(Gravity.CENTER);
-                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
+                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_500));
 //                            title1.setRotation(90);
                             canvLay.addView(title1);
                         }
@@ -289,7 +291,9 @@ public class HengFuActivity extends BaseActivity{
                             title1.setLayoutParams(txtLayParams);
                             title1.setText(txt.substring(i, i + 1));
                             title1.setGravity(Gravity.CENTER);
-                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_300));
+                            title1.setLineSpacing(10,1);
+                            title1.setLetterSpacing(0.05f);
+                            title1.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.dp_500));
                             title1.setRotation(90);
                             canvLay.addView(title1);
                         }
@@ -335,7 +339,9 @@ public class HengFuActivity extends BaseActivity{
                         title1.setLayoutParams(txtLayParams);
                         title1.setText(txt.substring(i, i+1));
                         title1.setGravity(Gravity.CENTER);
-                        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_300));
+                        title1.setLineSpacing(10,1);
+                        title1.setLetterSpacing(0.05f);
+                        title1.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_500));
 //                        title1.setRotation(90);
                         canvLay.addView(title1);
                     }
@@ -378,7 +384,7 @@ public class HengFuActivity extends BaseActivity{
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,Color.parseColor("#000000"));//二维码
                     if (bitmap != null){
                         SingleTouchView singleTouchView = new SingleTouchView(HengFuActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,

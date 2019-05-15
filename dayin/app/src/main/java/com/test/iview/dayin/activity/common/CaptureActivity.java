@@ -1,6 +1,7 @@
 package com.test.iview.dayin.activity.common;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -93,7 +94,7 @@ public class CaptureActivity extends BaseActivity {
                 Bitmap bitmap = null;
                 if (str.length() > 0){
                     if (flag.equals("1")){
-                        bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                        bitmap = QRCodeEncoder.syncEncodeQRCode(str,350, Color.parseColor("#000000"));//二维码
                     }else if (flag.equals("2")){
                         bitmap = QRCodeEncoder.syncEncodeBarcode(str,350,200,20);//条形码
                     }

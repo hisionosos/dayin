@@ -72,8 +72,8 @@ public class PiaojuDetailActivity extends BaseActivity {
                 startActivity(intent2);//标签打印
                 break;
             case R.id.piaoju3:
-                Intent intent3 = new Intent(this,BiaoQianActivity.class);
-                intent3.putExtra("flag","3");
+                Intent intent3 = new Intent(this,CaptureActivity.class);
+                intent3.putExtra("flag","2");
                 startActivity(intent3);//不干胶打印
                 break;
             case R.id.piaoju4:

@@ -294,7 +294,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0) {
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str, 350, R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str, 350, Color.parseColor("#000000"));//二维码
                     if (bitmap != null) {
                         SingleTouchView singleTouchView = new SingleTouchView(XiaoPiaoActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -383,7 +383,7 @@ public class XiaoPiaoActivity extends BaseActivity {
     private void addTwoView(){
         tworowCount ++;
         int txtSize = 6;
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
         int realSize = DimensUtils.dp2px(this, 50);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -515,7 +515,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
 
     private void addTitleView() {
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
         int txtSize = 6;
         int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
@@ -689,7 +689,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
     private void addGoodView() {
         int txtSize = 6;
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_40);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
         int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -803,6 +803,9 @@ public class XiaoPiaoActivity extends BaseActivity {
                 String ss = s + "";
                 if (s == null || s.length() == 0) {
                     ss = "0";
+                }
+                if (ss.length() > 10){
+                    return;
                 }
                 int rowcount = Integer.parseInt(ss);
                 double rowdanjia = Double.parseDouble(edit4.getText().toString());
