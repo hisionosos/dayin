@@ -65,7 +65,12 @@ public class CaptureActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        canv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+            }
+        });
 
     }
 

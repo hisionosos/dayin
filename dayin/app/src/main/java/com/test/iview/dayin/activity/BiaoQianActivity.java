@@ -149,7 +149,12 @@ public class BiaoQianActivity extends BaseActivity {
         edts.add(biaoqianfour4);
         edts.add(biaoqianfour5);
         edts.add(biaoqianfour6);
-
+        canv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+            }
+        });
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

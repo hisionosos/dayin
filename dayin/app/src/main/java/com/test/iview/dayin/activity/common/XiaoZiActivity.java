@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -70,7 +71,6 @@ public class XiaoZiActivity extends BaseActivity {
         flag = getIntent().getStringExtra("flag");
         commonTitle.setText(R.string.dy_xiaozidayin);
 
-
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
@@ -86,7 +86,20 @@ public class XiaoZiActivity extends BaseActivity {
                 editTxt.setCursorVisible(true);
             }
         });
+        editTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("editText","click");
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+        canv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -180,7 +193,7 @@ public class XiaoZiActivity extends BaseActivity {
                         isImg = false;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
-                            codeBar.setVisibility(View.INVISIBLE);
+                            codeBar.setVisibility(View.GONE);
                         }else{
                             codeBar.setVisibility(View.VISIBLE);
                         }

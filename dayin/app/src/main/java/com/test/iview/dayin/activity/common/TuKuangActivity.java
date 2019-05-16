@@ -97,6 +97,22 @@ public class TuKuangActivity extends BaseActivity{
                     edit1.setCursorVisible(true);
             }
         });
+        editLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+
+        edit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

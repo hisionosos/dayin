@@ -300,7 +300,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                         canv.addView(singleTouchView);
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE) {
-                            codeBar.setVisibility(View.INVISIBLE);
+                            codeBar.setVisibility(View.GONE);
                         } else {
                             codeBar.setVisibility(View.VISIBLE);
                         }
