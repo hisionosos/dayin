@@ -45,7 +45,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#fff">
 
 
         <EditText
@@ -56,11 +56,9 @@
             android:hint="@string/input_text"
             android:textColor="#000"
             android:layout_marginTop="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
             android:visibility="visible"
             android:padding="@dimen/dp_20"
-            android:background="@drawable/shape_pop_dialog"/>
+            android:background="#fff"/>
 
 
         <Button
@@ -81,11 +79,9 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/edit_txt"
             android:layout_marginTop="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
             android:layout_marginBottom="@dimen/dp_20"
             android:layout_above="@+id/main_tab"
-            android:background="@drawable/shape_pop_dialog">
+            android:background="#fff">
 
             <com.xiaopo.flying.sticker.StickerView
                 android:id="@+id/canv"

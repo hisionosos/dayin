@@ -134,6 +134,22 @@ public class BiaoQianActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        edts.add(biaoqian1);
+        edts.add(biaoqian2);
+        edts.add(biaoqian3);
+        edts.add(biaoqian4);
+        edts.add(biaoqiantwo0);
+        edts.add(biaoqiantwo1);
+        edts.add(biaoqiantwo2);
+        edts.add(biaoqiantwo3);
+        edts.add(biaoqianthree);
+        edts.add(biaoqianfour1);
+        edts.add(biaoqianfour2);
+        edts.add(biaoqianfour3);
+        edts.add(biaoqianfour4);
+        edts.add(biaoqianfour5);
+        edts.add(biaoqianfour6);
+
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -344,13 +360,9 @@ public class BiaoQianActivity extends BaseActivity {
                 break;
             case R.id.home_add:
 
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView) {
-                        arrs.get(i).setEditable(false);
-                    }
-                }
+                BitmapUtil.getInstance().cannelEdit(arrs,edts,false);
                 BitmapUtil.getInstance().getCutImage(canv,isImg,330,true);//330  220  100
+                BitmapUtil.getInstance().cannelEdit(arrs,edts,true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -358,16 +370,17 @@ public class BiaoQianActivity extends BaseActivity {
                 if (str.length() > 0) {
                     bitmap = QRCodeEncoder.syncEncodeQRCode(str, 350, Color.parseColor("#000000"));//二维码
                     if (bitmap != null) {
-                        SingleTouchView singleTouchView = new SingleTouchView(BiaoQianActivity.this);
+                        SingleTouchView singleTouchView = new SingleTouchView(this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(0,100,0,0);
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
-                        isImg = true;
+                        isImg = false;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE) {
-                            codeBar.setVisibility(View.INVISIBLE);
+                            codeBar.setVisibility(View.GONE);
                         } else {
                             codeBar.setVisibility(View.VISIBLE);
                         }
@@ -448,6 +461,7 @@ public class BiaoQianActivity extends BaseActivity {
     }
 
     private ArrayList<SingleTouchView> arrs = new ArrayList<>();
+    private ArrayList<EditText> edts = new ArrayList<>();
     private ArrayList<String> arr = new ArrayList<>();
 
     private void addCusView(int id) {

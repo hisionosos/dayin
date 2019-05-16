@@ -122,15 +122,9 @@ public class TuPianActivity extends MyImageCutActivity {
 //                startActivityForResult(intent4,1000);
 //                break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
                 BitmapUtil.getInstance().getCutImage(canv,true,0,false);
-
+                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
 
             case R.id.pain_1:

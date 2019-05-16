@@ -277,18 +277,14 @@ public class XiaoPiaoActivity extends BaseActivity {
                 }
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView) {
-                        arrs.get(i).setEditable(false);
-                    }
-                }
+
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
                 if (moban == 1){
                     BitmapUtil.getInstance().getBitmapScrollView(canvSoll,false,0);
                 }else{
                     BitmapUtil.getInstance().getBitmapScrollView(canvSoll2,false,0);
                 }
-
+                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -809,7 +805,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 }
                 int rowcount = Integer.parseInt(ss);
                 double rowdanjia = Double.parseDouble(edit4.getText().toString());
-                DecimalFormat df = new DecimalFormat("#,###.00");
+                DecimalFormat df = new DecimalFormat("#.00");
                 edit5.setText(df.format(rowcount * rowdanjia) + "");
                 double tot = 0.00;
                 for (int i = 1; i < list1.size(); i++) {
@@ -870,7 +866,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 }
                 double rowdanjia = Double.parseDouble(ss);
                 int rowcount = Integer.parseInt(edit3.getText().toString());
-                DecimalFormat df = new DecimalFormat("#,###.00");
+                DecimalFormat df = new DecimalFormat("#.00");
                 String fil = df.format(rowcount * rowdanjia) + "";
 
                 edit5.setText(df.format(rowcount * rowdanjia) + "");

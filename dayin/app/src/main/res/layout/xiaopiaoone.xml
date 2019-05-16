@@ -488,7 +488,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="top"
-                android:textSize="@dimen/sp_50"
+                android:textSize="@dimen/sp_55"
                 android:textColor="#000"
                 android:padding="@dimen/dp_40"
                 />

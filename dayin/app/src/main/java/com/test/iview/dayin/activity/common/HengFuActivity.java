@@ -370,15 +370,12 @@ public class HengFuActivity extends BaseActivity{
 
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
+
 //                BitmapUtil.getInstance().getCutImage(canv,0);
-                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,true,0);
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,false,0);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -410,7 +407,7 @@ public class HengFuActivity extends BaseActivity{
                 break;
         }
     }
-
+    private ArrayList<EditText> eds = new ArrayList<>();
     private ArrayList<SingleTouchView> arrs = new ArrayList<>();
     private boolean isexsit = false;
     private void addCusView(){

@@ -110,9 +110,10 @@ public class XiaoZiActivity extends BaseActivity {
     public int initLayout() {
         return R.layout.xiaozi_lay;
     }
-    private boolean isImg = true;
+    private boolean isImg = false;
     private boolean isBlod = false;
     private int editGrave = 0;
+    private ArrayList<EditText> eds = new ArrayList<>();
     @OnClick({R.id.back,R.id.home_add,R.id.main_tab1,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -120,15 +121,12 @@ public class XiaoZiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,isImg,0,false);
 
+
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,isImg,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab1:
                 setting();
@@ -179,7 +177,7 @@ public class XiaoZiActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
-                        isImg = true;
+                        isImg = false;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
                             codeBar.setVisibility(View.INVISIBLE);

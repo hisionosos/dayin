@@ -19,15 +19,18 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.test.iview.dayin.activity.PrintActivity;
+import com.test.iview.dayin.view.SingleTouchView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BitmapUtil {
 
@@ -230,6 +233,28 @@ public class BitmapUtil {
         options.inJustDecodeBounds = false;
 
         return BitmapFactory.decodeResource(resources,resId,options);
+
+    }
+
+
+
+    public static void cannelEdit(ArrayList<SingleTouchView> arrs, ArrayList<EditText> edt,boolean b){
+        if (null != edt){
+            for (int i = 0; i <edt.size() ; i++) {
+                if (!b){
+                    edt.get(0).setCursorVisible(b);
+                }
+
+            }
+        }
+        if (null != arrs){
+            for (int i = 0; i < arrs.size(); i++) {
+                SingleTouchView singleTouchView = arrs.get(i);
+                if (null != singleTouchView){
+                    arrs.get(i).setEditable(b);
+                }
+            }
+        }
 
     }
 

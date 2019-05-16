@@ -748,11 +748,17 @@ public class BlueSAPI {
 //                                startActivityForResult(intent, 2);
                                 Log.e("11111vv","11");
                                 Bitmap mp;
-                                if (isImg){
-                                    mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
-                                }else{
-                                    mp = PrinterImageUtils.convertToBlackWhite(bitmap,h);
+
+                                if (h == 0){
+                                    if (isImg){
+                                        mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h));
+                                    }else{
+                                        mp = PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h);
+                                    }
+                                }else{//标签
+                                    mp = PrinterImageUtils.resizeImage(bitmap,380,h);
                                 }
+
 //                                mp = PrinterImageUtils.convertGreyImgByFloyd(bitmap);
 
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);

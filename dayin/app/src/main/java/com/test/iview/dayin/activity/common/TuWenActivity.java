@@ -154,14 +154,10 @@ public class TuWenActivity extends BaseActivity {
                 CameraUtils.albumChoose(this,null);
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
                 BitmapUtil.getInstance().getCutImage(canv,true,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){

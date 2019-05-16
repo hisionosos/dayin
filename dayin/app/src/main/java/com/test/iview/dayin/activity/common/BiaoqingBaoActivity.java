@@ -133,19 +133,16 @@ public class BiaoqingBaoActivity extends BaseActivity{
                 setting();
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
 
+                eds.add(editTxt);
+
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
         }
     }
-
+    private ArrayList<EditText> eds = new ArrayList<>();
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
