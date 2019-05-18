@@ -64,6 +64,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingRight="@dimen/dp_60"
                     android:paddingLeft="@dimen/dp_60"
                     android:hint="输入文字"/>
@@ -95,6 +96,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingRight="@dimen/dp_60"
                     android:paddingLeft="@dimen/dp_60"
                     android:hint="输入文字"/>
@@ -126,6 +128,7 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingRight="@dimen/dp_60"
                     android:paddingLeft="@dimen/dp_60"
                     android:hint="输入文字"/>

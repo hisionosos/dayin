@@ -83,7 +83,7 @@ public class TuKuangActivity extends BaseActivity{
     @Override
     public void initData() {
         edit1 = new EditText(this);
-        edit1.setTextColor(Color.parseColor("#929292"));
+        edit1.setTextColor(Color.parseColor("#000000"));
         edit1.setGravity(Gravity.LEFT);
         edit1.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_80));
         edit1.setBackground(null);
@@ -97,6 +97,22 @@ public class TuKuangActivity extends BaseActivity{
                     edit1.setCursorVisible(true);
             }
         });
+        editLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+
+        edit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -146,22 +162,20 @@ public class TuKuangActivity extends BaseActivity{
                 startActivityForResult(intent4,1000);
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
                 if (null != edit1){
-                    edit1.setCursorVisible(false);
+                    eds.add(editTxt);
                 }
 
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+
 
                 break;
         }
     }
 
+    private ArrayList<EditText> eds = new ArrayList<>();
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

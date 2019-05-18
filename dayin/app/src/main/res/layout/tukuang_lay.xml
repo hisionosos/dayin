@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#fff">
 
 
 
@@ -20,10 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/title_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:background="#fff"
+
             android:layout_above="@+id/main_tab">
             <ImageView
                 android:id="@+id/canv_img"
@@ -43,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="@string/input_text"
-                android:textColor="#929292"
+                android:textColor="#000"
                 android:cursorVisible="false"
                 android:padding="@dimen/dp_30"
                 android:visibility="gone"

@@ -2,6 +2,7 @@ package com.test.iview.dayin.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import com.lzy.okgo.OkGo;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.util.AppManager;
+import com.test.iview.dayin.utils.AppUtils;
 import com.test.iview.dayin.view.common.HttpProgressDialog;
 
 import java.util.ArrayList;
@@ -55,14 +57,19 @@ public abstract class BaseActivity extends Activity {
         }
         setContentView(initLayout());
         ButterKnife.bind(this);
-        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
-        updateActivity(local);
+//        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
+//        updateActivity(local);
 
 
         initView(savedInstanceState);
         initData();
         AppManager.getAppManager().addActivity(this);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(AppUtils.updateLanguage(newBase));
     }
 
 

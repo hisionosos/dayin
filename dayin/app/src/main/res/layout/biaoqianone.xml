@@ -109,6 +109,7 @@
                     android:layout_height="@dimen/dp_110"
                     android:background="@null"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:paddingRight="@dimen/dp_40"
                     android:hint="输入文字"/>
@@ -161,6 +162,7 @@
                     android:background="@null"
                     android:paddingLeft="@dimen/dp_40"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingRight="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -212,6 +214,7 @@
                     android:background="@null"
                     android:paddingLeft="@dimen/dp_40"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:paddingRight="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -263,6 +266,7 @@
                     android:paddingRight="@dimen/dp_40"
                     android:paddingLeft="@dimen/dp_40"
                     android:singleLine="true"
+                    android:textColor="#000"
                     android:hint="输入文字"/>
             </LinearLayout>
 

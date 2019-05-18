@@ -42,7 +42,7 @@ public abstract class BaseFragment extends Fragment {
         if (view == null) {
             throw new IllegalFormatFlagsException("View 不能为空");
         }
-        String local = MyApplication.mCache.getAsString("local");
+//        String local = MyApplication.mCache.getAsString("local");
 
 //        updateActivity(local);
 

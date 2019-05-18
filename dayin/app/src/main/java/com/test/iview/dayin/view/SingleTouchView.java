@@ -13,6 +13,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -68,6 +69,7 @@ public class SingleTouchView extends View {
 	public static final float DEFAULT_DEGREE = 0;
 	public static final int DEFAULT_CONTROL_LOCATION = RIGHT_TOP;
 	public static final int DEFAULT_DELETE_LOCATION = LEFT_TOP;
+	public static final int DEFAULT_SCALE_LOCATION = RIGHT_BOTTOM;
 	public static final boolean DEFAULT_EDITABLE = true;
 	
 	
@@ -125,6 +127,7 @@ public class SingleTouchView extends View {
 	 * 用于缩放，旋转的控制点的坐标
 	 */
 	private Point mControlPoint = new Point();
+	private Point smControlPoint = new Point();
 	/**
 	 * 用于缩放，旋转的控制点的坐标
 	 */
@@ -134,6 +137,8 @@ public class SingleTouchView extends View {
 	 * 用于缩放，旋转的图标
 	 */
 	private Drawable controlDrawable;
+
+	private Drawable scaleDrawable;
 	/**
 	 * 用于点击移除的图标
 	 */
@@ -143,6 +148,7 @@ public class SingleTouchView extends View {
 	 * 缩放，旋转图标的宽和高
 	 */
 	private int mDrawableWidth, mDrawableHeight;
+	private int smDrawableWidth, smDrawableHeight;
 	private int mDeleteDrawableWidth, mDeleteDrawableHeight;
 
 	/**
@@ -168,7 +174,8 @@ public class SingleTouchView extends View {
 	/**
 	 * 旋转或者放大状态
 	 */
-	public static final int STATUS_ROTATE_ZOOM = 2;
+	public static final int STATUS_ROTATE = 2;
+	public static final int STATUS_ZOOM = 4;
 	/**
 	 * 移除状态
 	 */
@@ -217,11 +224,12 @@ public class SingleTouchView extends View {
 	/**
 	 * 控制图标所在的位置（比如左上，右上，左下，右下）
 	 */
-	private int controlLocation = DEFAULT_CONTROL_LOCATION;
+	private int controlLocation = DEFAULT_SCALE_LOCATION;
 	/**
 	 * 控制移除图片所在的位置（比如左上，右上，左下，右下）
 	 */
 	private int deleteLocation = DEFAULT_DELETE_LOCATION;
+	private int scaleLocation = DEFAULT_CONTROL_LOCATION;
 
 	private OnDeleteListener onDeleteListener;
 
@@ -266,8 +274,9 @@ public class SingleTouchView extends View {
 		mScale = mTypedArray.getFloat(R.styleable.SingleTouchView_scale, DEFAULT_SCALE);
 		mDegree = mTypedArray.getFloat(R.styleable.SingleTouchView_degree, DEFAULT_DEGREE);
 		controlDrawable = mTypedArray.getDrawable(R.styleable.SingleTouchView_controlDrawable);
+		scaleDrawable = mTypedArray.getDrawable(R.styleable.SingleTouchView_scaleDrawable);
 		deleteDrawable=mTypedArray.getDrawable(R.styleable.SingleTouchView_deleteDrawable);
-		controlLocation = mTypedArray.getInt(R.styleable.SingleTouchView_controlLocation, DEFAULT_CONTROL_LOCATION);
+		controlLocation = mTypedArray.getInt(R.styleable.SingleTouchView_controlLocation, DEFAULT_SCALE_LOCATION);
 		deleteLocation=mTypedArray.getInt(R.styleable.SingleTouchView_deleteLocation,DEFAULT_DELETE_LOCATION);
 		isEditable = mTypedArray.getBoolean(R.styleable.SingleTouchView_editable, DEFAULT_EDITABLE);
 		
@@ -285,14 +294,21 @@ public class SingleTouchView extends View {
 
 //		mBitmap = ((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_delete)).getBitmap();
 		if(controlDrawable == null){
-			controlDrawable = getContext().getResources().getDrawable(R.drawable.ic_move);
+			controlDrawable = getContext().getResources().getDrawable(R.drawable.ic_zoom);
 		}
 		if(deleteDrawable==null){
 			deleteDrawable=getContext().getResources().getDrawable(R.drawable.ic_delete);
 		}
-		
+
+		if(scaleDrawable==null){
+			scaleDrawable=getContext().getResources().getDrawable(R.drawable.ic_move);
+		}
+
 		mDrawableWidth = controlDrawable.getIntrinsicWidth();
 		mDrawableHeight = controlDrawable.getIntrinsicHeight();
+
+		smDrawableWidth = scaleDrawable.getIntrinsicWidth();
+		smDrawableHeight = scaleDrawable.getIntrinsicHeight();
 
 		if(deleteDrawable!=null) {
 			mDeleteDrawableHeight = deleteDrawable.getIntrinsicHeight();
@@ -427,6 +443,11 @@ public class SingleTouchView extends View {
 							/ 2, mControlPoint.y + mDrawableHeight / 2);
 			controlDrawable.draw(canvas);
 
+			scaleDrawable.setBounds(smControlPoint.x - smDrawableWidth / 2,
+					smControlPoint.y - smDrawableHeight / 2, smControlPoint.x + smDrawableWidth
+							/ 2, smControlPoint.y + smDrawableHeight / 2);
+			scaleDrawable.draw(canvas);
+
 
 			if(deleteDrawable!=null) {
 				deleteDrawable.setBounds(mDeletePoint.x - mDeleteDrawableWidth / 2, mDeletePoint.y - mDeleteDrawableHeight / 2,
@@ -441,10 +462,11 @@ public class SingleTouchView extends View {
 	Point curPoint = new Point();
 	List<Point> listPoint = new ArrayList<>();
 
+
 	public boolean onTouchEvent(MotionEvent event) {
-		if(!isEditable){
-			return super.onTouchEvent(event);
-		}
+//		if(!isEditable){
+//			return super.onTouchEvent(event);
+//		}
 		switch (event.getAction() ) {
 		case MotionEvent.ACTION_DOWN:
 			mPreMovePointF.set(event.getX() + mViewPaddingLeft, event.getY() + mViewPaddingTop);
@@ -464,6 +486,8 @@ public class SingleTouchView extends View {
 				return false;
 			}
 			listPoint.clear();
+			isEditable = true;
+			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
 			if(mStatus==STATUS_DELETE){
@@ -478,31 +502,34 @@ public class SingleTouchView extends View {
 			break;
 		case MotionEvent.ACTION_MOVE:
 			mCurMovePointF.set(event.getX() + mViewPaddingLeft, event.getY() + mViewPaddingTop);
-
-			if (mStatus == STATUS_ROTATE_ZOOM) {
+			Log.e("ACTION_MOVE",mStatus + "");
+			if (mStatus == STATUS_ZOOM){
 				float scale = 1f;
-				
+
 				int halfBitmapWidth = mBitmap.getWidth() / 2;
 				int halfBitmapHeight = mBitmap.getHeight() /2 ;
-				
+
 				//图片某个点到图片中心的距离
 				float bitmapToCenterDistance = (float) Math.sqrt(halfBitmapWidth * halfBitmapWidth + halfBitmapHeight * halfBitmapHeight);
-				
+
 				//移动的点到图片中心的距离
-				float moveToCenterDistance = distance4PointF(mCenterPoint, mCurMovePointF);
-				
+				float moveToCenterDistance = distance4PointF(mCenterPoint, mCurMovePointF) + 15;
+
 				//计算缩放比例
 				scale = moveToCenterDistance / bitmapToCenterDistance;
-				
-				
+
+
 				//缩放比例的界限判断
 				if (scale <= MIN_SCALE) {
 					scale = MIN_SCALE;
 				} else if (scale >= MAX_SCALE) {
 					scale = MAX_SCALE;
 				}
-				
-				
+
+				mScale = scale;
+				transformDraw();
+			}else if (mStatus == STATUS_ROTATE) {
+
 				// 角度
 				double a = distance4PointF(mCenterPoint, mPreMovePointF);
 				double b = distance4PointF(mPreMovePointF, mCurMovePointF);
@@ -531,7 +558,7 @@ public class SingleTouchView extends View {
 				} 
 				
 				mDegree = mDegree + newDegree;
-				mScale = scale;
+
 				
 				transformDraw();
 			}else if (mStatus == STATUS_DRAG) {
@@ -627,6 +654,7 @@ public class SingleTouchView extends View {
 		
 		mControlPoint = LocationToPoint(controlLocation);
 		mDeletePoint = LocationToPoint(deleteLocation);
+		smControlPoint = LocationToPoint(scaleLocation);
 	}
 	
 	
@@ -772,21 +800,27 @@ public class SingleTouchView extends View {
 		PointF touchPoint = new PointF(x, y);
 		PointF controlPointF = new PointF(mControlPoint);
 		PointF deletePointF = new PointF(mDeletePoint);
+		PointF scalePointF = new PointF(smControlPoint);
 
 		//点击的点到控制旋转，缩放点的距离
 		float distanceToControl = distance4PointF(touchPoint, controlPointF);
 		float distanceToDelete = distance4PointF(touchPoint, deletePointF);
+		float distanceToScale = distance4PointF(touchPoint, scalePointF);
 
 		//如果两者之间的距离小于 控制图标的宽度，高度的最小值，则认为点中了控制图标
 		if(distanceToControl < Math.min(mDrawableWidth/2, mDrawableHeight/2)){
-			return STATUS_ROTATE_ZOOM;
+			return STATUS_ROTATE;
 		}
 
 		//如果两者之间的距离小于 控制图标的宽度，高度的最小值，则认为点中了移除按钮
 		if(distanceToDelete < Math.min(mDrawableWidth/2, mDrawableHeight/2)){
 			return STATUS_DELETE;
 		}
-		
+
+		if(distanceToScale < Math.min(smDrawableWidth/2, smDrawableHeight/2)){
+			return STATUS_ZOOM;
+		}
+
 		return STATUS_DRAG;
 		
 	}
@@ -828,6 +862,9 @@ public class SingleTouchView extends View {
 	}
 	public Drawable getDeleteDrawable() {
 		return deleteDrawable;
+	}
+	public Drawable getSclaeDrawable() {
+		return scaleDrawable;
 	}
 
 	/**

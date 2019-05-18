@@ -140,6 +140,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.JianLouDetailsActivity"

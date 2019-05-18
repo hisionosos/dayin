@@ -216,13 +216,10 @@ public class TuYaActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+
                 break;
             case R.id.back:
                 finish();

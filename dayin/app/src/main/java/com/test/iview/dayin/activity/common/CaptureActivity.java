@@ -1,6 +1,7 @@
 package com.test.iview.dayin.activity.common;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -64,7 +65,12 @@ public class CaptureActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        canv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+            }
+        });
 
     }
 
@@ -82,18 +88,18 @@ public class CaptureActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    arrs.get(i).setEditable(false);
 
-                }
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
                     if (flag.equals("1")){
-                        bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                        bitmap = QRCodeEncoder.syncEncodeQRCode(str,350, Color.parseColor("#000000"));//二维码
                     }else if (flag.equals("2")){
                         bitmap = QRCodeEncoder.syncEncodeBarcode(str,350,200,20);//条形码
                     }

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#fff">
 
         <RelativeLayout
             android:id="@+id/code_bar"
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_120"
                 android:hint="@string/input_text"
-
+                android:textColor="#000"
                 android:gravity="center_vertical"
                 android:layout_toLeftOf="@+id/get_rcode"
                 android:layout_marginLeft="@dimen/dp_60"
@@ -53,10 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/code_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:background="#fff"
             android:layout_above="@+id/main_tab">
 
             <EditText
@@ -68,7 +65,7 @@
                 android:cursorVisible="false"
                 android:padding="@dimen/dp_30"
                 android:hint="@string/input_text"
-                android:textColor="#929292"
+                android:textColor="#000"
                 android:visibility="visible"
                 android:background="@null"/>
 
@@ -148,6 +145,7 @@
                 android:textColor="@color/text_color_selecter"
                 android:text="@string/dy_erweima"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_ercode"
                 android:layout_weight="1"/>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -72,9 +73,11 @@ public class BiaoqingBaoActivity extends BaseActivity{
         editTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
                 editTxt.setCursorVisible(true);
             }
         });
+
     }
 
     @Override
@@ -133,19 +136,15 @@ public class BiaoqingBaoActivity extends BaseActivity{
                 setting();
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
 
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
         }
     }
-
+    private ArrayList<EditText> eds = new ArrayList<>();
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

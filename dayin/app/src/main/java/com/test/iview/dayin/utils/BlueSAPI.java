@@ -347,7 +347,7 @@ public class BlueSAPI {
         }
 
         @SuppressLint({"NewApi"})
-        public int PrintImage(Bitmap bmp) {
+        public int PrintImage(Bitmap bmp , boolean isBiaoqian) {
             if (bmp == null) {
                 return -1;
             } else {
@@ -394,7 +394,7 @@ public class BlueSAPI {
                                 ++j;
                             }
 
-                            if (r < 100 && g < 100 && b < 100) {
+                            if (r < 127 && g < 127 && b < 127) {
                                 body[j] = (byte)(body[j] * 2 + 1);
                             } else {
                                 body[j] = (byte)(body[j] * 2);
@@ -409,20 +409,15 @@ public class BlueSAPI {
                         while(count == 0 && isConnect){
                             count = inStream.available();
                             Log.e("dedd",count + "");
-                            try {
-                                Thread.sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+
                         }
-                        if( count != 0 ) {
-                            System.out.println(count);
+                        if(count != 0) {
                             byte[] bt = new byte[count];
                             int readCount = 0;
                             while (readCount < count) {
                                 readCount += inStream.read(bt, readCount, count - readCount);
                             }
-                            System.out.println("12345rf" + readCount);
+
                             String xx = new String(bt);
                             System.out.println(xx);
                         }
@@ -435,10 +430,11 @@ public class BlueSAPI {
                 PrintLn();
                 PrintLn();
                 PrintLn();
-//                PrintLn();
-//                PrintLn();
-//                PrintLn();
-//                PrintLn();
+                if (!isBiaoqian){
+                    PrintLn();
+                    PrintLn();
+                    PrintLn();
+                }
 
                 return 0;
             }
@@ -559,13 +555,10 @@ public class BlueSAPI {
                 if (this.outStream == null) {
                     return 2007;
                 } else {
-
                     try {
                         this.outStream.write(data);
                         this.outStream.flush();
-
-                        Thread.sleep(100);
-
+                        Thread.sleep(10);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -686,10 +679,10 @@ public class BlueSAPI {
      * 打印
      * @param type 打印内容类型
      */
-    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final int h) {
-        if (!isConnect) {
-            ToastUtils.showShort(R.string.connect_printer);
-        } else {
+    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final boolean isImg, final int h,final boolean isBiaoqian) {
+//        if (!isConnect) {
+//            ToastUtils.showShort(R.string.connect_printer);
+//        } else {
             // 打印至蓝牙打印机
             final ProgressDialog pd = new ProgressDialog(content);
             pd.setTitle(content.getString(R.string.dy_tips));
@@ -754,12 +747,24 @@ public class BlueSAPI {
 //                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                                startActivityForResult(intent, 2);
                                 Log.e("11111vv","11");
-                                Bitmap mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(bitmap,h));
+                                Bitmap mp;
+
+                                if (h == 0){
+                                    if (isImg){
+                                        mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h));
+                                    }else{
+                                        mp = PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h);
+                                    }
+                                }else{//标签
+                                    mp = PrinterImageUtils.resizeImage(bitmap,380,h);
+                                }
+
+//                                mp = PrinterImageUtils.convertGreyImgByFloyd(bitmap);
 
 //                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
 //                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
 //                                        + "," + mp.getRowBytes());
-                                blueApi.PrintImage(mp);
+                                blueApi.PrintImage(mp,isBiaoqian);
 //                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
                                 Log.e("11111vv","22");
                                 view.destroyDrawingCache(); // 保存过后释放资源
@@ -818,7 +823,7 @@ public class BlueSAPI {
                     }
                 }
             }.start();
-        }
+//        }
     }
 
 

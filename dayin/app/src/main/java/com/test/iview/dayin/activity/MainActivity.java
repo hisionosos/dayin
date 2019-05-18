@@ -1,6 +1,7 @@
 package com.test.iview.dayin.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -20,13 +21,19 @@ import android.widget.TextView;
 
 import com.lzy.okgo.request.BaseRequest;
 import com.test.iview.dayin.R;
+import com.test.iview.dayin.entity.bean.EventMessage;
 import com.test.iview.dayin.fragment.HomeFragment;
 import com.test.iview.dayin.fragment.MyFragment;
 import com.test.iview.dayin.global.HttpManager;
 import com.test.iview.dayin.global.MyApplication;
+import com.test.iview.dayin.utils.AppUtils;
 import com.test.iview.dayin.utils.BaseResponse;
 import com.test.iview.dayin.utils.ResourceUtils;
 import com.test.iview.dayin.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +62,18 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     private ArrayList fgs = new ArrayList<>();
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(AppUtils.updateLanguage(newBase));
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 //        if (!Settings.canDrawOverlays(this)) {
 //            //若未授权则请求权限
 //            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -72,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 //            Utils.gotoNotificationSetting(this);
 //        }
 
-        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
-        updateActivity(local);
+//        String local = MyApplication.mCache.getAsString("local") == null ? "zh" : MyApplication.mCache.getAsString("local");
+//        updateActivity(local);
 
         //检查权限
         if (!EasyPermissions.hasPermissions(this,perms)){
@@ -85,6 +99,16 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         init();
 
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(EventMessage message) {
+        String m = message.getMessage();
+        if ("local".equals(m)){
+            recreate();
+        }
+    }
+
     public void updateActivity(String sta) {
         // 本地语言设置
         Locale myLocale = new Locale(sta);

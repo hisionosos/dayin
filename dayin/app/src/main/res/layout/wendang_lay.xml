@@ -9,10 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
-
-
-
+        android:background="#fff">
 
         <RelativeLayout
             android:id="@+id/canv"
@@ -20,15 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/title_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:background="#fff"
             android:layout_above="@+id/main_tab">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
+                android:textColor="#000"
                 android:visibility="invisible"
                 android:background="@null"/>
 

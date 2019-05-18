@@ -107,13 +107,20 @@ public class TuWenActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mainTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+        gridLay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
 
-                }
-
+        editTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
             }
         });
     }
@@ -154,14 +161,10 @@ public class TuWenActivity extends BaseActivity {
                 CameraUtils.albumChoose(this,null);
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){
@@ -240,7 +243,7 @@ public class TuWenActivity extends BaseActivity {
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,Color.parseColor("#000000"));//二维码
                     if (bitmap != null){
                         SingleTouchView singleTouchView = new SingleTouchView(TuWenActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -250,7 +253,7 @@ public class TuWenActivity extends BaseActivity {
                         canv.addView(singleTouchView);
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
-                            codeBar.setVisibility(View.INVISIBLE);
+                            codeBar.setVisibility(View.GONE);
                         }else{
                             codeBar.setVisibility(View.VISIBLE);
                         }
@@ -338,6 +341,13 @@ public class TuWenActivity extends BaseActivity {
         for (int i = 0, j = lie_count*hang_count; i < j; i++) {
             EditText edit = new EditText(this);
             edit.setBackgroundColor(Color.rgb(255,255,255));
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                    editTxt.setCursorVisible(true);
+                }
+            });
             eds.add(edit);
             //使用Spec定义子控件的位置和比重
             GridLayout.Spec rowSpec = GridLayout.spec(i / lie_count, 1f);

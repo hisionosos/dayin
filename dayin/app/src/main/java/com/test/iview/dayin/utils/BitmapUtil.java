@@ -19,15 +19,18 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.test.iview.dayin.activity.PrintActivity;
+import com.test.iview.dayin.view.SingleTouchView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BitmapUtil {
 
@@ -233,6 +236,28 @@ public class BitmapUtil {
 
     }
 
+
+
+    public static void cannelEdit(ArrayList<SingleTouchView> arrs, ArrayList<EditText> edt,boolean b){
+        if (null != edt){
+            for (int i = 0; i <edt.size() ; i++) {
+                if (!b){
+                    edt.get(0).setCursorVisible(b);
+                }
+
+            }
+        }
+        if (null != arrs){
+            for (int i = 0; i < arrs.size(); i++) {
+                SingleTouchView singleTouchView = arrs.get(i);
+                if (null != singleTouchView){
+                    arrs.get(i).setEditable(b);
+                }
+            }
+        }
+
+    }
+
     /**
      * 获取采样率
      * @param options
@@ -262,7 +287,7 @@ public class BitmapUtil {
 
     }
 
-    public String getCutImage(final View dView, final int h){
+    public String getCutImage(final View dView, final boolean isImg,final int h,final boolean isBiaoqian){
         boolean b = BlueSAPI.getInstance().isConnect();
         if (!b){
             dView.getContext().startActivity(new Intent(dView.getContext(), PrintActivity.class));
@@ -279,7 +304,7 @@ public class BitmapUtil {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,h);
+                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,isImg,h,isBiaoqian);
 //                    savePicture(bmp, fileName);// 保存图片
 //                    dView.destroyDrawingCache(); // 保存过后释放资源
 //                    if (null != bmp){
@@ -297,7 +322,7 @@ public class BitmapUtil {
         return filePath;
     }
 
-    public static String getBitmapScrollView(final ScrollView scrollView,final int hei) {
+    public static String getBitmapScrollView(final ScrollView scrollView,final boolean isImg,final int hei  ) {
         int h = 0;
         boolean b = BlueSAPI.getInstance().isConnect();
         if (!b){
@@ -327,7 +352,7 @@ public class BitmapUtil {
                     scrollView.draw(canvas);
 
 
-                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,hei);
+                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,isImg,hei,false);
 //                    ToastUtils.showShort("保存成功");
 
 

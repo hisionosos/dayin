@@ -2,9 +2,11 @@ package com.test.iview.dayin.activity.common;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -69,7 +71,6 @@ public class XiaoZiActivity extends BaseActivity {
         flag = getIntent().getStringExtra("flag");
         commonTitle.setText(R.string.dy_xiaozidayin);
 
-
         homeAdd.setVisibility(View.VISIBLE);
         homeAdd.setImageResource(R.drawable.printer);
         commonTxt.setVisibility(View.GONE);
@@ -85,7 +86,20 @@ public class XiaoZiActivity extends BaseActivity {
                 editTxt.setCursorVisible(true);
             }
         });
+        editTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("editText","click");
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                editTxt.setCursorVisible(true);
+            }
+        });
+        canv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -109,9 +123,10 @@ public class XiaoZiActivity extends BaseActivity {
     public int initLayout() {
         return R.layout.xiaozi_lay;
     }
-
+    private boolean isImg = false;
     private boolean isBlod = false;
     private int editGrave = 0;
+    private ArrayList<EditText> eds = new ArrayList<>();
     @OnClick({R.id.back,R.id.home_add,R.id.main_tab1,R.id.main_tab2,R.id.main_tab3,R.id.main_tab4,R.id.main_tab5,R.id.get_rcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -119,15 +134,12 @@ public class XiaoZiActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.home_add:
-                for (int i = 0; i < arrs.size(); i++) {
-                    SingleTouchView singleTouchView = arrs.get(i);
-                    if (null != singleTouchView){
-                        arrs.get(i).setEditable(false);
-                    }
-                }
-                editTxt.setCursorVisible(false);
-                BitmapUtil.getInstance().getCutImage(canv,0);
 
+
+                eds.add(editTxt);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
+                BitmapUtil.getInstance().getCutImage(canv,isImg,0,false);
+                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab1:
                 setting();
@@ -170,7 +182,7 @@ public class XiaoZiActivity extends BaseActivity {
                 String str = txtUrl.getText().toString();
                 Bitmap bitmap = null;
                 if (str.length() > 0){
-                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350,R.color.black);//二维码
+                    bitmap = QRCodeEncoder.syncEncodeQRCode(str,350, Color.parseColor("#000000"));//二维码
                     if (bitmap != null){
                         SingleTouchView singleTouchView = new SingleTouchView(XiaoZiActivity.this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -178,9 +190,10 @@ public class XiaoZiActivity extends BaseActivity {
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
+                        isImg = false;
                         arrs.add(singleTouchView);
                         if (codeBar.getVisibility() == View.VISIBLE){
-                            codeBar.setVisibility(View.INVISIBLE);
+                            codeBar.setVisibility(View.GONE);
                         }else{
                             codeBar.setVisibility(View.VISIBLE);
                         }
@@ -211,6 +224,7 @@ public class XiaoZiActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1000 && null != data) {
             int id = data.getIntExtra("img",0);
+            isImg = true;
             addCusView(id);
         }
 

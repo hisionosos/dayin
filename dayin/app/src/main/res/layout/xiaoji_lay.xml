@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#fff">
 
 
 
@@ -19,10 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/title_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:background="#fff"
             android:layout_above="@+id/main_tab">
             <ImageView
                 android:id="@+id/img_back"
@@ -46,7 +43,8 @@
                 android:hint="@string/dy_jilu"
                 android:layout_below="@+id/xiaoji_date"
                 android:layout_marginTop="@dimen/dp_20"
-                android:cursorVisible="false"
+                android:cursorVisible="true"
+                android:textColor="#000"
                 android:padding="@dimen/dp_30"
                 android:visibility="visible"
                 android:background="@null"/>

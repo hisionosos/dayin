@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFEFEF">
+        android:background="#fff">
 
         <RelativeLayout
             android:id="@+id/code_bar"
@@ -40,6 +40,7 @@
                 android:layout_height="@dimen/dp_120"
                 android:hint="输入文字..."
                 android:gravity="center_vertical"
+                android:textColor="#000"
                 android:layout_toLeftOf="@+id/get_rcode"
                 android:layout_marginLeft="@dimen/dp_60"
                 android:background="@null"/>
@@ -53,10 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/code_bar"
-            android:background="@drawable/shape_pop_dialog"
-            android:layout_marginLeft="@dimen/dp_50"
-            android:layout_marginRight="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:background="#fff"
             >
 
             <LinearLayout

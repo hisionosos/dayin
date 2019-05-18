@@ -69,6 +69,7 @@
                     android:paddingRight="@dimen/dp_40"
                     android:singleLine="true"
                     android:background="@null"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -100,6 +101,7 @@
                     android:paddingRight="@dimen/dp_40"
                     android:singleLine="true"
                     android:background="@null"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -132,6 +134,7 @@
                     android:paddingRight="@dimen/dp_40"
                     android:singleLine="true"
                     android:background="@null"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -164,6 +167,7 @@
                     android:paddingRight="@dimen/dp_40"
                     android:singleLine="true"
                     android:background="@null"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:hint="输入文字"/>
             </LinearLayout>
@@ -194,6 +198,7 @@
                     android:layout_height="@dimen/dp_110"
                     android:background="@null"
                     android:hint="输入文字"
+                    android:textColor="#000"
                     android:paddingLeft="@dimen/dp_40"
                     android:paddingRight="@dimen/dp_40"
                     android:singleLine="true" />
@@ -218,6 +223,7 @@
                         android:paddingRight="@dimen/dp_40"
                         android:singleLine="true"
                         android:background="@null"
+                        android:textColor="#000"
                         android:paddingLeft="@dimen/dp_40"
                         android:hint="输入文字"/>
                 </LinearLayout>

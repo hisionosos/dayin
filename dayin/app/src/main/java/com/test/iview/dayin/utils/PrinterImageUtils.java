@@ -2,6 +2,7 @@ package com.test.iview.dayin.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.media.ThumbnailUtils;
 import android.util.Base64;
 
@@ -159,16 +160,45 @@ public class PrinterImageUtils {
 
         var0 = Bitmap.createBitmap(var3, var4, Bitmap.Config.RGB_565);
         var0.setPixels(var6, 0, var3, 0, 0, var3, var4);
-        var2 = (int)(384.0F / (float)var3 * (float)var4);
-        var1 = var2;
-        if (var2 == 682) {
-            var1 = 681;
+        return var0;
+//        var2 = (int)(374.0F / (float)var3 * (float)var4);
+//        var1 = var2;
+//        if (var2 == 682) {
+//            var1 = 681;
+//        }
+//
+//        if (h > 0){
+//            var1 = h;
+//        }
+//        return ThumbnailUtils.extractThumbnail(var0, 374, var1);
+    }
+
+
+    public static Bitmap resizeImage(Bitmap bitmap, int w,int h) {
+        Bitmap BitmapOrg = bitmap;
+        int width = BitmapOrg.getWidth();
+        int height = BitmapOrg.getHeight();
+        int newWidth = w;
+        int newHeight = (int)((float)newWidth / (float)width * (float)height);
+
+
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        Matrix matrix = new Matrix();
+        if (h > 0){
+            float sw = ((float) newWidth) / width;
+            float sh = ((float) h) / height;
+            matrix.postScale(sw, sh);
+        }else{
+            matrix.postScale(scaleWidth, scaleHeight);
         }
 
-        if (h > 0){
-            var1 = h;
-        }
-        return ThumbnailUtils.extractThumbnail(var0, 384, var1);
+        // if you want to rotate the Bitmap
+        // matrix.postRotate(45);
+        Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, 0, 0, width,
+                height, matrix, true);
+        return resizedBitmap;
     }
 
     public static Bitmap convertToBlackWhiteLogo(Bitmap var0) {
@@ -194,7 +224,7 @@ public class PrinterImageUtils {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(param0, options);
-        options.inSampleSize = calculateInSampleSize(options, 384);//自定义一个宽和高
+        options.inSampleSize = calculateInSampleSize(options, 374);//自定义一个宽和高
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeFile(param0, options);
 
@@ -209,4 +239,55 @@ public class PrinterImageUtils {
         FileOutputStream var2 = new FileOutputStream(var1);
         var0.compress(Bitmap.CompressFormat.JPEG, 100, var2);
     }
+
+
+    public static Bitmap convertGreyImgByFloyd(Bitmap img) {
+        int width = img.getWidth();
+        int height = img.getHeight();
+
+        int[] pixels = new int[width * height]; //通过位图的大小创建像素点数组  
+        img.getPixels(pixels, 0, width, 0, 0, width, height);
+        int[] gray=new int[height*width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int grey = pixels[width * i + j];
+                int red = ((grey&0x00FF0000) >> 16);
+                gray[width*i+j]=red;
+            }
+        }
+
+
+        int e=0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int g=gray[width*i+j];
+                if (g>=128) {
+                    pixels[width*i+j]=0xffffffff;
+                    e=g-255;
+                }else {
+                    pixels[width*i+j]=0xff000000;
+                    e=g-0;
+                }
+//                if (j<width-1&&i<height-1) {
+////右边像素处理
+//                    gray[width*i+j+1]+=3*e/8;
+////下
+//                    gray[width*(i+1)+j]+=3*e/8;
+////右下
+//                    gray[width*(i+1)+j+1]+=e/4;
+//                }else if (j==width-1&&i<height-1) {//靠右或靠下边的像素的情况
+////下方像素处理
+//                    gray[width*(i+1)+j]+=3*e/8;
+//                }else if (j<width-1&&i==height-1) {
+////右边像素处理
+//                    gray[width*(i)+j+1]+=e/4;
+//                }
+            }
+        }
+
+        Bitmap mBitmap=Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        mBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return mBitmap;
+    }
+
 }
