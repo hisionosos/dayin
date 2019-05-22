@@ -110,4 +110,5 @@
 	<string name="dy_liangdu">effects</string>
 	<string name="dy_sediao">tone</string>
 	<string name="dy_baohedu">saturation</string>
+	<string name="dy_chicun">Please choose the print size</string>
 </resources>

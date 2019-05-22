@@ -11,6 +11,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -163,8 +164,8 @@ public class TuWenActivity extends BaseActivity {
             case R.id.home_add:
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+                BitmapUtil.getInstance().showBitmap(canv,true,0,false);
+//                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab3:
                 if (editGrave == 0){
@@ -348,6 +349,40 @@ public class TuWenActivity extends BaseActivity {
                     editTxt.setCursorVisible(true);
                 }
             });
+            int dimen = getResources().getDimensionPixelSize(R.dimen.sp_60);
+            switch (lie_count){
+                case 1:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_60);
+                    break;
+                case 2:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_60);
+                    break;
+                case 3:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_60);
+                    break;
+                case 4:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_50);
+                    break;
+                case 5:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_40);
+                    break;
+                case 6:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_35);
+                    break;
+                case 7:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_30);
+                    break;
+                case 8:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_25);
+                    break;
+                case 9:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_20);
+                    break;
+                case 10:
+                    dimen = getResources().getDimensionPixelSize(R.dimen.sp_15);
+                    break;
+            }
+            edit.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
             eds.add(edit);
             //使用Spec定义子控件的位置和比重
             GridLayout.Spec rowSpec = GridLayout.spec(i / lie_count, 1f);

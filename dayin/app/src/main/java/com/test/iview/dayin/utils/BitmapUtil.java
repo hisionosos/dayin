@@ -1,6 +1,7 @@
 package com.test.iview.dayin.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,10 +20,13 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.ScrollView;
 
+import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.PrintActivity;
+import com.test.iview.dayin.activity.ShowBitmapActivity;
 import com.test.iview.dayin.view.SingleTouchView;
 
 import java.io.BufferedOutputStream;
@@ -190,6 +194,15 @@ public class BitmapUtil {
     }
 
 
+    public static Bitmap choosePath(String imagePath){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 1;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        final int[] size = getBitmapWidthHeight(imagePath);
+
+        Bitmap targetBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(imagePath, options), size[0], size[1], true);
+        return targetBitmap;
+    }
     /**
      * 按原图比例缩放裁剪图片
      *
@@ -241,6 +254,7 @@ public class BitmapUtil {
     public static void cannelEdit(ArrayList<SingleTouchView> arrs, ArrayList<EditText> edt,boolean b){
         if (null != edt){
             for (int i = 0; i <edt.size() ; i++) {
+                edt.get(i).setHint("");
                 if (!b){
                     edt.get(0).setCursorVisible(b);
                 }
@@ -287,6 +301,161 @@ public class BitmapUtil {
 
     }
 
+    public void showBitmap(final View dView, final boolean isImg,final int h,final boolean isBiaoqian){
+        final ProgressDialog pd = new ProgressDialog(dView.getContext());
+        pd.setTitle(dView.getContext().getString(R.string.dy_tips));
+        pd.setMessage("请稍候……");
+        pd.show();
+        dView.setDrawingCacheEnabled(true);
+        dView.buildDrawingCache();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final Bitmap bmp = dView.getDrawingCache(); // 获取图片
+                final String path = BitmapUtil.getInstance().savePicture(bmp,System.currentTimeMillis() + "_logo.png");
+                ((Activity)dView.getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(dView.getContext(), ShowBitmapActivity.class);
+                        intent.putExtra("path",path);
+                        intent.putExtra("isImg",isImg);
+                        intent.putExtra("h",h);
+                        intent.putExtra("isBiaoqian",isBiaoqian);
+                        dView.getContext().startActivity(intent);
+                        if (null != pd){
+                            pd.dismiss();
+                        }
+                        if (null != dView){
+                            dView.destroyDrawingCache(); // 保存过后释放资源
+                        }
+
+                        if (null != bmp){
+                            bmp.recycle();
+                        }
+                    }
+                });
+            }
+        }).start();
+
+
+    }
+
+
+    public void showScollBitmap(final ScrollView scrollView, final boolean isImg,final int hei){
+        final ProgressDialog pd = new ProgressDialog(scrollView.getContext());
+        pd.setTitle(scrollView.getContext().getString(R.string.dy_tips));
+        pd.setMessage("请稍候……");
+        pd.show();
+
+        int h = 0;
+        for (int i = 0; i < scrollView.getChildCount(); i++) {
+            h += scrollView.getChildAt(i).getHeight();
+            scrollView.getChildAt(i).setBackgroundColor(
+                    Color.parseColor("#ffffff"));
+        }
+
+        try {
+            final int finalH = h;
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+                    final Bitmap bitmap = Bitmap.createBitmap(scrollView.getWidth(), finalH,
+                            Bitmap.Config.RGB_565);
+                    final Canvas canvas = new Canvas(bitmap);
+                    scrollView.draw(canvas);
+
+                    final String path = BitmapUtil.getInstance().savePicture(bitmap,System.currentTimeMillis() + "_logo.png");
+                    ((Activity)scrollView.getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(scrollView.getContext(), ShowBitmapActivity.class);
+                            intent.putExtra("path",path);
+                            intent.putExtra("isImg",isImg);
+                            intent.putExtra("h",hei);
+                            intent.putExtra("isBiaoqian",false);
+                            scrollView.getContext().startActivity(intent);
+                            if (null != pd){
+                                pd.dismiss();
+                            }
+                            if (null != scrollView){
+                                scrollView.destroyDrawingCache(); // 保存过后释放资源
+                            }
+
+                            if (null != bitmap){
+                                bitmap.recycle();
+                            }
+                        }
+                    });
+
+                }
+            }).start();
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+
+    public void getwebViewBitmap(final WebView webView){
+        final ProgressDialog pd = new ProgressDialog(webView.getContext());
+        pd.setTitle(webView.getContext().getString(R.string.dy_tips));
+        pd.setMessage("请稍候……");
+        pd.show();
+
+        webView.setDrawingCacheEnabled(true);
+        webView.buildDrawingCache();
+        int height = (int) (webView.getContentHeight() * webView.getScale());
+        int width = webView.getWidth();
+        int pH = webView.getHeight();
+        final Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bm);
+        int top = height;
+        while (top > 0) {
+            if (top < pH) {
+                top = 0;
+            } else {
+                top -= pH;
+            }
+            canvas.save();
+            canvas.clipRect(0, top, width, top + pH);
+            webView.scrollTo(0, top);
+            webView.draw(canvas);
+            canvas.restore();
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String path = BitmapUtil.getInstance().savePicture(bm,System.currentTimeMillis() + "_logo.png");
+                ((Activity)webView.getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(webView.getContext(), ShowBitmapActivity.class);
+                        intent.putExtra("path",path);
+                        intent.putExtra("isImg",true);
+                        intent.putExtra("h",0);
+                        intent.putExtra("isBiaoqian",false);
+                        webView.getContext().startActivity(intent);
+                        if (null != pd){
+                            pd.dismiss();
+                        }
+                        if (null != webView){
+                            webView.destroyDrawingCache(); // 保存过后释放资源
+                        }
+
+                        if (null != bm){
+                            bm.recycle();
+                        }
+                    }
+                });
+
+            }
+        }).start();
+    }
+
+
     public String getCutImage(final View dView, final boolean isImg,final int h,final boolean isBiaoqian){
         boolean b = BlueSAPI.getInstance().isConnect();
         if (!b){
@@ -298,13 +467,18 @@ public class BitmapUtil {
         final String fileName = System.currentTimeMillis() + "_screen.png";
         String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + fileName;
         try {
-            new Handler().postDelayed(new Runnable() {
+            final ProgressDialog pd = new ProgressDialog(dView.getContext());
+            pd.setTitle(dView.getContext().getString(R.string.dy_tips));
+            pd.setMessage("正在打印，请稍候……");
+            pd.show();
+
+            new Thread(new Runnable() {
 
                 @Override
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,isImg,h,isBiaoqian);
+//                    BlueSAPI.getInstance().printContent(pd,dView,dView.getContext(),bmp,5,isImg,h,isBiaoqian);
 //                    savePicture(bmp, fileName);// 保存图片
 //                    dView.destroyDrawingCache(); // 保存过后释放资源
 //                    if (null != bmp){
@@ -313,7 +487,7 @@ public class BitmapUtil {
 
 
                 }
-            },500);
+            }).start();
 
         } catch (Exception e) {
             filePath = "";
@@ -339,25 +513,27 @@ public class BitmapUtil {
 
         try {
             final int finalH = h;
-            new Handler().postDelayed(new Runnable() {
+            final ProgressDialog pd = new ProgressDialog(scrollView.getContext());
+            pd.setTitle(scrollView.getContext().getString(R.string.dy_tips));
+            pd.setMessage("正在打印，请稍候……");
+            pd.show();
+
+            new Thread(new Runnable() {
 
                 @Override
                 public void run() {
-                    // 获取scrollview实际高度
-
-                    // 创建对应大小的bitmap
                     Bitmap bitmap = Bitmap.createBitmap(scrollView.getWidth(), finalH,
                             Bitmap.Config.RGB_565);
                     final Canvas canvas = new Canvas(bitmap);
                     scrollView.draw(canvas);
 
 
-                    BlueSAPI.getInstance().printContent(scrollView,scrollView.getContext(),bitmap,5,isImg,hei,false);
+//                    BlueSAPI.getInstance().printContent(pd,scrollView,scrollView.getContext(),bitmap,5,isImg,hei,false);
 //                    ToastUtils.showShort("保存成功");
 
 
                 }
-            },500);
+            }).start();
 
         } catch (Exception e) {
             filePath = "";
@@ -367,11 +543,28 @@ public class BitmapUtil {
 
     }
 
+    public static Bitmap toGrayScale(Bitmap bmpOriginal) {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
 
-    public void savePicture(Bitmap bm, String fileName) {
+        Bitmap bmpGrayScale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayScale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayScale;
+    }
+
+
+
+    public String savePicture(Bitmap bm, String fileName) {
         if (null == bm) {
             Log.i("savePicture", "---图片为空------");
-            return;
+            return null;
         }
 
         Log.e("path", Environment.getExternalStorageDirectory().getAbsolutePath() );
@@ -386,15 +579,15 @@ public class BitmapUtil {
             }
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
             //压缩保存到本地
-            bm.compress(Bitmap.CompressFormat.PNG, 90, bos);
+            bm.compress(Bitmap.CompressFormat.PNG, 100, bos);
             bos.flush();
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
-
+            return null;
         }
 
-
+        return myCaptureFile.getAbsolutePath();
     }
 
 

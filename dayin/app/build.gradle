@@ -119,7 +119,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation project(path: ':sticker')
     implementation project(':doodle')
-    implementation ('cn.hzw.imageselector:library:1.0'){
+    implementation('cn.hzw.imageselector:library:1.0') {
         transitive = false
     }
     implementation 'am.util:printer:2.0.0'

@@ -1,6 +1,7 @@
 package com.test.iview.dayin.utils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -394,7 +395,7 @@ public class BlueSAPI {
                                 ++j;
                             }
 
-                            if (r < 127 && g < 127 && b < 127) {
+                            if (r < 100 && g < 100 && b < 100) {
                                 body[j] = (byte)(body[j] * 2 + 1);
                             } else {
                                 body[j] = (byte)(body[j] * 2);
@@ -404,29 +405,30 @@ public class BlueSAPI {
 
                     this.PrintByte(body);
 
-                    try {
-                        int count = 0;
-                        while(count == 0 && isConnect){
-                            count = inStream.available();
-                            Log.e("dedd",count + "");
-
-                        }
-                        if(count != 0) {
-                            byte[] bt = new byte[count];
-                            int readCount = 0;
-                            while (readCount < count) {
-                                readCount += inStream.read(bt, readCount, count - readCount);
-                            }
-
-                            String xx = new String(bt);
-                            System.out.println(xx);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        int count = 0;
+//                        while(count == 0 && isConnect){
+//                            count = inStream.available();
+//                            Log.e("dedd",count + "");
+//
+//                        }
+//                        if(count != 0) {
+//                            byte[] bt = new byte[count];
+//                            int readCount = 0;
+//                            while (readCount < count) {
+//                                readCount += inStream.read(bt, readCount, count - readCount);
+//                            }
+//
+////                            String xx = new String(bt);
+////                            System.out.println(xx);
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
                 Log.e("printwriteCount",writeCount + "");
+                PrintLn();
                 PrintLn();
                 PrintLn();
                 PrintLn();
@@ -545,48 +547,207 @@ public class BlueSAPI {
 
         }
 
-        private int limitData = 512;
-        private int writeCount = 0;
-        private Vector<byte[]> vb = new Vector<>();
-        private boolean isprint = false;
-        public int PrintByte(byte[] data) {
-            Log.e("printDataLenght",data.length + "");
-            if (this.mBtAdapter != null && this.mBtAdapter.isEnabled()) {
-                if (this.outStream == null) {
-                    return 2007;
-                } else {
+
+
+        private boolean autoBond(Class btClass, BluetoothDevice device, String strPin) throws Exception {
+            Method autoBondMethod = btClass.getMethod("setPin", byte[].class);
+            Boolean result = (Boolean)autoBondMethod.invoke(device, strPin.getBytes());
+            return result;
+        }
+
+        private boolean createBond(Class btClass, BluetoothDevice device) throws Exception {
+            Method createBondMethod = btClass.getMethod("createBond");
+            Boolean returnValue = (Boolean)createBondMethod.invoke(device);
+            return returnValue;
+        }
+
+
+
+    /**
+     * 打印
+     * @param type 打印内容类型
+     */
+    public void printContent(final Bitmap bitmap, final int type, final boolean isImg, final int h, final boolean isBiaoqian) {
+
+            /**
+             * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
+             */
+            blueApi.initPrinter();
+//            blueApi.CheckPrinterStatus();
+            // //新开线程 打印
+            new Thread() {
+                public void run() {
                     try {
-                        this.outStream.write(data);
-                        this.outStream.flush();
-                        Thread.sleep(10);
+                        int rtn = 0;
+                        switch (type) {
+                            case 0: {
+                                String code ="12345678";
+                                rtn = blueApi.PrintOnedimCode(200,50,10,code,0);
+                            };
+                            break;
+                            case 1: {
+                                String code ="12345678";
+                                rtn = blueApi.PrintOnedimCode(200,50,10,code,1);
+                            }
+                            break;
+                            case 2: {
+                                String code ="1234567";
+                                rtn = blueApi.PrintOnedimCode(200,50,10,code,2);
+                            }
+                            break;
+                            case 3: {
+                                String code ="123456789012";
+                                rtn = blueApi.PrintOnedimCode(200,50,10,code,3);
+                            }
+                            break;
+                            case 4: {
+                                rtn = blueApi.PrintTwoCode("http://www.baidu.com");
+                            }
+                            break;
+                            case 5: {
+
+//							AssetManager am = getResources().getAssets();
+//							try {
+//								InputStream is = am.open("1214.png");
+//								final Bitmap bmplogo = BitmapFactory.decodeStream(is);
+//
+//								btapi.PrintImage(bmplogo);
+//								is.close();
+//								runOnUiThread(new Runnable() {
+//									@Override
+//									public void run() {
+//										bImageView.setVisibility(View.VISIBLE);
+//										bImageView.setImageBitmap(bmplogo);
+//									}
+//								});
+//							} catch (IOException e) {
+//								e.printStackTrace();
+//							}
+//                                Intent intent = new Intent(Intent.ACTION_PICK,
+//                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                                startActivityForResult(intent, 2);
+                                Log.e("11111vv","11");
+                                Bitmap mp;
+
+//                                if (h == 0){
+//                                    if (isImg){
+//                                        mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,384,h),h));
+//                                    }else{
+//                                        mp = PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,384,h),h);
+//                                    }
+//                                }else{//标签
+//                                    mp = PrinterImageUtils.resizeImage(bitmap,384,h);
+//                                }
+
+//                                mp = PrinterImageUtils.convertGreyImgByFloyd(bitmap);
+
+//                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
+//                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
+//                                        + "," + mp.getRowBytes());
+                                blueApi.PrintImage(bitmap,isBiaoqian);
+//                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
+                                Log.e("11111vv","22");
+//                                if (null != view){
+//                                    view.destroyDrawingCache(); // 保存过后释放资源
+//                                }
+//
+//                                if (null != bitmap){
+//                                    bitmap.recycle();
+//                                }
+
+                            }
+                            break;
+                            case 6: {
+                                rtn = blueApi.PrintByte(new byte[] { 0x0A, 0x20, 0x21,
+                                        0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
+                                        0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
+                                        0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
+                                        0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D,
+                                        0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43, 0x44,
+                                        0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
+                                        0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52,
+                                        0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59,
+                                        0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60,
+                                        0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67,
+                                        0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0x6E,
+                                        0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75,
+                                        0x76, 0x77, 0x78, 0x79, 0x7A, 0x7B, 0x7C,
+                                        0x7D, 0x7E, 0x7F, 0x0A, 0x0A });
+                            }
+                            break;
+                            case 7: {
+//                                rtn = blueApi.PrintByte(toPrintText.getText().toString().getBytes("GBK"));
+
+                            }
+                            break;
+                            default:
+                                break;
+                        }
+//                        rtn = blueApi.PrintLn();
+                        if(rtn == 0) {
+                            // 提示 打印完成
+//                            handler.sendEmptyMessage(1);
+                        } else {
+                            Message msg =Message.obtain();
+                            msg.what = 0;
+                            msg.getData().putString("error", "" + rtn);
+//							handler.sendMessage(msg);
+                        }
+
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        // 提示 打印时 出错
+                        Message msg =Message.obtain();
+                        msg.what = 0;
+                        msg.getData().putString("error", e.getMessage());
+                        Log.e("printException",e.toString());
+                    } finally {
+
+                    }
+                }
+            }.start();
+//        }
+    }
+
+
+    private int limitData = 512;
+    private int writeCount = 0;
+    private Vector<byte[]> vb = new Vector<>();
+    private boolean isprint = false;
+    public int PrintByte(byte[] data) {
+        Log.e("printDataLenght",data.length + "");
+        if (this.mBtAdapter != null && this.mBtAdapter.isEnabled()) {
+            if (this.outStream == null) {
+                return 2007;
+            } else {
+//                    try {
+//                        this.outStream.write(data);
+//                        this.outStream.flush();
+//                        Thread.sleep(10);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+
+                try {
+
+                    for (int i = 0;i < data.length;i += limitData){
+                        if (limitData  + i > data.length){
+                            this.outStream.write(data,i,data.length - i);
+                            this.outStream.flush();
+                            writeCount++;
+                        }else{
+                            this.outStream.write(data,i,limitData);
+                            this.outStream.flush();
+                            writeCount++;
+                        }
+
                     }
 
-//                    try {
-//
-//                        for (int i = 0;i < data.length;i += limitData){
-//                            if (limitData  + i > data.length){
-//                                this.outStream.write(data,i,data.length - i);
-//                                this.outStream.flush();
-//                                Thread.sleep(100);
-//
-//                                writeCount++;
-//                            }else{
-//                                this.outStream.write(data,i,limitData);
-//                                this.outStream.flush();
-//                                writeCount++;
-//                                Thread.sleep(100);
-//                            }
-//
-//                        }
-//
-//
-//                    } catch (UnsupportedEncodingException var3) {
-//                        var3.printStackTrace();
-//                    } catch (Exception var4) {
-//                        var4.printStackTrace();
-//                    }
+
+                } catch (UnsupportedEncodingException var3) {
+                    var3.printStackTrace();
+                } catch (Exception var4) {
+                    var4.printStackTrace();
+                }
 
 
 //                    try {
@@ -654,178 +815,11 @@ public class BlueSAPI {
 //                        var4.printStackTrace();
 //                    }
 
-                    return 0;
-                }
-            } else {
-                return 2007;
+                return 0;
             }
+        } else {
+            return 2007;
         }
-
-        private boolean autoBond(Class btClass, BluetoothDevice device, String strPin) throws Exception {
-            Method autoBondMethod = btClass.getMethod("setPin", byte[].class);
-            Boolean result = (Boolean)autoBondMethod.invoke(device, strPin.getBytes());
-            return result;
-        }
-
-        private boolean createBond(Class btClass, BluetoothDevice device) throws Exception {
-            Method createBondMethod = btClass.getMethod("createBond");
-            Boolean returnValue = (Boolean)createBondMethod.invoke(device);
-            return returnValue;
-        }
-
-
-
-    /**
-     * 打印
-     * @param type 打印内容类型
-     */
-    public void printContent(final View view, Context content, final Bitmap bitmap, final int type, final boolean isImg, final int h,final boolean isBiaoqian) {
-//        if (!isConnect) {
-//            ToastUtils.showShort(R.string.connect_printer);
-//        } else {
-            // 打印至蓝牙打印机
-            final ProgressDialog pd = new ProgressDialog(content);
-            pd.setTitle(content.getString(R.string.dy_tips));
-            pd.setMessage("正在打印，请稍候……");
-            pd.show();
-
-            /**
-             * 初始化打印机 ，带格式的数据打印完成后一定要设置回去否则以后打印的文字都会带次格式
-             */
-            blueApi.initPrinter();
-//            blueApi.CheckPrinterStatus();
-            // //新开线程 打印
-            new Thread() {
-                public void run() {
-                    try {
-                        int rtn = 0;
-                        switch (type) {
-                            case 0: {
-                                String code ="12345678";
-                                rtn = blueApi.PrintOnedimCode(200,50,10,code,0);
-                            };
-                            break;
-                            case 1: {
-                                String code ="12345678";
-                                rtn = blueApi.PrintOnedimCode(200,50,10,code,1);
-                            }
-                            break;
-                            case 2: {
-                                String code ="1234567";
-                                rtn = blueApi.PrintOnedimCode(200,50,10,code,2);
-                            }
-                            break;
-                            case 3: {
-                                String code ="123456789012";
-                                rtn = blueApi.PrintOnedimCode(200,50,10,code,3);
-                            }
-                            break;
-                            case 4: {
-                                rtn = blueApi.PrintTwoCode("http://www.baidu.com");
-                            }
-                            break;
-                            case 5: {
-
-//							AssetManager am = getResources().getAssets();
-//							try {
-//								InputStream is = am.open("1214.png");
-//								final Bitmap bmplogo = BitmapFactory.decodeStream(is);
-//
-//								btapi.PrintImage(bmplogo);
-//								is.close();
-//								runOnUiThread(new Runnable() {
-//									@Override
-//									public void run() {
-//										bImageView.setVisibility(View.VISIBLE);
-//										bImageView.setImageBitmap(bmplogo);
-//									}
-//								});
-//							} catch (IOException e) {
-//								e.printStackTrace();
-//							}
-//                                Intent intent = new Intent(Intent.ACTION_PICK,
-//                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                                startActivityForResult(intent, 2);
-                                Log.e("11111vv","11");
-                                Bitmap mp;
-
-                                if (h == 0){
-                                    if (isImg){
-                                        mp = PrinterImageUtils.imageFloydSteinberg(PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h));
-                                    }else{
-                                        mp = PrinterImageUtils.convertToBlackWhite(PrinterImageUtils.resizeImage(bitmap,380,h),h);
-                                    }
-                                }else{//标签
-                                    mp = PrinterImageUtils.resizeImage(bitmap,380,h);
-                                }
-
-//                                mp = PrinterImageUtils.convertGreyImgByFloyd(bitmap);
-
-//                                Bitmap mp = PrinterImageUtils.getSmallBitmap(path);
-//                                Log.e("PrintImageBitmap:",mp.getWidth() + "," + mp.getHeight() + "," + mp.getByteCount()
-//                                        + "," + mp.getRowBytes());
-                                blueApi.PrintImage(mp,isBiaoqian);
-//                                BitmapUtil.getInstance().savePicture(mp,System.currentTimeMillis() + "_logo.png");
-                                Log.e("11111vv","22");
-                                view.destroyDrawingCache(); // 保存过后释放资源
-                                if (null != bitmap){
-                                    bitmap.recycle();
-                                }
-
-                            }
-                            break;
-                            case 6: {
-                                rtn = blueApi.PrintByte(new byte[] { 0x0A, 0x20, 0x21,
-                                        0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
-                                        0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
-                                        0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,
-                                        0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D,
-                                        0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43, 0x44,
-                                        0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B,
-                                        0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52,
-                                        0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59,
-                                        0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x60,
-                                        0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67,
-                                        0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0x6E,
-                                        0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75,
-                                        0x76, 0x77, 0x78, 0x79, 0x7A, 0x7B, 0x7C,
-                                        0x7D, 0x7E, 0x7F, 0x0A, 0x0A });
-                            }
-                            break;
-                            case 7: {
-//                                rtn = blueApi.PrintByte(toPrintText.getText().toString().getBytes("GBK"));
-
-                            }
-                            break;
-                            default:
-                                break;
-                        }
-//                        rtn = blueApi.PrintLn();
-                        if(rtn == 0) {
-                            // 提示 打印完成
-//                            handler.sendEmptyMessage(1);
-                        } else {
-                            Message msg =Message.obtain();
-                            msg.what = 0;
-                            msg.getData().putString("error", "" + rtn);
-//							handler.sendMessage(msg);
-                        }
-
-                    } catch (Exception e) {
-                        // 提示 打印时 出错
-                        Message msg =Message.obtain();
-                        msg.what = 0;
-                        msg.getData().putString("error", e.getMessage());
-                        Log.e("printException",e.toString());
-                    } finally {
-                        pd.dismiss();
-
-                    }
-                }
-            }.start();
-//        }
     }
-
-
 
 }

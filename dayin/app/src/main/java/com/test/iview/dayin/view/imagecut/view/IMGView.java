@@ -43,7 +43,7 @@ public class IMGView extends FrameLayout implements Runnable, ScaleGestureDetect
 
     private IMGMode mPreMode = IMGMode.NONE;
 
-    private IMGImage mImage = new IMGImage();
+    public IMGImage mImage = new IMGImage();
 
     private GestureDetector mGDetector;
 
@@ -65,6 +65,15 @@ public class IMGView extends FrameLayout implements Runnable, ScaleGestureDetect
 
     public void setmDoodlePaint(Paint mDoodlePaint) {
         this.mDoodlePaint = mDoodlePaint;
+    }
+
+
+    public IMGImage getmImage() {
+        return mImage;
+    }
+
+    public void setmImage(IMGImage mImage) {
+        this.mImage = mImage;
     }
 
     private static final boolean DEBUG = true;

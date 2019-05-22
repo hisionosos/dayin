@@ -93,7 +93,7 @@ public class XiaoJiActivity extends BaseActivity {
                 break;
             case R.id.home_add:
                     editTxt.setCursorVisible(false);
-                    BitmapUtil.getInstance().getCutImage(canv,true,0,false);
+                    BitmapUtil.getInstance().showBitmap(canv,true,0,false);
                 break;
         }
     }

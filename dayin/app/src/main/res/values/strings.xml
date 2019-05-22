@@ -105,6 +105,7 @@
     <string name="dy_caijian">裁剪</string>
     <string name="dy_delete">删除</string>
     <string name="dy_chexiao">撤销</string>
+    <string name="dy_chicun">请选择打印尺寸</string>
 
     <string name="dy_liangdu">特效</string>
     <string name="dy_sediao">色调</string>

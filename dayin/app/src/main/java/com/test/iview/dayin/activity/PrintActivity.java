@@ -143,6 +143,7 @@ public class PrintActivity extends BaseActivity {
 							public void run() {
 								hideLaodingDialog();
 								ToastUtils.showShort("打印机连接成功");
+								finish();
 
 							}
 						});

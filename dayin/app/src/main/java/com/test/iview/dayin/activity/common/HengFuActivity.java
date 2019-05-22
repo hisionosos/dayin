@@ -374,8 +374,8 @@ public class HengFuActivity extends BaseActivity{
 //                BitmapUtil.getInstance().getCutImage(canv,0);
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,null,false);
-                BitmapUtil.getInstance().getBitmapScrollView(canvSoll3,false,0);
-                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+                BitmapUtil.getInstance().showScollBitmap(canvSoll3,false,0);
+//                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();

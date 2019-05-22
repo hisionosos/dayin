@@ -104,7 +104,7 @@
         <activity
             android:name="com.test.iview.dayin.activity.common.CaptureActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name="com.test.iview.dayin.view.word.ShowWordActivity" />
         <activity
             android:name="com.test.iview.dayin.activity.LanguageActivity"
             android:screenOrientation="portrait" />
@@ -125,6 +125,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.BiaoQianActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.test.iview.dayin.activity.ShowBitmapActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.test.iview.dayin.activity.DeviceListActivity"

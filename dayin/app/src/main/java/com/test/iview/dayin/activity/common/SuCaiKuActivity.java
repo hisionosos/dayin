@@ -32,7 +32,10 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
             R.mipmap.biaoqian_30,R.mipmap.biaoqian_31,R.mipmap.biaoqian_32,R.mipmap.biaoqian_33,R.mipmap.biaoqian_34,
             R.mipmap.biaoqian_35,R.mipmap.biaoqian_36,R.mipmap.biaoqian_37,R.mipmap.biaoqian_38};
 
-    private int[] biaoqianzhi_data = {R.mipmap.biaoqianzhi_1,R.mipmap.biaoqianzhi_2,R.mipmap.biaoqianzhi_3,R.mipmap.biaoqianzhi_4};
+    private int[] biaoqianzhi3_data = {R.mipmap.biaoqianzhi_3};
+    private int[] biaoqianzhi4_data = {R.mipmap.biaoqianzhi_2};
+    private int[] biaoqianzhi5_data = {R.mipmap.biaoqianzhi_1,R.mipmap.biaoqianzhi_4};
+
     private int[] biaoqing_data = {R.mipmap.biaoqing_1,R.mipmap.biaoqing_2,R.mipmap.biaoqing_3,R.mipmap.biaoqing_4,R.mipmap.biaoqing_5,
             R.mipmap.biaoqing_6,R.mipmap.biaoqing_7,R.mipmap.biaoqing_8,R.mipmap.biaoqing_9,R.mipmap.biaoqing_10,
             R.mipmap.biaoqing_11,R.mipmap.biaoqing_12,R.mipmap.biaoqing_13,R.mipmap.biaoqing_14,R.mipmap.biaoqing_15,
@@ -113,8 +116,14 @@ public class SuCaiKuActivity extends BaseActivity implements SuCaiAdapter.OnOssS
                 case "biaoqian":
                     datas = biaoqian_data;
                     break;
-                case "biaoqianzhi":
-                    datas = biaoqianzhi_data;
+                case "biaoqianzhi3":
+                    datas = biaoqianzhi3_data;
+                    break;
+                case "biaoqianzhi4":
+                    datas = biaoqianzhi4_data;
+                    break;
+                case "biaoqianzhi5":
+                    datas = biaoqianzhi5_data;
                     break;
                 case "biaoqing":
                     datas = biaoqing_data;

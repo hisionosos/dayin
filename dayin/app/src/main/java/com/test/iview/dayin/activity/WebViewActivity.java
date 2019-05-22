@@ -34,6 +34,7 @@ import com.test.iview.dayin.R;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.util.DiaLog;
 import com.test.iview.dayin.util.QqShare;
+import com.test.iview.dayin.utils.BitmapUtil;
 import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.utils.ToastUtils;
 import com.test.iview.dayin.wbapi.WBShareActivity;
@@ -148,7 +149,8 @@ public class WebViewActivity extends BaseActivity {
             case R.id.print_cur:
                 webTitle.setVisibility(View.GONE);
                 webviewRl.setVisibility(View.GONE);
-                getCutImage();
+//                getCutImage();
+                BitmapUtil.getInstance().showBitmap(webView,true,0,false);
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -160,8 +162,8 @@ public class WebViewActivity extends BaseActivity {
                 break;
             case R.id.print_all:
                 //截取组件视图
-
-                getViewBitmap(webView);
+                BitmapUtil.getInstance().getwebViewBitmap(webView);
+//                getViewBitmap(webView);
                 break;
         }
     }
@@ -180,7 +182,7 @@ public class WebViewActivity extends BaseActivity {
                 public void run() {
                     // 要在运行在子线程中
                     final Bitmap bmp = dView.getDrawingCache(); // 获取图片
-                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,true,0 ,false);
+//                    BlueSAPI.getInstance().printContent(dView,dView.getContext(),bmp,5,true,0 ,false);
 //                    savePicture(bmp, System.currentTimeMillis() + "_screen.png");// 保存图片
 //                    ToastUtils.showShort("保存成功");
 //                    dView.destroyDrawingCache(); // 保存过后释放资源
@@ -222,7 +224,7 @@ public class WebViewActivity extends BaseActivity {
             new Handler().post(new Runnable() {
                 @Override
                 public void run() {
-                    BlueSAPI.getInstance().printContent(webView,webView.getContext(),bm,5,true,0,false);
+//                    BlueSAPI.getInstance().printContent(webView,webView.getContext(),bm,5,true,0,false);
 //                    savePicture(bm, System.currentTimeMillis() + "_screen.png");// 保存图片
 //                    ToastUtils.showShort("保存成功");
 //                    webView.destroyDrawingCache(); // 保存过后释放资源

@@ -2,9 +2,14 @@ package com.test.iview.dayin.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.media.ThumbnailUtils;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -161,7 +166,7 @@ public class PrinterImageUtils {
         var0 = Bitmap.createBitmap(var3, var4, Bitmap.Config.RGB_565);
         var0.setPixels(var6, 0, var3, 0, 0, var3, var4);
         return var0;
-//        var2 = (int)(374.0F / (float)var3 * (float)var4);
+//        var2 = (int)(384.0F / (float)var3 * (float)var4);
 //        var1 = var2;
 //        if (var2 == 682) {
 //            var1 = 681;
@@ -170,7 +175,7 @@ public class PrinterImageUtils {
 //        if (h > 0){
 //            var1 = h;
 //        }
-//        return ThumbnailUtils.extractThumbnail(var0, 374, var1);
+//        return ThumbnailUtils.extractThumbnail(var0, 384, var1);
     }
 
 
@@ -179,7 +184,7 @@ public class PrinterImageUtils {
         int width = BitmapOrg.getWidth();
         int height = BitmapOrg.getHeight();
         int newWidth = w;
-        int newHeight = (int)((float)newWidth / (float)width * (float)height);
+        int newHeight = (int)(((float)newWidth / (float)width * (float)height));
 
 
         float scaleWidth = ((float) newWidth) / width;
@@ -196,8 +201,12 @@ public class PrinterImageUtils {
 
         // if you want to rotate the Bitmap
         // matrix.postRotate(45);
+        Log.e("oodododod",width + "");
+        Log.e("oodododod1",height + "");
+
         Bitmap resizedBitmap = Bitmap.createBitmap(BitmapOrg, 0, 0, width,
                 height, matrix, true);
+
         return resizedBitmap;
     }
 
@@ -219,6 +228,23 @@ public class PrinterImageUtils {
         var0.setPixels(var6, 0, var3, 0, 0, var3, var4);
         return ThumbnailUtils.extractThumbnail(var0, 120, 120);
     }
+
+    public static Bitmap toGrayScale(Bitmap bmpOriginal) {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayScale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayScale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayScale;
+    }
+
 
     public static Bitmap getSmallBitmap(String param0) {
         final BitmapFactory.Options options = new BitmapFactory.Options();

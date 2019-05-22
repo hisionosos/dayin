@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -108,6 +109,20 @@ public class BiaoQianActivity extends BaseActivity {
     LinearLayout biaoqian4Lay;
     @BindView(R.id.main_tab0)
     RadioButton mainTab0;
+    @BindView(R.id.main_tab6)
+    RadioButton mainTab6;
+    @BindView(R.id.min_txt)
+    TextView minTxt;
+    @BindView(R.id.max_txt)
+    TextView maxTxt;
+    @BindView(R.id.daxiao_3)
+    RadioButton daxiao3;
+    @BindView(R.id.daxiao_4)
+    RadioButton daxiao4;
+    @BindView(R.id.daxiao_5)
+    RadioButton daxiao5;
+    @BindView(R.id.wangge_lay1)
+    LinearLayout wanggeLay1;
 
     private String[] tab_title = {"模板", "大小", "调整", "表情包", "粗细", "二维码"};
     private int[] tab_imgs = {R.drawable.tab_muban, R.drawable.tab_daxiao, R.drawable.tab_tiaozheng, R.drawable.tab_biaoqing,
@@ -152,33 +167,33 @@ public class BiaoQianActivity extends BaseActivity {
         canv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BitmapUtil.getInstance().cannelEdit(arrs,null,false);
+                BitmapUtil.getInstance().cannelEdit(arrs, null, false);
             }
         });
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 //                if (flag.equals("2")) {
-                    if (moban == 1){
-                        biaoqian1.setTextSize(progress/5 + 15);
-                        biaoqian2.setTextSize(progress/5 + 15);
-                        biaoqian3.setTextSize(progress/5 + 15);
-                        biaoqian4.setTextSize(progress/5 + 15);
-                    }else if (moban == 2){
-                        biaoqiantwo0.setTextSize(progress/5 + 15);
-                        biaoqiantwo1.setTextSize(progress/5 + 15);
-                        biaoqiantwo2.setTextSize(progress/5 + 15);
-                        biaoqiantwo3.setTextSize(progress/5 + 15);
-                    }else if (moban == 3){
-                        biaoqianthree.setTextSize(progress/5 + 15);
-                    }else if (moban == 4){
-                        biaoqianfour1.setTextSize(progress/5 + 15);
-                        biaoqianfour2.setTextSize(progress/5 + 15);
-                        biaoqianfour3.setTextSize(progress/5 + 15);
-                        biaoqianfour4.setTextSize(progress/5 + 15);
-                        biaoqianfour5.setTextSize(progress/5 + 15);
-                        biaoqianfour6.setTextSize(progress/5 + 15);
-                    }
+                if (moban == 1) {
+                    biaoqian1.setTextSize(progress / 5 + 15);
+                    biaoqian2.setTextSize(progress / 5 + 15);
+                    biaoqian3.setTextSize(progress / 5 + 15);
+                    biaoqian4.setTextSize(progress / 5 + 15);
+                } else if (moban == 2) {
+                    biaoqiantwo0.setTextSize(progress / 5 + 15);
+                    biaoqiantwo1.setTextSize(progress / 5 + 15);
+                    biaoqiantwo2.setTextSize(progress / 5 + 15);
+                    biaoqiantwo3.setTextSize(progress / 5 + 15);
+                } else if (moban == 3) {
+                    biaoqianthree.setTextSize(progress / 5 + 15);
+                } else if (moban == 4) {
+                    biaoqianfour1.setTextSize(progress / 5 + 15);
+                    biaoqianfour2.setTextSize(progress / 5 + 15);
+                    biaoqianfour3.setTextSize(progress / 5 + 15);
+                    biaoqianfour4.setTextSize(progress / 5 + 15);
+                    biaoqianfour5.setTextSize(progress / 5 + 15);
+                    biaoqianfour6.setTextSize(progress / 5 + 15);
+                }
 
 //                }
             }
@@ -205,16 +220,16 @@ public class BiaoQianActivity extends BaseActivity {
     private int editGrave = 0;
 
     private boolean isImg = false;
-    @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.main_tab6, R.id.home_add, R.id.get_rcode})
+
+    @OnClick({R.id.back, R.id.main_tab1, R.id.main_tab2, R.id.main_tab3, R.id.main_tab4, R.id.main_tab5, R.id.main_tab6,
+            R.id.home_add, R.id.get_rcode,R.id.daxiao_3, R.id.daxiao_4, R.id.daxiao_5})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 finish();
                 break;
             case R.id.main_tab1://模板
-                Intent intent = new Intent(this, SuCaiKuActivity.class);
-                intent.putExtra("sucai", "biaoqianzhi");
-                startActivityForResult(intent, 1000);
+                wanggeLay1.setVisibility(View.VISIBLE);
                 break;
             case R.id.main_tab2://大小
                 setting();
@@ -222,77 +237,77 @@ public class BiaoQianActivity extends BaseActivity {
             case R.id.main_tab3://调整
                 if (editGrave == 0) {
 //                    if (flag.equals("2")) {
-                        if (moban == 1){
-                            biaoqian1.setGravity(Gravity.CENTER);
-                            biaoqian2.setGravity(Gravity.CENTER);
-                            biaoqian3.setGravity(Gravity.CENTER);
-                            biaoqian4.setGravity(Gravity.CENTER);
-                        }else if (moban == 2){
-                            biaoqiantwo0.setGravity(Gravity.CENTER);
-                            biaoqiantwo1.setGravity(Gravity.CENTER);
-                            biaoqiantwo2.setGravity(Gravity.CENTER);
-                            biaoqiantwo3.setGravity(Gravity.CENTER);
-                        }else if (moban == 3){
-                            biaoqianthree.setGravity(Gravity.CENTER);
-                        }else if (moban == 4){
-                            biaoqianfour1.setGravity(Gravity.CENTER);
-                            biaoqianfour2.setGravity(Gravity.CENTER);
-                            biaoqianfour3.setGravity(Gravity.CENTER);
-                            biaoqianfour4.setGravity(Gravity.CENTER);
-                            biaoqianfour5.setGravity(Gravity.CENTER);
-                            biaoqianfour6.setGravity(Gravity.CENTER);
-                        }
+                    if (moban == 1) {
+                        biaoqian1.setGravity(Gravity.CENTER);
+                        biaoqian2.setGravity(Gravity.CENTER);
+                        biaoqian3.setGravity(Gravity.CENTER);
+                        biaoqian4.setGravity(Gravity.CENTER);
+                    } else if (moban == 2) {
+                        biaoqiantwo0.setGravity(Gravity.CENTER);
+                        biaoqiantwo1.setGravity(Gravity.CENTER);
+                        biaoqiantwo2.setGravity(Gravity.CENTER);
+                        biaoqiantwo3.setGravity(Gravity.CENTER);
+                    } else if (moban == 3) {
+                        biaoqianthree.setGravity(Gravity.CENTER);
+                    } else if (moban == 4) {
+                        biaoqianfour1.setGravity(Gravity.CENTER);
+                        biaoqianfour2.setGravity(Gravity.CENTER);
+                        biaoqianfour3.setGravity(Gravity.CENTER);
+                        biaoqianfour4.setGravity(Gravity.CENTER);
+                        biaoqianfour5.setGravity(Gravity.CENTER);
+                        biaoqianfour6.setGravity(Gravity.CENTER);
+                    }
 
 //                    }
                     editGrave++;
                 } else if (editGrave == 1) {
 //                    if (flag.equals("2")) {
-                        if (moban == 1){
-                            biaoqian1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqian2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqian3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqian4.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 2){
-                            biaoqiantwo0.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 3){
-                            biaoqianthree.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 4){
-                            biaoqianfour1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour4.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour5.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour6.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        }
+                    if (moban == 1) {
+                        biaoqian1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqian4.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 2) {
+                        biaoqiantwo0.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 3) {
+                        biaoqianthree.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 4) {
+                        biaoqianfour1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour4.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour5.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour6.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+                    }
 
 //                    }
 
                     editGrave++;
                 } else if (editGrave == 2) {
 //                    if (flag.equals("2")) {
-                        if (moban == 1){
-                            biaoqian1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqian2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqian3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqian4.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 2){
-                            biaoqiantwo0.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqiantwo3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 3){
-                            biaoqianthree.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        }else if (moban == 4){
-                            biaoqianfour1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour4.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour5.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                            biaoqianfour6.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        }
+                    if (moban == 1) {
+                        biaoqian1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqian4.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 2) {
+                        biaoqiantwo0.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqiantwo3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 3) {
+                        biaoqianthree.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    } else if (moban == 4) {
+                        biaoqianfour1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour4.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour5.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        biaoqianfour6.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                    }
 //                    }
                     editGrave--;
                     editGrave--;
@@ -300,52 +315,52 @@ public class BiaoQianActivity extends BaseActivity {
                 break;
             case R.id.main_tab4://粗细
 //                if (flag.equals("2")) {
-                    if (isBlod) {
+                if (isBlod) {
 
-                        if (moban == 1){
-                            biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                        }else if (moban == 2){
-                            biaoqiantwo0.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqiantwo1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqiantwo2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqiantwo3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                        }else if (moban == 3){
-                            biaoqianthree.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                        }else if (moban == 4){
-                            biaoqianfour1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqianfour2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqianfour3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqianfour4.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqianfour5.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                            biaoqianfour6.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
-                        }
+                    if (moban == 1) {
+                        biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                    } else if (moban == 2) {
+                        biaoqiantwo0.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqiantwo1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqiantwo2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqiantwo3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                    } else if (moban == 3) {
+                        biaoqianthree.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                    } else if (moban == 4) {
+                        biaoqianfour1.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqianfour2.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqianfour3.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqianfour4.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqianfour5.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                        biaoqianfour6.setTypeface(Typeface.SANS_SERIF, Typeface.NORMAL);
+                    }
 
-                        isBlod = false;
-                    } else {
-                        if (moban == 1){
-                            biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                        }else if (moban == 2){
-                            biaoqiantwo0.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqiantwo1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqiantwo2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqiantwo3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                        }else if (moban == 3){
-                            biaoqianthree.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                        }else if (moban == 4){
-                            biaoqianfour1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqianfour2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqianfour3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqianfour4.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqianfour5.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                            biaoqianfour6.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
-                        }
-                        isBlod = true;
+                    isBlod = false;
+                } else {
+                    if (moban == 1) {
+                        biaoqian1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqian4.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                    } else if (moban == 2) {
+                        biaoqiantwo0.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqiantwo1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqiantwo2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqiantwo3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                    } else if (moban == 3) {
+                        biaoqianthree.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                    } else if (moban == 4) {
+                        biaoqianfour1.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqianfour2.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqianfour3.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqianfour4.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqianfour5.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                        biaoqianfour6.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+                    }
+                    isBlod = true;
 //                    }
 
 
@@ -359,15 +374,25 @@ public class BiaoQianActivity extends BaseActivity {
                 }
                 break;
             case R.id.main_tab6:
-                Intent intent4 = new Intent(this,SuCaiKuActivity.class);
-                intent4.putExtra("sucai","biaoqing");
-                startActivityForResult(intent4,1000);
+                Intent intent4 = new Intent(this, SuCaiKuActivity.class);
+                intent4.putExtra("sucai", "biaoqing");
+                startActivityForResult(intent4, 1000);
                 break;
             case R.id.home_add:
 
-                BitmapUtil.getInstance().cannelEdit(arrs,edts,false);
-                BitmapUtil.getInstance().getCutImage(canv,isImg,330,true);//330  220  100
-                BitmapUtil.getInstance().cannelEdit(arrs,edts,true);
+                BitmapUtil.getInstance().cannelEdit(arrs, edts, false);
+                if (biaoqian_ban == 50){
+                    Log.e("saize",50+ "");
+                    BitmapUtil.getInstance().showBitmap(canv, isImg, 330, true);//330  220  100
+                }else if (biaoqian_ban == 40){
+                    Log.e("saize",50+ "");
+                    BitmapUtil.getInstance().showBitmap(canv, isImg, 220, true);//330  220  100
+                }else if (biaoqian_ban == 30){
+                    Log.e("saize",50+ "");
+                    BitmapUtil.getInstance().showBitmap(canv, isImg, 110, true);//330  220  100
+                }
+
+//                BitmapUtil.getInstance().cannelEdit(arrs, edts, true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -378,7 +403,7 @@ public class BiaoQianActivity extends BaseActivity {
                         SingleTouchView singleTouchView = new SingleTouchView(this);
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        layoutParams.setMargins(0,100,0,0);
+                        layoutParams.setMargins(0, 100, 0, 0);
                         singleTouchView.setLayoutParams(layoutParams);
                         singleTouchView.setImageBitamp(bitmap);
                         canv.addView(singleTouchView);
@@ -399,10 +424,34 @@ public class BiaoQianActivity extends BaseActivity {
                 }
 
                 break;
+            case R.id.daxiao_3:
+                Intent intent3 = new Intent(this, SuCaiKuActivity.class);
+                intent3.putExtra("sucai", "biaoqianzhi3");
+                startActivityForResult(intent3, 1000);
+                biaoqian_ban = 30;
+                wanggeLay1.setVisibility(View.INVISIBLE);
+                break;
+
+            case R.id.daxiao_4:
+                Intent intent44 = new Intent(this, SuCaiKuActivity.class);
+                intent44.putExtra("sucai", "biaoqianzhi4");
+                startActivityForResult(intent44, 1000);
+                biaoqian_ban = 40;
+                wanggeLay1.setVisibility(View.INVISIBLE);
+                break;
+
+            case R.id.daxiao_5:
+                Intent intent5 = new Intent(this, SuCaiKuActivity.class);
+                intent5.putExtra("sucai", "biaoqianzhi5");
+                startActivityForResult(intent5, 1000);
+                biaoqian_ban = 50;
+                wanggeLay1.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 
 
+    private int biaoqian_ban = 50;
     private void setting() {
         if (wanggeLay.getVisibility() == View.VISIBLE) {
             wanggeLay.setVisibility(View.INVISIBLE);
@@ -428,35 +477,35 @@ public class BiaoQianActivity extends BaseActivity {
             } else if (id == R.mipmap.biaoqianzhi_4) {
                 moban = 4;
                 hideView();
-            }else{
+            } else {
                 addCusView(id);
             }
         }
 
     }
 
-    private void  hideView(){
-        if (moban == 1){
+    private void hideView() {
+        if (moban == 1) {
             biaoqian1Lay.setVisibility(View.VISIBLE);
             biaoqian2Lay.setVisibility(View.GONE);
             biaoqian3Lay.setVisibility(View.GONE);
             biaoqian4Lay.setVisibility(View.GONE);
-        }else if (moban == 2){
+        } else if (moban == 2) {
             biaoqian1Lay.setVisibility(View.GONE);
             biaoqian2Lay.setVisibility(View.VISIBLE);
             biaoqian3Lay.setVisibility(View.GONE);
             biaoqian4Lay.setVisibility(View.GONE);
-        }else if (moban == 3){
+        } else if (moban == 3) {
             biaoqian1Lay.setVisibility(View.GONE);
             biaoqian2Lay.setVisibility(View.GONE);
             biaoqian3Lay.setVisibility(View.VISIBLE);
             biaoqian4Lay.setVisibility(View.GONE);
-        }else if (moban == 4){
+        } else if (moban == 4) {
             biaoqian1Lay.setVisibility(View.GONE);
             biaoqian2Lay.setVisibility(View.GONE);
             biaoqian3Lay.setVisibility(View.GONE);
             biaoqian4Lay.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             biaoqian1Lay.setVisibility(View.GONE);
             biaoqian2Lay.setVisibility(View.GONE);
             biaoqian3Lay.setVisibility(View.GONE);
@@ -482,5 +531,7 @@ public class BiaoQianActivity extends BaseActivity {
         }
 
     }
+
+
 
 }

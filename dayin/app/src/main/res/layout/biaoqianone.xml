@@ -2,17 +2,17 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_800">
+    android:layout_height="@dimen/dp_650">
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
+        android:layout_height="@dimen/dp_4"
         android:layout_marginTop="@dimen/dp_70"
         android:layout_marginLeft="@dimen/dp_30"
         android:layout_marginRight="@dimen/dp_30"
         android:background="#000"/>
 
     <View
-        android:layout_width="@dimen/dp_2"
+        android:layout_width="@dimen/dp_4"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_70"
         android:layout_marginLeft="@dimen/dp_30"
@@ -20,7 +20,7 @@
         android:background="#000"/>
 
     <View
-        android:layout_width="@dimen/dp_2"
+        android:layout_width="@dimen/dp_4"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_70"
         android:layout_alignParentRight="true"
@@ -32,7 +32,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2"
+        android:layout_height="@dimen/dp_4"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginLeft="@dimen/dp_30"
@@ -60,6 +60,7 @@
                 android:layout_height="match_parent"
                 android:textColor="#000"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="@dimen/sp_80"
                 android:text="出货标签"/>
 
@@ -67,7 +68,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:background="#000"/>
 
         <!-- 第二行 -->
@@ -86,7 +87,8 @@
                     android:layout_height="match_parent"
                     android:textColor="#000"
                     android:gravity="center"
-                    android:textSize="@dimen/sp_40"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_45"
                     android:text="品名"/>
             </LinearLayout>
 
@@ -99,7 +101,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/dp_2"
+                    android:layout_width="@dimen/dp_4"
                     android:layout_height="match_parent"
                     android:background="#000"/>
 
@@ -119,7 +121,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:background="#000"/>
 
         <!-- 第三行 -->
@@ -138,7 +140,8 @@
                     android:layout_height="match_parent"
                     android:textColor="#000"
                     android:gravity="center"
-                    android:textSize="@dimen/sp_40"
+                    android:textSize="@dimen/sp_45"
+                    android:textStyle="bold"
                     android:text="规格"/>
             </LinearLayout>
 
@@ -151,7 +154,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/dp_2"
+                    android:layout_width="@dimen/dp_4"
                     android:layout_height="match_parent"
                     android:background="#000"/>
 
@@ -171,7 +174,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:background="#000"/>
 
         <!-- 第四行 -->
@@ -190,7 +193,8 @@
                     android:layout_height="match_parent"
                     android:textColor="#000"
                     android:gravity="center"
-                    android:textSize="@dimen/sp_40"
+                    android:textSize="@dimen/sp_45"
+                    android:textStyle="bold"
                     android:text="数量"/>
             </LinearLayout>
 
@@ -203,7 +207,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/dp_2"
+                    android:layout_width="@dimen/dp_4"
                     android:layout_height="match_parent"
                     android:background="#000"/>
 
@@ -223,7 +227,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:background="#000"/>
 
         <!-- 第五行 -->
@@ -242,7 +246,8 @@
                     android:layout_height="match_parent"
                     android:textColor="#000"
                     android:gravity="center"
-                    android:textSize="@dimen/sp_40"
+                    android:textSize="@dimen/sp_45"
+                    android:textStyle="bold"
                     android:text="检验员"/>
             </LinearLayout>
 
@@ -255,7 +260,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="@dimen/dp_2"
+                    android:layout_width="@dimen/dp_4"
                     android:layout_height="match_parent"
                     android:background="#000"/>
                 <EditText

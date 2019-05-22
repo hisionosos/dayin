@@ -138,8 +138,8 @@ public class XiaoZiActivity extends BaseActivity {
 
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().getCutImage(canv,isImg,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+                BitmapUtil.getInstance().showBitmap(canv,isImg,0,false);
+//                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab1:
                 setting();

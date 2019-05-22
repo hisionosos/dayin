@@ -218,36 +218,88 @@ public class XiaoPiaoActivity extends BaseActivity {
 
                 break;
             case R.id.main_tab3://调整
-                if (editGrave == 0) {
-                    if (flag.equals("2")) {
-                        xiaopiao1.setGravity(Gravity.CENTER);
-                        xiaopiao2.setGravity(Gravity.CENTER);
-                        xiaopiao3.setGravity(Gravity.CENTER);
-                        xiaopiao5.setGravity(Gravity.CENTER);
-                        xiaopiao6.setGravity(Gravity.CENTER);
-                    }
-                    editGrave++;
-                } else if (editGrave == 1) {
-                    if (flag.equals("2")) {
-                        xiaopiao1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        xiaopiao2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        xiaopiao3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        xiaopiao5.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                        xiaopiao6.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
-                    }
+                if (moban == 1){
+                    if (lay1.size() > 0){
+                        addItemLay.removeView(lay1.get(lay1.size() - 1));
+                        addItemLay.removeView(view1.get(view1.size() - 1));
+                        lay1.remove(lay1.size() - 1);
+                        view1.remove(view1.size() - 1);
 
-                    editGrave++;
-                } else if (editGrave == 2) {
-                    if (flag.equals("2")) {
-                        xiaopiao1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        xiaopiao2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        xiaopiao3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        xiaopiao5.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        xiaopiao6.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        rowCount -- ;
+                        String s = xiaopiao5.getText().toString();
+                        String ss= ((EditText)list5.get(list5.size() - 1)).getText().toString();
+                        DecimalFormat df = new DecimalFormat("#.00");
+                        xiaopiao5.setText(df.format(Double.parseDouble(s) - Double.parseDouble(ss)));
+
+                        list1.remove(list1.size() - 1);
+                        list2.remove(list2.size() - 1);
+                        list3.remove(list3.size() - 1);
+                        list4.remove(list4.size() - 1);
+                        list5.remove(list5.size() - 1);
+
+                    }else{
+                        xiaopiao5.setText("0.00");
                     }
-                    editGrave--;
-                    editGrave--;
+                }else if (moban == 2){
+                    if (lay2.size() > 0){
+                        twoAddItemLay.removeView(lay2.get(lay2.size() - 1));
+                        lay2.remove(lay2.size() - 1);
+                        tworowCount --;
+
+                        String s = xiaopiaotwo1.getText().toString();
+
+                        String count1 =  tList1.get(tList1.size() - 1).getText().toString();//数量
+                        String price1 =  tList2.get(tList2.size() - 1).getText().toString();//单价
+                        if (null == price1 || price1.length() == 0) {
+                            price1 = "0.00";
+                        }
+
+                        if (null == count1 || count1.length() == 0) {
+                            count1 = "0";
+                        }
+
+                        int rowcount = Integer.parseInt(count1);
+                        double rowdanjia = Double.parseDouble(price1);
+
+                        DecimalFormat df = new DecimalFormat("#.00");
+                        xiaopiaotwo1.setText(df.format(Double.parseDouble(s) - rowcount * rowdanjia));
+
+                        tList1.remove(tList1.size() - 1);
+                        tList2.remove(tList2.size() - 1);
+                    }else{
+                        xiaopiaotwo1.setText("0.00");
+                    }
                 }
+//                if (editGrave == 0) {
+//                    if (flag.equals("2")) {
+//                        xiaopiao1.setGravity(Gravity.CENTER);
+//                        xiaopiao2.setGravity(Gravity.CENTER);
+//                        xiaopiao3.setGravity(Gravity.CENTER);
+//                        xiaopiao5.setGravity(Gravity.CENTER);
+//                        xiaopiao6.setGravity(Gravity.CENTER);
+//                    }
+//                    editGrave++;
+//                } else if (editGrave == 1) {
+//                    if (flag.equals("2")) {
+//                        xiaopiao1.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao2.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao3.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao5.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao6.setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
+//                    }
+//
+//                    editGrave++;
+//                } else if (editGrave == 2) {
+//                    if (flag.equals("2")) {
+//                        xiaopiao1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao5.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//                        xiaopiao6.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+//                    }
+//                    editGrave--;
+//                    editGrave--;
+//                }
                 break;
             case R.id.main_tab4://粗细
                 if (flag.equals("2")) {
@@ -280,11 +332,11 @@ public class XiaoPiaoActivity extends BaseActivity {
 
                 BitmapUtil.getInstance().cannelEdit(arrs,null,false);
                 if (moban == 1){
-                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll,false,0);
+                    BitmapUtil.getInstance().showScollBitmap(canvSoll,false,0);
                 }else{
-                    BitmapUtil.getInstance().getBitmapScrollView(canvSoll2,false,0);
+                    BitmapUtil.getInstance().showScollBitmap(canvSoll2,false,0);
                 }
-                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+//                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
             case R.id.get_rcode:
                 String str = txtUrl.getText().toString();
@@ -379,7 +431,7 @@ public class XiaoPiaoActivity extends BaseActivity {
     private void addTwoView(){
         tworowCount ++;
         int txtSize = 6;
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_60);
         int realSize = DimensUtils.dp2px(this, 50);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -507,11 +559,14 @@ public class XiaoPiaoActivity extends BaseActivity {
         linearLayout.addView(edit3);
         tList2.add(edit3);
         twoAddItemLay.addView(linearLayout);
+
+        lay2.add(linearLayout);
+
     }
 
 
     private void addTitleView() {
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_55);
         int txtSize = 6;
         int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
@@ -685,7 +740,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
     private void addGoodView() {
         int txtSize = 6;
-        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_50);
+        int dimen = getResources().getDimensionPixelSize(R.dimen.dp_60);
         int realSize = DimensUtils.dp2px(this, 40);
         int secSize = DimensUtils.dp2px(this, 100);
 
@@ -807,6 +862,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 double rowdanjia = Double.parseDouble(edit4.getText().toString());
                 DecimalFormat df = new DecimalFormat("#.00");
                 edit5.setText(df.format(rowcount * rowdanjia) + "");
+
                 double tot = 0.00;
                 for (int i = 1; i < list1.size(); i++) {
                     String total = ((EditText) list5.get(i)).getText().toString().replace(",","");
@@ -929,9 +985,19 @@ public class XiaoPiaoActivity extends BaseActivity {
         addItemLay.addView(linearLayout);
         addItemLay.addView(view);
 
+        lay1.add(linearLayout);
+        view1.add(view);
         //序号显示
         list1.get(rowCount).setText(rowCount + "");
         rowCount++;
     }
 
+    private ArrayList<LinearLayout> lay1 = new ArrayList<>();
+    private ArrayList<View> view1 = new ArrayList<>();
+
+    private ArrayList<LinearLayout> lay2 = new ArrayList<>();
+    private ArrayList<View> view2 = new ArrayList<>();
+
+    private ArrayList<String> piao1 = new ArrayList<>();
+    private ArrayList<String> piao2 = new ArrayList<>();
 }

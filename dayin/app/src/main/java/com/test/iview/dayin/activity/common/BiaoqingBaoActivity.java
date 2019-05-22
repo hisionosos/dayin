@@ -80,6 +80,12 @@ public class BiaoqingBaoActivity extends BaseActivity{
 
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+//    }
+
     @Override
     public void initData() {
         sizeSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -139,8 +145,8 @@ public class BiaoqingBaoActivity extends BaseActivity{
 
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+                BitmapUtil.getInstance().showBitmap(canv,false,0,false);
+
                 break;
         }
     }

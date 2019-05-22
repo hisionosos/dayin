@@ -167,8 +167,8 @@ public class TuKuangActivity extends BaseActivity{
                 }
 
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
+                BitmapUtil.getInstance().showBitmap(canv,true,0,false);
+//                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
 
 
                 break;

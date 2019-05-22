@@ -131,9 +131,9 @@
                 android:button="@null"
                 android:textSize="@dimen/sp_30"
                 android:textColor="@color/text_color_selecter"
-                android:text="@string/dy_ajust"
+                android:text="@string/dy_delete"
                 android:gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/tab_tiaozheng"
                 android:layout_weight="1"/>

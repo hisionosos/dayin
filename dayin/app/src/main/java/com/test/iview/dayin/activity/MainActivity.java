@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(EventMessage message) {
+        Log.e("language_main","ok");
         String m = message.getMessage();
         if ("local".equals(m)){
             recreate();

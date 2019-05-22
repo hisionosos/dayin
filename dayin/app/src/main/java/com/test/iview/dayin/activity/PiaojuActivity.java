@@ -172,8 +172,8 @@ public class PiaojuActivity extends BaseActivity {
             case R.id.home_add:
 
                 BitmapUtil.getInstance().cannelEdit(arrs,null,false);
-                BitmapUtil.getInstance().getCutImage(canv,false,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+                BitmapUtil.getInstance().showBitmap(canv,false,0,false);
+//                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
 
                 break;
         }

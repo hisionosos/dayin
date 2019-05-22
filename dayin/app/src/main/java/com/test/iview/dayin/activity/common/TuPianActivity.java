@@ -1,11 +1,14 @@
 package com.test.iview.dayin.activity.common;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -21,8 +24,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import com.test.iview.dayin.R;
 import com.test.iview.dayin.activity.BaseActivity;
+import com.test.iview.dayin.activity.PrintActivity;
+import com.test.iview.dayin.activity.ShowBitmapActivity;
 import com.test.iview.dayin.global.MyApplication;
 import com.test.iview.dayin.utils.BitmapUtil;
+import com.test.iview.dayin.utils.BlueSAPI;
 import com.test.iview.dayin.view.SingleTouchView;
 import com.test.iview.dayin.view.imagecut.IMGEditActivity;
 import com.test.iview.dayin.view.imagecut.IMGGalleryActivity;
@@ -36,6 +42,7 @@ import com.test.iview.dayin.view.imagecut.core.file.IMGFileDecoder;
 import com.test.iview.dayin.view.imagecut.core.util.IMGUtils;
 import com.test.iview.dayin.view.imagecut.gallery.model.IMGChooseMode;
 import com.test.iview.dayin.view.imagecut.gallery.model.IMGImageInfo;
+import com.test.iview.dayin.view.imagecut.view.IMGView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +98,8 @@ public class TuPianActivity extends MyImageCutActivity {
     LinearLayout pain4;
     @BindView(R.id.pain_5)
     LinearLayout pain5;
+    @BindView(R.id.image_canvas)
+    IMGView imageCanvas;
 
 
 //    @Override
@@ -123,8 +132,52 @@ public class TuPianActivity extends MyImageCutActivity {
 //                break;
             case R.id.home_add:
                 BitmapUtil.getInstance().cannelEdit(arrs,null,false);
-                BitmapUtil.getInstance().getCutImage(canv,true,0,false);
-                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+//                BitmapUtil.getInstance().getCutImage(imageCanvas,true,0,false);
+
+                final Bitmap bitmap = mImgView.saveBitmap();
+                final ProgressDialog pd = new ProgressDialog(this);
+                pd.setTitle(this.getString(R.string.dy_tips));
+                pd.setMessage("请稍候……");
+                pd.show();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        final String path = BitmapUtil.getInstance().savePicture(bitmap,System.currentTimeMillis() + "_logo.png");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(TuPianActivity.this, ShowBitmapActivity.class);
+                                intent.putExtra("path",path);
+                                intent.putExtra("isImg",true);
+                                intent.putExtra("h",0);
+                                intent.putExtra("isBiaoqian",false);
+                                startActivity(intent);
+                                if (null != pd){
+                                    pd.dismiss();
+                                }
+
+                            }
+                        });
+                    }
+                }).start();
+
+//                try {
+//                    new Handler().postDelayed(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            BlueSAPI.getInstance().printContent(null,TuPianActivity.this,bitmap,5,true,0,false);
+//                        }
+//                    },500);
+//
+//                } catch (Exception e) {
+//
+//                }
+
+
+//                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
 
             case R.id.pain_1:

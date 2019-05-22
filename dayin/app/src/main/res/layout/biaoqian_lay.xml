@@ -251,6 +251,64 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/wangge_lay1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_180"
+            android:layout_above="@+id/main_tab"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_marginRight="@dimen/dp_60"
+            android:paddingLeft="@dimen/dp_60"
+            android:paddingRight="@dimen/dp_60"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:gravity="center"
+            android:background="#fff"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dy_chicun"/>
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/daxiao_3"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:text="30"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                    <RadioButton
+                        android:id="@+id/daxiao_4"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:text="40"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                    <RadioButton
+                        android:id="@+id/daxiao_5"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="match_parent"
+                        android:text="50"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
     </RelativeLayout>
 
 </LinearLayout>

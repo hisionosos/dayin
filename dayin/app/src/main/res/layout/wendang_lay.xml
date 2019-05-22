@@ -11,6 +11,12 @@
         android:layout_height="match_parent"
         android:background="#fff">
 
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
         <RelativeLayout
             android:id="@+id/canv"
             android:layout_marginTop="@dimen/dp_30"
@@ -18,6 +24,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/title_bar"
             android:background="#fff"
+            android:visibility="gone"
             android:layout_above="@+id/main_tab">
             <EditText
                 android:layout_width="match_parent"

@@ -115,8 +115,8 @@ public class DaiBanActivity extends BaseActivity {
 //                editTxt.setCursorVisible(false);
 //                BitmapUtil.getInstance().getCutImage(canv, isImg, 0, false);
                 BitmapUtil.getInstance().cannelEdit(arrs,null,false);
-                BitmapUtil.getInstance().getBitmapScrollView(scollLay, isImg, 0);
-                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
+                BitmapUtil.getInstance().showScollBitmap(scollLay, isImg, 0);
+//                BitmapUtil.getInstance().cannelEdit(arrs,null,true);
                 break;
         }
     }
