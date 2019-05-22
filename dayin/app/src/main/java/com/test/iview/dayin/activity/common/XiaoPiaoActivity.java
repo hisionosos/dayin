@@ -574,7 +574,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 40));
 
         LinearLayout.LayoutParams viewLayParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 0.5f));
+                ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dp_4));
 
 
         //1
@@ -593,7 +593,7 @@ public class XiaoPiaoActivity extends BaseActivity {
         TextView title = new TextView(this);
         title.setTextColor(Color.parseColor("#000000"));
         title.setGravity(Gravity.CENTER);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,getResources().getDimensionPixelSize(R.dimen.dp_45));
         title.setText("序号");
         title.setLayoutParams(txtLayParams);
         headlinearLayout1.addView(title);
@@ -618,7 +618,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         //划线LinearLayout
         LinearLayout.LayoutParams liLayParams = new LinearLayout.LayoutParams(
-                DimensUtils.dp2px(this, 0.5f), ViewGroup.LayoutParams.MATCH_PARENT);
+                getResources().getDimensionPixelSize(R.dimen.dp_4), ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout linLay = new LinearLayout(this);
         linLay.setLayoutParams(liLayParams);
@@ -754,7 +754,7 @@ public class XiaoPiaoActivity extends BaseActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);//DimensUtils.dp2px(this, 40));
 
         LinearLayout.LayoutParams viewLayParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 0.5f));
+                ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dp_4));
 
         LinearLayout.LayoutParams headLayParams1 = new LinearLayout.LayoutParams(
                 DimensUtils.dp2px(this, 25), ViewGroup.LayoutParams.MATCH_PARENT);
@@ -796,7 +796,7 @@ public class XiaoPiaoActivity extends BaseActivity {
 
         //划线LinearLayout
         LinearLayout.LayoutParams liLayParams = new LinearLayout.LayoutParams(
-                DimensUtils.dp2px(this, 0.5f), ViewGroup.LayoutParams.MATCH_PARENT);
+                getResources().getDimensionPixelSize(R.dimen.dp_4), ViewGroup.LayoutParams.MATCH_PARENT);
 
         LinearLayout linLay = new LinearLayout(this);
         linLay.setLayoutParams(liLayParams);

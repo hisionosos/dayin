@@ -164,7 +164,7 @@ public class TuWenActivity extends BaseActivity {
             case R.id.home_add:
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().showBitmap(canv,true,0,false);
+                BitmapUtil.getInstance().showBitmap(canv,false,0,false);
 //                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab3:
@@ -172,16 +172,19 @@ public class TuWenActivity extends BaseActivity {
                     for (int i = 0; i < eds.size(); i++) {
                         eds.get(i).setGravity(Gravity.CENTER);
                     }
+                    editTxt.setGravity(Gravity.CENTER_HORIZONTAL);
                     editGrave ++;
                 }else if (editGrave == 1){
                     for (int i = 0; i < eds.size(); i++) {
                         eds.get(i).setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
                     }
+                    editTxt.setGravity(Gravity.RIGHT);
                     editGrave ++;
                 }else if (editGrave == 2){
                     for (int i = 0; i < eds.size(); i++) {
                         eds.get(i).setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
                     }
+                    editTxt.setGravity(Gravity.LEFT);
                     editGrave --;
                     editGrave --;
                 }
@@ -393,10 +396,20 @@ public class TuWenActivity extends BaseActivity {
             layoutParams.width = 0;
             //还可以根据位置动态定义子控件直接的边距，下面的意思是
             //第一行的子控件都有2dp的bottomMargin，中间位置的子控件都有2dp的leftMargin和rightMargin
-            layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.dp_1);
-            layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dp_1);
-            layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.dp_1);
-            layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_1);
+//            layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.dp_4);
+//            layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dp_4);
+//            layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.dp_4);
+//            layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_4);
+
+            if (i / lie_count < 1){
+                layoutParams.topMargin = getResources().getDimensionPixelSize(R.dimen.dp_8);
+            }
+            layoutParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen.dp_8);
+            layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.dp_8);
+
+            if ((i + 1) % lie_count == 0){
+                layoutParams.rightMargin = getResources().getDimensionPixelSize(R.dimen.dp_8);
+            }
             gridLay.addView(edit, layoutParams);
         }
 

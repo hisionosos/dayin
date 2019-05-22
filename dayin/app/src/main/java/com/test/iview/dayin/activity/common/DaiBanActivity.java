@@ -222,10 +222,19 @@ public class DaiBanActivity extends BaseActivity {
         editLayParams.setMargins(0,0,dimen,0);
         EditText edit = new EditText(this);
         edit.setTextSize(TypedValue.COMPLEX_UNIT_PX,dimen);
+        edit.setBackground(null);
         edit.setLayoutParams(editLayParams);
         headlinearLayout.addView(edit);
 
+        LinearLayout.LayoutParams viewp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, DimensUtils.dp2px(this, 3));
+
+        View view = new View(this);
+        view.setLayoutParams(viewp);
+        viewp.setMargins(DimensUtils.dp2px(this,50),0,DimensUtils.dp2px(this,40),0);
+        view.setBackgroundColor(Color.parseColor("#000000"));
         midLay.addView(headlinearLayout);
+        midLay.addView(view);
 
 
     }

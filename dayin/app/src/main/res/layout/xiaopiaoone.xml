@@ -2,23 +2,24 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent">
 
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:background="#000"/>
 
         <View
-            android:layout_width="@dimen/dp_2"
+            android:layout_width="@dimen/dp_4"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_60"
             android:layout_marginBottom="@dimen/dp_60"
             android:background="#000"/>
 
         <View
-            android:layout_width="@dimen/dp_2"
+            android:layout_width="@dimen/dp_4"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_60"
             android:layout_alignParentRight="true"
@@ -29,7 +30,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
+            android:layout_height="@dimen/dp_4"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp_60"
             android:background="#000"/>
@@ -51,7 +52,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:background="#000"/>
 
             <!-- 第二行 -->
@@ -98,7 +99,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:background="#000"/>
 
             <!-- 第三行 -->
@@ -146,7 +147,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:background="#000"/>
 
             <!-- 第四行 -->
@@ -194,7 +195,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:background="#000"/>
 
             <!-- 第五行 -->
@@ -224,7 +225,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp_2"
+                        android:layout_width="@dimen/dp_4"
                         android:layout_height="match_parent"
                         android:background="#000"/>
                     <TextView
@@ -243,7 +244,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp_2"
+                        android:layout_width="@dimen/dp_4"
                         android:layout_height="match_parent"
                         android:background="#000"/>
                     <TextView
@@ -262,7 +263,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp_2"
+                        android:layout_width="@dimen/dp_4"
                         android:layout_height="match_parent"
                         android:background="#000"/>
                     <TextView
@@ -281,7 +282,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp_2"
+                        android:layout_width="@dimen/dp_4"
                         android:layout_height="match_parent"
                         android:background="#000"/>
                     <TextView
@@ -296,7 +297,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:visibility="gone"
                 android:background="#000"/>
 
@@ -325,7 +326,7 @@
                         android:text="1"/>
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp_2"
+                        android:layout_width="@dimen/dp_4"
                         android:layout_height="match_parent"
                         android:background="#000"/>
 
@@ -355,7 +356,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="@dimen/dp_2"
+                            android:layout_width="@dimen/dp_4"
                             android:layout_height="match_parent"
                             android:background="#000"/>
                         <EditText
@@ -376,7 +377,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="@dimen/dp_2"
+                            android:layout_width="@dimen/dp_4"
                             android:layout_height="match_parent"
                             android:background="#000"/>
                         <EditText
@@ -397,7 +398,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="@dimen/dp_2"
+                            android:layout_width="@dimen/dp_4"
                             android:layout_height="match_parent"
                             android:background="#000"/>
                         <EditText
@@ -413,7 +414,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_2"
+                    android:layout_height="@dimen/dp_4"
                     android:visibility="gone"
                     android:background="#000"/>
 
@@ -470,7 +471,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2"
+                android:layout_height="@dimen/dp_4"
                 android:background="#000"/>
 
             <TextView
