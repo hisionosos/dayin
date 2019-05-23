@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -382,20 +383,23 @@ public class BlueSAPI {
                             int b;
                             if (i + k < aHeight && j / 3 < aWeight) {
                                 int color = pixels[(i + k) * aWeight + j / 3];
-                                r = 255 & color;
-                                g = ('\uff00' & color) >> 8;
-                                b = (16711680 & color) >> 16;
+//                                r = 255 & color;
+//                                g = ('\uff00' & color) >> 8;
+//                                b = (16711680 & color) >> 16;
+                                r = Color.red(color);
+                                g = Color.green(color);
+                                b = Color.blue(color);
                             } else {
-                                r = 111;
-                                g = 111;
-                                b = 111;
+                                r = 250;
+                                g = 250;
+                                b = 250;
                             }
 
                             if (k == 8 || k == 16) {
                                 ++j;
                             }
 
-                            if (r < 100 && g < 100 && b < 100) {
+                            if (r < 150 && g < 150 && b < 150) {
                                 body[j] = (byte)(body[j] * 2 + 1);
                             } else {
                                 body[j] = (byte)(body[j] * 2);
@@ -405,26 +409,26 @@ public class BlueSAPI {
 
                     this.PrintByte(body);
 
-//                    try {
-//                        int count = 0;
-//                        while(count == 0 && isConnect){
-//                            count = inStream.available();
-//                            Log.e("dedd",count + "");
-//
-//                        }
-//                        if(count != 0) {
-//                            byte[] bt = new byte[count];
-//                            int readCount = 0;
-//                            while (readCount < count) {
-//                                readCount += inStream.read(bt, readCount, count - readCount);
-//                            }
-//
-////                            String xx = new String(bt);
-////                            System.out.println(xx);
-//                        }
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        int count = 0;
+                        while(count == 0 && isConnect){
+                            count = inStream.available();
+                            Log.e("dedd",count + "");
+
+                        }
+                        if(count != 0) {
+                            byte[] bt = new byte[count];
+                            int readCount = 0;
+                            while (readCount < count) {
+                                readCount += inStream.read(bt, readCount, count - readCount);
+                            }
+
+//                            String xx = new String(bt);
+//                            System.out.println(xx);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 Log.e("printwriteCount",writeCount + "");
@@ -719,35 +723,35 @@ public class BlueSAPI {
             if (this.outStream == null) {
                 return 2007;
             } else {
-//                    try {
-//                        this.outStream.write(data);
-//                        this.outStream.flush();
-//                        Thread.sleep(10);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-
-                try {
-
-                    for (int i = 0;i < data.length;i += limitData){
-                        if (limitData  + i > data.length){
-                            this.outStream.write(data,i,data.length - i);
-                            this.outStream.flush();
-                            writeCount++;
-                        }else{
-                            this.outStream.write(data,i,limitData);
-                            this.outStream.flush();
-                            writeCount++;
-                        }
-
+                    try {
+                        this.outStream.write(data);
+                        this.outStream.flush();
+                        Thread.sleep(10);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-
-                } catch (UnsupportedEncodingException var3) {
-                    var3.printStackTrace();
-                } catch (Exception var4) {
-                    var4.printStackTrace();
-                }
+//                try {
+//
+//                    for (int i = 0;i < data.length;i += limitData){
+//                        if (limitData  + i > data.length){
+//                            this.outStream.write(data,i,data.length - i);
+//                            this.outStream.flush();
+//                            writeCount++;
+//                        }else{
+//                            this.outStream.write(data,i,limitData);
+//                            this.outStream.flush();
+//                            writeCount++;
+//                        }
+//
+//                    }
+//
+//
+//                } catch (UnsupportedEncodingException var3) {
+//                    var3.printStackTrace();
+//                } catch (Exception var4) {
+//                    var4.printStackTrace();
+//                }
 
 
 //                    try {

@@ -164,7 +164,7 @@ public class TuWenActivity extends BaseActivity {
             case R.id.home_add:
                 eds.add(editTxt);
                 BitmapUtil.getInstance().cannelEdit(arrs,eds,false);
-                BitmapUtil.getInstance().showBitmap(canv,false,0,false);
+                BitmapUtil.getInstance().showBitmap(canv,true,0,false);
 //                BitmapUtil.getInstance().cannelEdit(arrs,eds,true);
                 break;
             case R.id.main_tab3:
