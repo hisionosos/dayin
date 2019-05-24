@@ -3,6 +3,7 @@ package com.test.iview.dayin.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
@@ -178,6 +179,43 @@ public class PrinterImageUtils {
 //        return ThumbnailUtils.extractThumbnail(var0, 384, var1);
     }
 
+
+    public static Bitmap convertToBlackWhitebaioge(Bitmap var0 ,int h) {
+//        ToastUtils.showShort("数据处理中...");
+        int var3 = var0.getWidth();
+        int var4 = var0.getHeight();
+        int[] var6 = new int[var3 * var4];
+        var0.getPixels(var6, 0, var3, 0, 0, var3, var4);
+
+        int var1;
+        int var2;
+        for(var1 = 0; var1 < var4; ++var1) {
+            for(var2 = 0; var2 < var3; ++var2) {
+                int var5 = var6[var3 * var1 + var2];
+
+                int r = Color.red(var5);
+                int g = Color.green(var5);
+                int b = Color.blue(var5);
+                if (r < 200){
+                    r = 0;
+                }
+                if (g < 200){
+                    g = 0;
+                }
+                if (b < 200){
+                    b = 0;
+                }
+                int color = Color.rgb(r,g,b);
+                var6[var3 * var1 + var2] = color;
+//                var5 = (int)((double)((16711680 & var5) >> 16) * 0.3D + (double)(('\uff00' & var5) >> 8) * 0.59D + (double)(var5 & 255) * 0.11D);
+//                var6[var3 * var1 + var2] = var5 | var5 << 16 | -16777216 | var5 << 8;
+            }
+        }
+
+        var0 = Bitmap.createBitmap(var3, var4, Bitmap.Config.RGB_565);
+        var0.setPixels(var6, 0, var3, 0, 0, var3, var4);
+        return var0;
+    }
 
     public static Bitmap resizeImage(Bitmap bitmap, int w,int h) {
         Bitmap BitmapOrg = bitmap;

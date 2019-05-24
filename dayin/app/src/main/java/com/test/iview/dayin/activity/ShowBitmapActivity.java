@@ -58,7 +58,8 @@ public class ShowBitmapActivity extends BaseActivity {
                     public void onSucceed(Object object) {
 //                    bitmap = PrinterImageUtils.convertGreyImgByFloyd(PrinterImageUtils.toGrayScale((Bitmap)object));
                         if (h > 0){
-                            bitmap = (Bitmap)object;
+//                            bitmap = (Bitmap)object;
+                            bitmap = PrinterImageUtils.convertToBlackWhitebaioge((Bitmap)object,384);
                             Log.e("saize1",h+ "");
                             BitmapUtil.getInstance().savePicture(bitmap,System.currentTimeMillis() + "_logo.png");
                         }else{
