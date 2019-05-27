@@ -113,7 +113,7 @@ public class MyFragment extends BaseFragment {
         if (nick != null){
             nickTxt.setText(nick);
         }else{
-            nickTxt.setText(R.string.dy_app_name);
+            nickTxt.setText(R.string.app_name);
         }
 
         Bitmap bitmap = MyApplication.mCache.getAsBitmap("user_head");

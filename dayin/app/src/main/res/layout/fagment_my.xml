@@ -46,7 +46,7 @@
                     android:layout_marginLeft="@dimen/dp_50"
                     android:layout_marginTop="@dimen/dp_300"
                     android:layout_toRightOf="@+id/my_shezhi"
-                    android:text="@string/dy_app_name"
+                    android:text="@string/app_name"
                     android:textColor="#fff"
                     android:textSize="@dimen/dp_60" />
 
@@ -70,6 +70,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:paddingLeft="@dimen/dp_50"
                 android:paddingRight="@dimen/dp_50"
+                android:visibility="gone"
                 android:gravity="center_vertical">
 
                 <ImageView
