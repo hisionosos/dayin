@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">打印</string>
+    <string name="app_name">蒂酷</string>
     <string name="to_qcode">生成二维码</string>
     <string name="input_text">请输入文字...</string>
     <string name="wangge">表格</string>
@@ -21,7 +21,7 @@
     <string name="dy_shijian">时间</string>
     <string name="dy_myinfo">个人中心</string>
     <string name="dy_app_name">嘟嘟机</string>
-    <string name="dy_qq">QQ群: 850810714</string>
+    <string name="dy_qq">QQ群: </string>
     <string name="dy_yuyan">语言设置</string>
     <string name="dy_caozuo">操作指南</string>
     <string name="dy_shebei">设备列表</string>

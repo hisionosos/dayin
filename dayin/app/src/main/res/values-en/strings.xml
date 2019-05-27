@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">Printing</string>
+	<string name="app_name">D-Cool</string>
 	<string name="to_qcode">Generating</string>
 	<string name="input_text">Please enter the text.</string>
 	<string name="wangge">form</string>
@@ -23,7 +23,7 @@
 	<string name="dy_shijian">time</string>
 	<string name="dy_myinfo">Personal Center</string>
 	<string name="dy_app_name">Dudu machine</string>
-	<string name="dy_qq">QQ group:850810714</string>
+	<string name="dy_qq">QQ group:</string>
 	<string name="dy_yuyan">Language settings</string>
 	<string name="dy_caozuo">Operation guide</string>
 	<string name="dy_shebei">Device list</string>
