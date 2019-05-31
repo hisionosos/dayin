@@ -720,6 +720,18 @@ public class AppUtils {
             case "zh":
                 locale = Locale.SIMPLIFIED_CHINESE;
                 break;
+            case "es":
+                locale = new Locale("es", "ES");
+                break;
+            case "ja":
+                locale = Locale.JAPANESE;
+                break;
+            case "ko":
+                locale = Locale.KOREA;
+                break;
+            case "pt":
+                locale = new Locale("pt", "PT");
+                break;
             default:
                 locale = Locale.getDefault();
                 break;
@@ -740,6 +752,18 @@ public class AppUtils {
                 break;
             case "zh":
                 locale = Locale.SIMPLIFIED_CHINESE;
+                break;
+            case "es":
+                locale = new Locale("es", "ES");
+                break;
+            case "ja":
+                locale = Locale.JAPANESE;
+                break;
+            case "ko":
+                locale = Locale.KOREA;
+                break;
+            case "pt":
+                locale = new Locale("pt", "PT");
                 break;
             default:
                 locale = Locale.getDefault();
@@ -772,7 +796,7 @@ public class AppUtils {
             if (value.equals("zh")) {
                 SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,"zh");
             } else {
-                SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,"en");
+                SharedPreferencesUtils.setParam(Constant.APP_LANGUAGE,value);
             }
         }
         selectLanguage(context, (String)SharedPreferencesUtils.getParam(Constant.APP_LANGUAGE,"zh"));

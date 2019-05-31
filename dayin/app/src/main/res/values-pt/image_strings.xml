@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_doodle">Graffiti</string>
+    <string name="image_text">O texto</string>
+    <string name="image_mosaic">Mosaico</string>
+    <string name="image_clip">Clipping</string>
+    <string name="image_reset">A redução de</string>
+    <string name="image_done">Completa</string>
+    <string name="image_cancel">Cancelar</string>
+    <string name="image_rotate">Rotary</string>
+    <string name="image_mosaic_tip">Por favor Aplique diretamente Na Imagem virtual</string>
+    <string name="image_undo">A revogação</string>
+    <string name="image_all_photo">Todas as fotos</string>
+    <string name="image_original">Original</string>
+    <string name="image_preview">Preview</string>
+</resources>

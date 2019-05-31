@@ -84,9 +84,45 @@ public class LanguageActivity extends BaseActivity {
         if (null == cur_local ||cur_local.equals("zh")){
             choose0.setChecked(true);
             choose1.setChecked(false);
-        }else{
+            choose2.setChecked(false);
+            choose3.setChecked(false);
+            choose4.setChecked(false);
+            choose5.setChecked(false);
+        }else if (cur_local.equals("en")){
             choose0.setChecked(false);
             choose1.setChecked(true);
+            choose2.setChecked(false);
+            choose3.setChecked(false);
+            choose4.setChecked(false);
+            choose5.setChecked(false);
+        }else if (cur_local.equals("es")){
+            choose0.setChecked(false);
+            choose1.setChecked(false);
+            choose2.setChecked(true);
+            choose3.setChecked(false);
+            choose4.setChecked(false);
+            choose5.setChecked(false);
+        }else if (cur_local.equals("pt")){
+            choose0.setChecked(false);
+            choose1.setChecked(false);
+            choose2.setChecked(false);
+            choose3.setChecked(true);
+            choose4.setChecked(false);
+            choose5.setChecked(false);
+        }else if (cur_local.equals("ja")){
+            choose0.setChecked(false);
+            choose1.setChecked(false);
+            choose2.setChecked(false);
+            choose3.setChecked(false);
+            choose4.setChecked(true);
+            choose5.setChecked(false);
+        }else if (cur_local.equals("ko")){
+            choose0.setChecked(false);
+            choose1.setChecked(false);
+            choose2.setChecked(false);
+            choose3.setChecked(false);
+            choose4.setChecked(false);
+            choose5.setChecked(true);
         }
 
     }
@@ -124,7 +160,7 @@ public class LanguageActivity extends BaseActivity {
                 Log.e("check","choose4");
                 break;
             case R.id.choose5:
-                local = "zh";
+                local = "ko";
                 Log.e("check","choose5");
                 break;
             case R.id.choose6:

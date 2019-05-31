@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_doodle">落書きをする</string>
+    <string name="image_text">テキスト</string>
+    <string name="image_mosaic">モザイク</string>
+    <string name="image_clip">切り取り</string>
+    <string name="image_reset">元に戻す</string>
+    <string name="image_done">完了</string>
+    <string name="image_cancel">キャンセル</string>
+    <string name="image_rotate">回転</string>
+    <string name="image_mosaic_tip">写真に直接虚化を塗ってください</string>
+    <string name="image_undo">取り消す</string>
+    <string name="image_all_photo">すべての写真</string>
+    <string name="image_original">原図</string>
+    <string name="image_preview">プレビュー</string>
+</resources>

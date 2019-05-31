@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_doodle">낙서</string>
+    <string name="image_text">문자</string>
+    <string name="image_mosaic">모자이크</string>
+    <string name="image_clip">재단하다</string>
+    <string name="image_reset">환원</string>
+    <string name="image_done">완성</string>
+    <string name="image_cancel">취소</string>
+    <string name="image_rotate">회전</string>
+    <string name="image_mosaic_tip">그냥 그림에 허화를 발라주세요</string>
+    <string name="image_undo">철회하다</string>
+    <string name="image_all_photo">모든 사진</string>
+    <string name="image_original">원도</string>
+    <string name="image_preview">미리 보기</string>
+</resources>
