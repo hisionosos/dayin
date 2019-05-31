@@ -58,7 +58,13 @@ public class HttpManager {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        if (tag.equals("app")){
+                        if (response == null ){
+                            ToastUtils.showToast("网络不可用");
+                            return;
+                        }
+                        Log.e("response.code",response.code() + "");
+                        Log.e("response.message",response.message() + "");
+                        if (tag.equals("app") && response.code() == 403){
                             System.exit(0);
                         }
                         switch (response.code()){

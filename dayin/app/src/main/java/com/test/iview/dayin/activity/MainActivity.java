@@ -124,27 +124,27 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private void init() {
         //控制APP
-//        HttpManager.getRequets("https://gitee.com/null_274_6893/dayin_test/blob/master/dayin.txt", "app", null, String.class, new HttpManager.HttpCallBackListener() {
-//            @Override
-//            public void onBefore(BaseRequest request) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(BaseResponse baseResponse, String s, Call call, Response response) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Call call, Response response, Exception e) {
-//
-//            }
-//
-//            @Override
-//            public void onAfter(String s, Exception e) {
-//
-//            }
-//        });
+        HttpManager.getRequets("https://gitee.com/null_274_6893/dayin_test/blob/master/dayin.txt", "app", null, String.class, new HttpManager.HttpCallBackListener() {
+            @Override
+            public void onBefore(BaseRequest request) {
+
+            }
+
+            @Override
+            public void onSuccess(BaseResponse baseResponse, String s, Call call, Response response) {
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+
+            }
+
+            @Override
+            public void onAfter(String s, Exception e) {
+
+            }
+        });
 
         homeFragment = new HomeFragment();
         myFragment = new MyFragment();
