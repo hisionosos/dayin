@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center_vertical"
-                android:text="@string/dy_chinese"
+                android:text="中文"
                 android:layout_centerVertical="true"
                 android:textColor="#f333"
                 android:textSize="@dimen/sp_40" />
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center_vertical"
-                android:text="@string/dy_english"
+                android:text="English"
                 android:layout_centerVertical="true"
                 android:textColor="#f333"
                 android:textSize="@dimen/sp_40" />
